@@ -28,6 +28,11 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
+    # The fetch is ~50 search terms at 0.6s apart, so a healthy run is about two
+    # minutes. If a retailer starts hanging connections rather than refusing
+    # them, this stops the job burning runner time on a scrape that is already
+    # dead.
+    timeout-minutes: 15
     permissions:
       contents: write
 
