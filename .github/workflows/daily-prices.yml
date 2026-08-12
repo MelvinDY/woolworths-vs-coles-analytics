@@ -1,0 +1,63 @@
+# Daily price collection.
+#
+# The point of this file: a price snapshot cannot be backfilled. Every day this
+# does not run is a day of history that can never be recovered, which is why the
+# schedule matters more than any single run. The fetcher already writes
+# data/raw/prices_<date>.csv and re-running the same day overwrites it, so a
+# retry or a manual dispatch is always safe.
+#
+# Free on public repos. Nothing here needs credentials: both retailers are read
+# through the same public JSON endpoints their own web frontends use.
+
+name: Daily prices
+
+on:
+  schedule:
+    # 19:10 UTC ≈ 06:10 Sydney (05:10 during daylight saving). Shelf prices are
+    # settled by early morning, and the odd minute keeps this off GitHub's
+    # on-the-hour congestion, where scheduled jobs get queued or dropped.
+    - cron: '10 19 * * *'
+  workflow_dispatch:
+
+# One run at a time. Two concurrent runs would fight over the same dated file
+# and race on the commit.
+concurrency:
+  group: daily-prices
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # Fetch only. The marts and the dashboard are rebuilt on demand from the
+      # raw CSVs, and running them here would mean committing a 1.8MB binary
+      # warehouse every single day for no benefit.
+      - name: Fetch today's prices
+        run: python -m ingest.fetch_prices
+
+      - name: Commit the snapshot
+        run: |
+          set -euo pipefail
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/raw/
+          # No diff means the fetch produced nothing new — a same-day re-run.
+          # That is not a failure, so exit clean rather than red.
+          if git diff --cached --quiet; then
+            echo 'No new snapshot to commit.'
+            exit 0
+          fi
+          git commit -m "data: price snapshot $(date -u +%Y-%m-%d)"
+          git push

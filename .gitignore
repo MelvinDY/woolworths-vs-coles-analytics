@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+
+# The warehouse is a build artifact: run_pipeline.py reconstructs it from the
+# raw CSVs on every run, so committing it would just be a 1.8MB binary that
+# conflicts on every scheduled commit.
+data/warehouse.duckdb
+
+# Note what is deliberately absent: data/raw/. Those snapshots are the dataset,
+# they cannot be refetched for a past date, and the scheduled run appends one
+# per day. They are the asset this project accumulates, so they are tracked.
+
+dashboard/index.html
