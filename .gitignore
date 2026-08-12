@@ -12,3 +12,7 @@ data/warehouse.duckdb
 # per day. They are the asset this project accumulates, so they are tracked.
 
 dashboard/index.html
+
+# Scheduled-run logs. Useful locally for finding the morning a retailer changed
+# shape; not worth carrying in the history.
+logs/
