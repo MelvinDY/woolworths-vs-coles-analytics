@@ -43,16 +43,32 @@ if (-not (Test-Path $python)) {
 Set-Location $repo
 $ErrorActionPreference = 'Continue'
 
+# Python logs in UTF-8; without these the console decodes it as the system
+# codepage and every em-dash in an error message lands in the log as mojibake,
+# exactly when the log is the only thing left to diagnose from.
+$env:PYTHONIOENCODING = 'utf-8'
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
 # Fetch only. The marts and dashboard rebuild from the raw CSVs on demand, and
 # running them here would mean committing a ~1.8MB binary warehouse every day.
-& $python -m ingest.fetch_prices 2>&1 | ForEach-Object { Write-Log ($_ | Out-String).TrimEnd() }
+#
+# One retry, well spaced. fetch_prices aborts rather than record a half-empty
+# day, which is correct: a snapshot missing one retailer silently skews every
+# comparison built on it. But a retailer throttling for a few minutes should not
+# cost a day that can never be refetched, and a 10 minute gap is long enough to
+# clear a rate limit without turning a failure into hammering.
+$attempts = 0
+while ($true) {
+    $attempts++
+    & $python -m ingest.fetch_prices 2>&1 | ForEach-Object { Write-Log ($_ | Out-String).TrimEnd() }
+    if ($LASTEXITCODE -eq 0) { break }
 
-if ($LASTEXITCODE -ne 0) {
-    # fetch_prices aborts rather than record a half-empty day, which is the
-    # correct behaviour: a snapshot missing one retailer is worse than no
-    # snapshot, because it silently skews every comparison built on it.
-    Write-Log "FAILED: fetch exited $LASTEXITCODE. No snapshot written."
-    exit 1
+    if ($attempts -ge 2) {
+        Write-Log "FAILED: fetch exited $LASTEXITCODE on both attempts. No snapshot written."
+        exit 1
+    }
+    Write-Log "Fetch exited $LASTEXITCODE. Waiting 10 minutes for one retry."
+    Start-Sleep -Seconds 600
 }
 
 & git add data/raw/
