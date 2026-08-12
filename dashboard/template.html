@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Woolworths vs Coles — Price Analytics</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface-1: #fcfcfb;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11, 11, 11, 0.10);
+    --wow: #2a78d6;      /* categorical slot 1: Woolworths */
+    --coles: #1baf7a;    /* categorical slot 2: Coles */
+    --tie: #c3c2b7;
+    --neutral-mid: #f0efec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page: #0d0d0d;
+      --surface-1: #1a1a19;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --grid: #2c2c2a;
+      --baseline: #383835;
+      --border: rgba(255, 255, 255, 0.10);
+      --wow: #3987e5;
+      --coles: #199e70;
+      --tie: #52514e;
+      --neutral-mid: #383835;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface-1: #1a1a19;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --baseline: #383835;
+    --border: rgba(255, 255, 255, 0.10);
+    --wow: #3987e5;
+    --coles: #199e70;
+    --tie: #52514e;
+    --neutral-mid: #383835;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 32px 20px 64px; }
+
+  header h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  header .sub { color: var(--text-secondary); font-size: 14px; margin: 0; }
+
+  .card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-top: 20px;
+  }
+  .card h2 { font-size: 16px; margin: 0 0 2px; }
+  .card .insight { color: var(--text-secondary); font-size: 14px; margin: 0 0 16px; }
+  .card .insight strong { color: var(--text-primary); }
+
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 20px; }
+  .tile {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .tile .label { font-size: 13px; color: var(--text-secondary); }
+  .tile .value { font-size: 26px; font-weight: 600; margin-top: 2px; }
+  .tile .note { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .tile .value .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: 2px; }
+
+  .hero-card { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px; }
+  .hero-figure { font-size: 52px; font-weight: 650; letter-spacing: -0.02em; line-height: 1.1; }
+  .hero-caption { font-size: 15px; color: var(--text-secondary); max-width: 46ch; }
+  .hero-caption strong { color: var(--text-primary); }
+
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--text-secondary); margin: 0 0 12px; }
+  .legend .key { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .key .rect { width: 12px; height: 12px; border-radius: 3px; }
+
+  svg { display: block; max-width: 100%; }
+  svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .chart-scroll { overflow-x: auto; }
+
+  .bar-mark { transition: filter 0.1s; cursor: default; }
+  .bar-mark:hover, .dot-hit:hover + .dot-mark { filter: brightness(1.12); }
+
+  details.tableview { margin-top: 12px; font-size: 13px; }
+  details.tableview summary { color: var(--text-muted); cursor: pointer; }
+  table { border-collapse: collapse; width: 100%; margin-top: 8px; font-size: 13px; }
+  th { text-align: left; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid var(--baseline); padding: 6px 10px 6px 0; }
+  td { border-bottom: 1px solid var(--grid); padding: 6px 10px 6px 0; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .winner-wow { color: var(--text-primary); font-weight: 600; }
+  .winner-cell .swatch { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; }
+
+  #tooltip {
+    position: fixed; pointer-events: none; z-index: 10; display: none;
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 11px; font-size: 13px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14); max-width: 300px;
+  }
+  #tooltip .t-title { color: var(--text-secondary); font-size: 12px; margin-bottom: 3px; }
+  #tooltip .t-row { display: flex; align-items: center; gap: 7px; }
+  #tooltip .t-row .k { width: 12px; height: 3px; border-radius: 2px; flex: none; }
+  #tooltip .t-row .v { font-weight: 600; }
+  #tooltip .t-row .s { color: var(--text-secondary); }
+
+  .notes { font-size: 13px; color: var(--text-secondary); }
+  .notes ul { margin: 8px 0 0; padding-left: 18px; }
+  .notes li { margin-bottom: 4px; }
+
+  footer { margin-top: 28px; font-size: 12px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Woolworths vs Coles — who is cheaper?</h1>
+    <p class="sub" id="subtitle"></p>
+  </header>
+
+  <div class="card hero-card" id="hero"></div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="card">
+    <h2>Matched identical products</h2>
+    <p class="insight" id="verdict-insight"></p>
+    <div class="legend" id="verdict-legend"></div>
+    <div class="chart-scroll" id="verdict-chart"></div>
+    <details class="tableview"><summary>Table view</summary><div id="verdict-table"></div></details>
+  </div>
+
+  <div class="card">
+    <h2>Basket cost by category</h2>
+    <p class="insight" id="basket-insight"></p>
+    <div class="legend" id="basket-legend"></div>
+    <div class="chart-scroll" id="basket-chart"></div>
+    <details class="tableview"><summary>Table view</summary><div id="basket-table"></div></details>
+  </div>
+
+  <div class="card">
+    <h2>Median unit price by category</h2>
+    <p class="insight" id="unit-insight"></p>
+    <div class="legend" id="unit-legend"></div>
+    <div class="chart-scroll" id="unit-chart"></div>
+    <details class="tableview"><summary>Table view</summary><div id="unit-table"></div></details>
+  </div>
+
+  <div class="card">
+    <h2>Biggest price gaps on identical products</h2>
+    <p class="insight" id="gaps-insight"></p>
+    <div id="gaps-table"></div>
+  </div>
+
+  <div class="card notes">
+    <h2>How to read this</h2>
+    <ul id="notes-list"></ul>
+  </div>
+
+  <footer id="footer"></footer>
+</div>
+
+<div id="tooltip" role="status"></div>
+
+<script>
+/*__DATA__*/
+
+const fmt$ = (v) => "$" + Number(v).toFixed(2);
+const RETAILERS = [
+  { id: "woolworths", label: "Woolworths", cssVar: "--wow" },
+  { id: "coles", label: "Coles", cssVar: "--coles" },
+];
+// CSS variable references (not resolved hex) so marks follow theme changes live
+const C = { wow: "var(--wow)", coles: "var(--coles)", tie: "var(--tie)" };
+// in-fill label inks chosen to clear contrast on the slot's light AND dark fill
+const INK = { wow: "#ffffff", coles: "#0b0b0b", tie: "var(--text-primary)" };
+
+// ---------- tooltip ----------
+const tip = document.getElementById("tooltip");
+function showTip(evt, title, rows) {
+  tip.textContent = "";
+  const t = document.createElement("div");
+  t.className = "t-title";
+  t.textContent = title;
+  tip.appendChild(t);
+  for (const r of rows) {
+    const row = document.createElement("div");
+    row.className = "t-row";
+    const k = document.createElement("span");
+    k.className = "k";
+    k.style.background = r.color || "transparent";
+    const v = document.createElement("span");
+    v.className = "v";
+    v.textContent = r.value;
+    const s = document.createElement("span");
+    s.className = "s";
+    s.textContent = r.label;
+    row.append(k, v, s);
+    tip.appendChild(row);
+  }
+  tip.style.display = "block";
+  moveTip(evt);
+}
+function moveTip(evt) {
+  const pad = 14;
+  let x = evt.clientX + pad, y = evt.clientY + pad;
+  const r = tip.getBoundingClientRect();
+  if (x + r.width > window.innerWidth - 8) x = evt.clientX - r.width - pad;
+  if (y + r.height > window.innerHeight - 8) y = evt.clientY - r.height - pad;
+  tip.style.left = x + "px";
+  tip.style.top = y + "px";
+}
+function hideTip() { tip.style.display = "none"; }
+function attachTip(el, titleFn, rowsFn) {
+  el.addEventListener("pointerenter", (e) => showTip(e, titleFn(), rowsFn()));
+  el.addEventListener("pointermove", moveTip);
+  el.addEventListener("pointerleave", hideTip);
+  el.setAttribute("tabindex", "0");
+  el.addEventListener("focus", () => {
+    const r = el.getBoundingClientRect();
+    showTip({ clientX: r.right, clientY: r.top }, titleFn(), rowsFn());
+  });
+  el.addEventListener("blur", hideTip);
+}
+
+// ---------- helpers ----------
+const SVGNS = "http://www.w3.org/2000/svg";
+function svgEl(tag, attrs) {
+  const el = document.createElementNS(SVGNS, tag);
+  for (const [k, v] of Object.entries(attrs || {})) el.setAttribute(k, v);
+  return el;
+}
+function legend(containerId, items) {
+  const el = document.getElementById(containerId);
+  for (const it of items) {
+    const key = document.createElement("span");
+    key.className = "key";
+    const rect = document.createElement("span");
+    rect.className = "rect";
+    rect.style.background = it.color;
+    const lbl = document.createElement("span");
+    lbl.textContent = it.label;
+    key.append(rect, lbl);
+    el.appendChild(key);
+  }
+}
+function niceTicks(max, count) {
+  const rough = max / count;
+  const mag = Math.pow(10, Math.floor(Math.log10(rough)));
+  const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => max / s <= count) || 10 * mag;
+  const ticks = [];
+  for (let v = 0; ; v += step) {
+    ticks.push(Math.round(v * 100) / 100);
+    if (v >= max - 1e-9) break;
+  }
+  return ticks;
+}
+function makeTable(containerId, headers, rows) {
+  const container = document.getElementById(containerId);
+  const table = document.createElement("table");
+  const thead = document.createElement("thead");
+  const trh = document.createElement("tr");
+  for (const h of headers) {
+    const th = document.createElement("th");
+    th.textContent = h.label;
+    if (h.num) th.className = "num";
+    trh.appendChild(th);
+  }
+  thead.appendChild(trh);
+  table.appendChild(thead);
+  const tbody = document.createElement("tbody");
+  for (const row of rows) {
+    const tr = document.createElement("tr");
+    row.forEach((cell, i) => {
+      const td = document.createElement("td");
+      if (cell && cell.nodeType) td.appendChild(cell);
+      else td.textContent = cell;
+      if (headers[i].num) td.className = "num";
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  }
+  table.appendChild(tbody);
+  container.appendChild(table);
+}
+
+// ---------- header, hero, KPIs ----------
+const P = DATA.pairs_identical;
+const basketCats = Object.keys(DATA.basket).sort();
+const basketTotals = { woolworths: 0, coles: 0 };
+for (const c of basketCats) {
+  basketTotals.woolworths += DATA.basket[c].woolworths.total;
+  basketTotals.coles += DATA.basket[c].coles.total;
+}
+const basketWinner = basketTotals.woolworths <= basketTotals.coles ? RETAILERS[0] : RETAILERS[1];
+const basketGap = Math.abs(basketTotals.coles - basketTotals.woolworths);
+const nBasketTerms = basketCats.reduce((a, c) => a + DATA.basket[c].woolworths.n_terms, 0);
+
+document.getElementById("subtitle").textContent =
+  `Live snapshot ${DATA.snapshot_date} · ${DATA.n_products.toLocaleString()} prices across ` +
+  `${DATA.n_terms} common grocery items, captured the same day from both retailers' websites.`;
+
+const hero = document.getElementById("hero");
+{
+  const fig = document.createElement("div");
+  fig.className = "hero-figure";
+  fig.textContent = fmt$(basketGap);
+  const cap = document.createElement("div");
+  cap.className = "hero-caption";
+  const strong = document.createElement("strong");
+  strong.textContent = basketWinner.label;
+  cap.append(
+    "cheaper at ", strong,
+    ` for the full ${nBasketTerms}-item comparison basket ` +
+    `(${fmt$(basketTotals[basketWinner.id])} vs ` +
+    `${fmt$(basketTotals[basketWinner.id === "woolworths" ? "coles" : "woolworths"])}), ` +
+    "buying the cheapest matching product for each item at each store."
+  );
+  hero.append(fig, cap);
+}
+
+const kpis = document.getElementById("kpis");
+function tile(label, value, note, swatchColor) {
+  const t = document.createElement("div");
+  t.className = "tile";
+  const l = document.createElement("div");
+  l.className = "label";
+  l.textContent = label;
+  const v = document.createElement("div");
+  v.className = "value";
+  if (swatchColor) {
+    const sw = document.createElement("span");
+    sw.className = "swatch";
+    sw.style.background = swatchColor;
+    v.appendChild(sw);
+  }
+  v.appendChild(document.createTextNode(value));
+  t.append(l, v);
+  if (note) {
+    const n = document.createElement("div");
+    n.className = "note";
+    n.textContent = note;
+    t.appendChild(n);
+  }
+  kpis.appendChild(t);
+}
+tile("Woolworths basket", fmt$(basketTotals.woolworths), `${nBasketTerms} items`, C.wow);
+tile("Coles basket", fmt$(basketTotals.coles), `${nBasketTerms} items`, C.coles);
+tile("Identical products matched", String(P.n), "same brand, same pack size");
+tile("Median gap when prices differ", fmt$(P.median_abs_gap), "across matched pairs");
+tile(
+  "Lines on special",
+  `${DATA.specials.woolworths.pct_on_special}% / ${DATA.specials.coles.pct_on_special}%`,
+  "Woolworths / Coles"
+);
+
+// ---------- verdict stacked bar ----------
+{
+  const segs = [
+    { label: "Cheaper at Woolworths", n: P.wow_wins, color: C.wow, ink: INK.wow },
+    { label: "Same price", n: P.ties, color: C.tie, ink: INK.tie },
+    { label: "Cheaper at Coles", n: P.coles_wins, color: C.coles, ink: INK.coles },
+  ];
+  const leader = P.wow_wins === P.coles_wins ? null : (P.wow_wins > P.coles_wins ? segs[0] : segs[2]);
+  const insight = document.getElementById("verdict-insight");
+  if (leader) {
+    const strong = document.createElement("strong");
+    strong.textContent = `${leader.label.replace("Cheaper at ", "")} wins ${leader.n} of ${P.n}`;
+    insight.append("Of ", String(P.n), " products sold by both chains in identical brand and pack size, ");
+    insight.append(strong);
+    insight.append(`; ${P.ties} are priced the same.`);
+  } else {
+    insight.textContent = `Dead heat: ${P.wow_wins} wins each across ${P.n} identical products, ${P.ties} priced the same.`;
+  }
+
+  legend("verdict-legend", segs.map((s) => ({ label: s.label, color: s.color })));
+
+  const W = 960, H = 64, barH = 24, y = 14;
+  const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, width: "100%", role: "img",
+    "aria-label": "Share of matched identical products cheaper at each retailer" });
+  let x = 0;
+  const total = P.n || 1;
+  for (const s of segs) {
+    if (!s.n) continue;
+    const w = (s.n / total) * W;
+    const rect = svgEl("rect", {
+      class: "bar-mark", x: x + 1, y, width: Math.max(w - 2, 1), height: barH,
+      rx: 4, fill: s.color,
+    });
+    attachTip(rect, () => s.label, () => [
+      { color: s.color, value: `${s.n} products`, label: `${Math.round((s.n / total) * 100)}% of matched pairs` },
+    ]);
+    svg.appendChild(rect);
+    // in-segment count label only when it comfortably fits
+    if (w > 56) {
+      const t = svgEl("text", {
+        x: x + w / 2, y: y + barH / 2 + 4, "text-anchor": "middle",
+        "font-size": "12", "font-weight": "600", fill: s.ink,
+      });
+      t.textContent = s.n;
+      svg.appendChild(t);
+    }
+    x += w;
+  }
+  const axis = svgEl("line", { x1: 0, y1: y + barH + 6, x2: W, y2: y + barH + 6,
+    stroke: "var(--baseline)", "stroke-width": 1 });
+  svg.appendChild(axis);
+  for (const pct of [0, 25, 50, 75, 100]) {
+    const t = svgEl("text", { x: (pct / 100) * W, y: H - 4, "font-size": "11",
+      fill: "var(--text-muted)", "text-anchor": pct === 0 ? "start" : pct === 100 ? "end" : "middle" });
+    t.textContent = pct + "%";
+    svg.appendChild(t);
+  }
+  document.getElementById("verdict-chart").appendChild(svg);
+
+  makeTable("verdict-table",
+    [{ label: "Outcome" }, { label: "Products", num: true }, { label: "Share", num: true }],
+    segs.map((s) => [s.label, String(s.n), Math.round((s.n / total) * 100) + "%"]));
+}
+
+// ---------- basket grouped bars ----------
+{
+  const wow = C.wow, coles = C.coles;
+  legend("basket-legend", [
+    { label: "Woolworths", color: wow },
+    { label: "Coles", color: coles },
+  ]);
+
+  const rows = basketCats.map((c) => ({
+    cat: c,
+    wow: DATA.basket[c].woolworths.total,
+    coles: DATA.basket[c].coles.total,
+    n: DATA.basket[c].woolworths.n_terms,
+  })).sort((a, b) => (b.wow + b.coles) - (a.wow + a.coles));
+
+  const biggestGap = [...rows].sort((a, b) =>
+    Math.abs(b.wow - b.coles) - Math.abs(a.wow - a.coles))[0];
+  const insight = document.getElementById("basket-insight");
+  const strong = document.createElement("strong");
+  strong.textContent = biggestGap.cat;
+  insight.append("Cheapest-available item per basket line, summed by category. The biggest category gap is in ");
+  insight.append(strong);
+  insight.append(` (${fmt$(Math.abs(biggestGap.wow - biggestGap.coles))} difference).`);
+
+  const labelW = 110, rightPad = 56, W = 960, rowH = 46, barH = 16, gap = 2;
+  const plotW = W - labelW - rightPad;
+  const H = rows.length * rowH + 30;
+  const maxV = Math.max(...rows.flatMap((r) => [r.wow, r.coles]));
+  const ticks = niceTicks(maxV, 5);
+  const scaleMax = ticks[ticks.length - 1];
+  const sx = (v) => (v / scaleMax) * plotW;
+
+  const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, width: "100%", role: "img",
+    "aria-label": "Basket cost by category, Woolworths vs Coles" });
+
+  for (const tv of ticks) {
+    const gx = labelW + sx(tv);
+    svg.appendChild(svgEl("line", { x1: gx, y1: 6, x2: gx, y2: H - 24,
+      stroke: "var(--grid)", "stroke-width": 1 }));
+    const t = svgEl("text", { x: gx, y: H - 8, "font-size": "11",
+      fill: "var(--text-muted)", "text-anchor": "middle" });
+    t.textContent = "$" + tv;
+    svg.appendChild(t);
+  }
+
+  rows.forEach((r, i) => {
+    const y0 = i * rowH + 8;
+    const lbl = svgEl("text", { x: labelW - 10, y: y0 + barH + 4, "font-size": "12.5",
+      fill: "var(--text-secondary)", "text-anchor": "end" });
+    lbl.textContent = r.cat;
+    svg.appendChild(lbl);
+
+    [{ v: r.wow, c: wow, name: "Woolworths" }, { v: r.coles, c: coles, name: "Coles" }]
+      .forEach((s, j) => {
+        const y = y0 + j * (barH + gap);
+        const rect = svgEl("rect", {
+          class: "bar-mark", x: labelW, y, width: Math.max(sx(s.v), 1), height: barH,
+          fill: s.c,
+        });
+        rect.setAttribute("rx", 3);
+        attachTip(rect, () => `${r.cat} — ${s.name}`, () => [
+          { color: s.c, value: fmt$(s.v), label: `${r.n} basket items` },
+          { color: "transparent", value: fmt$(Math.abs(r.wow - r.coles)), label: r.wow === r.coles ? "no gap" : (s.v === Math.min(r.wow, r.coles) ? "cheaper here" : "gap vs other") },
+        ]);
+        svg.appendChild(rect);
+      });
+  });
+
+  svg.appendChild(svgEl("line", { x1: labelW, y1: 6, x2: labelW, y2: H - 24,
+    stroke: "var(--baseline)", "stroke-width": 1 }));
+  document.getElementById("basket-chart").appendChild(svg);
+
+  makeTable("basket-table",
+    [{ label: "Category" }, { label: "Items", num: true },
+     { label: "Woolworths", num: true }, { label: "Coles", num: true }, { label: "Gap", num: true }],
+    rows.map((r) => [r.cat, String(r.n), fmt$(r.wow), fmt$(r.coles), fmt$(Math.abs(r.wow - r.coles))]));
+}
+
+// ---------- unit price dumbbell ----------
+{
+  const wow = C.wow, coles = C.coles;
+  legend("unit-legend", [
+    { label: "Woolworths", color: wow },
+    { label: "Coles", color: coles },
+  ]);
+
+  const rows = DATA.unit_prices.map((u) => ({
+    label: `${u.category} (${u.basis === "per_100g" ? "$/100g" : "$/100ml"})`,
+    wow: u.woolworths.median, coles: u.coles.median,
+    nW: u.woolworths.n, nC: u.coles.n,
+  })).sort((a, b) => (b.wow + b.coles) - (a.wow + a.coles));
+
+  const wowCheaper = rows.filter((r) => r.wow < r.coles).length;
+  const insight = document.getElementById("unit-insight");
+  const strong = document.createElement("strong");
+  strong.textContent = `${wowCheaper} of ${rows.length}`;
+  insight.append("Median shelf unit price across all products returned for each category — pack-size neutral. Woolworths has the lower median in ");
+  insight.append(strong);
+  insight.append(" categories.");
+
+  const labelW = 190, rightPad = 70, W = 960, rowH = 36;
+  const plotW = W - labelW - rightPad;
+  const H = rows.length * rowH + 34;
+  const maxV = Math.max(...rows.flatMap((r) => [r.wow, r.coles]));
+  const ticks = niceTicks(maxV, 5);
+  const scaleMax = ticks[ticks.length - 1];
+  const sx = (v) => labelW + (v / scaleMax) * plotW;
+
+  const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, width: "100%", role: "img",
+    "aria-label": "Median unit price by category, Woolworths vs Coles" });
+
+  for (const tv of ticks) {
+    const gx = sx(tv);
+    svg.appendChild(svgEl("line", { x1: gx, y1: 6, x2: gx, y2: H - 26,
+      stroke: "var(--grid)", "stroke-width": 1 }));
+    const t = svgEl("text", { x: gx, y: H - 10, "font-size": "11",
+      fill: "var(--text-muted)", "text-anchor": "middle" });
+    t.textContent = "$" + tv;
+    svg.appendChild(t);
+  }
+
+  rows.forEach((r, i) => {
+    const cy = i * rowH + 22;
+    const lbl = svgEl("text", { x: labelW - 12, y: cy + 4, "font-size": "12.5",
+      fill: "var(--text-secondary)", "text-anchor": "end" });
+    lbl.textContent = r.label;
+    svg.appendChild(lbl);
+
+    svg.appendChild(svgEl("line", { x1: sx(Math.min(r.wow, r.coles)), y1: cy,
+      x2: sx(Math.max(r.wow, r.coles)), y2: cy, stroke: "var(--baseline)", "stroke-width": 1.5 }));
+
+    [{ v: r.wow, c: wow, name: "Woolworths", n: r.nW }, { v: r.coles, c: coles, name: "Coles", n: r.nC }]
+      .forEach((s) => {
+        const hit = svgEl("circle", { cx: sx(s.v), cy, r: 13, fill: "transparent", class: "dot-hit" });
+        const dot = svgEl("circle", { cx: sx(s.v), cy, r: 5.5, fill: s.c, class: "dot-mark",
+          stroke: "var(--surface-1)", "stroke-width": 2 });
+        attachTip(hit, () => `${r.label} — ${s.name}`, () => [
+          { color: s.c, value: fmt$(s.v), label: `median of ${s.n} products` },
+        ]);
+        svg.append(hit, dot);
+      });
+
+    const gapPct = Math.round(Math.abs(r.wow - r.coles) / Math.max(r.wow, r.coles) * 100);
+    const gt = svgEl("text", { x: W - rightPad + 12, y: cy + 4, "font-size": "12",
+      fill: "var(--text-muted)" });
+    gt.textContent = gapPct + "%";
+    svg.appendChild(gt);
+  });
+
+  document.getElementById("unit-chart").appendChild(svg);
+
+  makeTable("unit-table",
+    [{ label: "Category" }, { label: "Woolworths", num: true }, { label: "Coles", num: true },
+     { label: "Gap %", num: true }],
+    rows.map((r) => [r.label, fmt$(r.wow), fmt$(r.coles),
+      String(Math.round(Math.abs(r.wow - r.coles) / Math.max(r.wow, r.coles) * 100)) + "%"]));
+}
+
+// ---------- top gaps table ----------
+{
+  document.getElementById("gaps-insight").textContent =
+    "Same brand, same pack size, biggest dollar difference on the day. These are the items worth switching stores for.";
+  const wow = C.wow, coles = C.coles;
+  makeTable("gaps-table",
+    [{ label: "Product" }, { label: "Size" }, { label: "Woolworths", num: true },
+     { label: "Coles", num: true }, { label: "Gap", num: true }, { label: "Cheaper at" }],
+    DATA.top_gaps.map((g) => {
+      const cheaperColor = g.cheaper_at === "woolworths" ? wow : coles;
+      const cell = document.createElement("span");
+      cell.className = "winner-cell";
+      const sw = document.createElement("span");
+      sw.className = "swatch";
+      sw.style.background = cheaperColor;
+      cell.append(sw, g.cheaper_at === "woolworths" ? "Woolworths" : "Coles");
+      return [g.wow_name, g.wow_size, fmt$(g.wow_price), fmt$(g.coles_price),
+        fmt$(Math.abs(g.gap_dollars)), cell];
+    }));
+}
+
+// ---------- notes ----------
+{
+  const O = DATA.pairs_own_brand;
+  const notes = [
+    `Prices captured ${DATA.snapshot_date} from the retailers' public websites (national online pricing); in-store and state pricing can differ.`,
+    `Scope is a fixed basket of ${DATA.n_terms} everyday grocery search terms — this is not a whole-of-store price index.`,
+    `"Identical products" match on brand, pack size (±2%), and product name similarity ≥80; every match carries an audit score in the warehouse.`,
+    `Own-brand substitutes (e.g. Woolworths vs Coles home-brand milk) are matched separately: ${O.n} pairs, ${O.wow_wins} cheaper at Woolworths, ${O.coles_wins} at Coles, ${O.ties} tied.`,
+    `Specials: ${DATA.specials.woolworths.pct_on_special}% of Woolworths lines and ${DATA.specials.coles.pct_on_special}% of Coles lines were flagged on special (median depth ${DATA.specials.woolworths.median_discount_pct ?? "–"}% vs ${DATA.specials.coles.median_discount_pct ?? "–"}%).`,
+  ];
+  const ul = document.getElementById("notes-list");
+  for (const n of notes) {
+    const li = document.createElement("li");
+    li.textContent = n;
+    ul.appendChild(li);
+  }
+  document.getElementById("footer").textContent =
+    "Built with Python, DuckDB and rapidfuzz · single-day snapshot · data from public product-search endpoints.";
+}
+</script>
+</body>
+</html>
