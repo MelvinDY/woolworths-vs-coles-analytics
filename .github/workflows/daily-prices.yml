@@ -11,12 +11,18 @@
 
 name: Daily prices
 
+# The schedule is deliberately commented out. GitHub-hosted runners cannot do
+# this collection: Woolworths answers 403 to every request from their IP ranges
+# and Coles resolves a buildId but returns nothing usable, while the identical
+# script and User-Agent from a residential connection pulls ~1,900 rows. This is
+# IP reputation, not something the fetcher can be fixed to work around.
+#
+# Re-enable this line only against a self-hosted runner (change runs-on below).
+# Until then the collection runs locally and this file exists for manual runs.
+#
+#  schedule:
+#    - cron: '10 19 * * *'   # 19:10 UTC ≈ 06:10 Sydney
 on:
-  schedule:
-    # 19:10 UTC ≈ 06:10 Sydney (05:10 during daylight saving). Shelf prices are
-    # settled by early morning, and the odd minute keeps this off GitHub's
-    # on-the-hour congestion, where scheduled jobs get queued or dropped.
-    - cron: '10 19 * * *'
   workflow_dispatch:
 
 # One run at a time. Two concurrent runs would fight over the same dated file
