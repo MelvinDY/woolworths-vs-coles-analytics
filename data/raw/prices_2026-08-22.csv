@@ -1,0 +1,598 @@
+retailer,product_id,name,brand,size_raw,price,was_price,unit_price,unit_measure,is_on_special,result_rank,search_term,category,snapshot_date,fetched_at
+woolworths,888137,Woolworths Full Cream Milk 2L,Woolworths,2L,3.55,3.55,1.78,1L,False,1,full cream milk 2l,dairy,2026-08-22,2026-08-22T01:48:10.399241+00:00
+woolworths,88436,Dairy Farmers Full Cream Milk 2L,Dairy Farmers,2L,4.7,4.7,2.35,1L,False,2,full cream milk 2l,dairy,2026-08-22,2026-08-22T01:48:10.399241+00:00
+woolworths,44528,Norco Full Cream Milk 2L,Norco,2L,5.05,5.05,2.53,1L,False,3,full cream milk 2l,dairy,2026-08-22,2026-08-22T01:48:10.399241+00:00
+woolworths,113887,Riverina Fresh Full Cream Milk 2L,Riverina,2L,5.15,5.15,2.58,1L,False,4,full cream milk 2l,dairy,2026-08-22,2026-08-22T01:48:10.399241+00:00
+woolworths,757826,Farmers Own Full Cream Homogenised 2L,Farmers Own,2L,3.95,3.95,1.98,1L,False,5,full cream milk 2l,dairy,2026-08-22,2026-08-22T01:48:10.399241+00:00
+woolworths,154465,Norco Organic Milk 2L,Norco,2L,7.2,7.2,3.6,1L,False,6,full cream milk 2l,dairy,2026-08-22,2026-08-22T01:48:10.399241+00:00
+woolworths,896367,Norco Pure Jersey Milk 2L,Norco,2L,6.55,6.55,3.28,1L,False,7,full cream milk 2l,dairy,2026-08-22,2026-08-22T01:48:10.399241+00:00
+woolworths,406949,The Little Big Dairy Company Full Cream Milk 2L,The Little Big Dairy Company,2L,7.45,7.45,3.73,1L,False,8,full cream milk 2l,dairy,2026-08-22,2026-08-22T01:48:10.399241+00:00
+woolworths,785722,Pauls Zymil Lactose Free Full Cream Milk 2L,Pauls,2L,5.95,6.9,2.98,1L,True,9,full cream milk 2l,dairy,2026-08-22,2026-08-22T01:48:10.399241+00:00
+woolworths,789208,Riverina Fresh Lactose Free Full Cream Milk 2L,Riverina,2L,6.3,6.3,3.15,1L,False,10,full cream milk 2l,dairy,2026-08-22,2026-08-22T01:48:10.399241+00:00
+woolworths,260729,Norco Skim Milk 2L,Norco,2L,5.05,5.05,2.53,1L,False,1,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+woolworths,89926,Dairy Farmers Skim Milk 2L,Dairy Farmers,2L,5.05,5.05,2.53,1L,False,2,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+woolworths,345464,Riverina Fresh Skim Milk 2L,Riverina,2L,5.25,5.25,2.63,1L,False,3,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+woolworths,208066,a2 Milk Light 2L,a2,2L,7.3,7.3,3.65,1L,False,4,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+woolworths,888139,Woolworths Lite Milk 2L,Woolworths,2L,3.55,3.55,1.78,1L,False,5,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+woolworths,293187,Norco Reduced Fat Milk 2L,Norco,2L,5.05,5.05,2.53,1L,False,6,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+woolworths,24133,Dairy Farmers Light Milk 2L,Dairy Farmers,2L,5.05,5.05,2.53,1L,False,7,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+woolworths,553273,Norco Lactose Free Lite Milk 2L,Norco,2L,6.65,6.65,3.33,1L,False,8,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+woolworths,513469,Pauls Plus+ Protein Low Fat Milk 2L,Pauls,2L,5.6,5.6,2.8,1L,False,9,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+woolworths,407262,The Little Big Dairy Company Less Cream Milk 2L,The Little Big Dairy Company,2L,7.6,7.6,3.8,1L,False,10,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,1079800,Coles Skim Milk,Coles,2L,3.55,,1.78,1l,False,1,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,455849,Devondale Skim Long Life Milk,Devondale,1L,2.35,,2.35,1l,False,2,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,1993267,Coles Skim Milk Bottle,Coles,1L,1.85,,1.85,1l,False,3,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,4824856,Devondale Semi Skim Long Life Milk,Devondale,1L,2.35,,2.35,1l,False,4,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,7910660,Coles Fat Free Instant Skim Milk Powder,Coles,1kg,10.5,,1.05,100g,False,5,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,7667244,Coles Australian Skim Long Life Milk,Coles,1L,1.85,,1.85,1l,False,6,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,5994046,Devondale Uht Skim Multipack Milk 6x200ml,Devondale,1.2L,6.25,,5.21,1l,False,7,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,8011598,Coles Multipack Skim Uht Milk 6 Pack,Coles,1200mL,4.5,,3.75,1l,False,8,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,7239433,Coles Australian Lite Long Life Milk,Coles,1L,1.85,,1.85,1l,False,9,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,301721,Devondale Full Cream Long Life Milk,Devondale,1L,2.35,,2.35,1l,False,10,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,7667368,Coles Australian Full Cream Long Life Milk,Coles,1L,1.85,,1.85,1l,False,11,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,8972436,Pauls Zymil Lactose Free Skim Milk,Pauls,1L,4.1,,4.1,1l,False,12,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,5984520,Devondale Uht Full Cream Multipack Milk 6x200ml,Devondale,1.2L,6.25,,5.21,1l,False,13,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,4311829,Pauls Zymil Skim Long Life Milk,Pauls,1L,3,,3,1l,False,14,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+coles,3964532,Nestle Skim Sweetened Condensed Milk,Nestle,410g,4,,0.98,100g,False,15,skim milk 2l,dairy,2026-08-22,2026-08-22T01:48:27.562593+00:00
+woolworths,48650,Woolworths Salted Butter 500g,Woolworths,500g,7,7,1.4,100G,False,1,butter 500g,dairy,2026-08-22,2026-08-22T01:48:29.255924+00:00
+woolworths,688962,Woolworths Essentials Unsalted Butter 500g,Woolworths Essentials,500g,7,7,1.4,100G,False,2,butter 500g,dairy,2026-08-22,2026-08-22T01:48:29.255924+00:00
+woolworths,41287,Western Star Salted Butter Block 500g,Western Star,500g,9.5,9.5,1.9,100G,False,3,butter 500g,dairy,2026-08-22,2026-08-22T01:48:29.255924+00:00
+woolworths,41421,Devondale Butter Block Salted 500g,Devondale,500g,8.4,9.3,1.68,100G,True,4,butter 500g,dairy,2026-08-22,2026-08-22T01:48:29.255924+00:00
+woolworths,712251,Western Star Unsalted Butter Block Chef's Choice 500g,Western Star,500g,9.5,9.5,1.9,100G,False,5,butter 500g,dairy,2026-08-22,2026-08-22T01:48:29.255924+00:00
+woolworths,802209,Devondale Butter Block Unsalted 500g,Devondale,500g,8.4,9.3,1.68,100G,True,6,butter 500g,dairy,2026-08-22,2026-08-22T01:48:29.255924+00:00
+woolworths,48016,Meadowlea Original Spread 500g,Meadowlea,500g,4,4.5,0.8,100G,False,7,butter 500g,dairy,2026-08-22,2026-08-22T01:48:29.255924+00:00
+woolworths,69756,Western Star Original Spreadable Butter Blend Tub 500g,Western Star,500g,8.5,8.5,1.7,100G,False,8,butter 500g,dairy,2026-08-22,2026-08-22T01:48:29.255924+00:00
+woolworths,69759,Western Star Spreadable Butter Blend Tub Soft 'n' Less Salt 500g,Western Star,500g,8.5,8.5,1.7,100G,False,9,butter 500g,dairy,2026-08-22,2026-08-22T01:48:29.255924+00:00
+woolworths,1125895867,Protein Supplies Australia Whey Protein Powder Choc Peanut Butter 500g,Protein Supplies Australia,500G,44.95,44.95,8.99,100G,False,10,butter 500g,dairy,2026-08-22,2026-08-22T01:48:29.255924+00:00
+woolworths,310237,Woolworths Tasty Cheese Block 500g,Woolworths,500g,7.7,7.7,15.4,1KG,False,1,tasty cheese block 500g,dairy,2026-08-22,2026-08-22T01:48:45.693659+00:00
+woolworths,40471,Bega Tasty Cheese Block 500g,Bega,500g,11.2,11.2,22.4,1KG,False,2,tasty cheese block 500g,dairy,2026-08-22,2026-08-22T01:48:45.693659+00:00
+woolworths,32198,Mainland Tasty Cheese Block 500g,Mainland,500g,10.5,11.8,21,1KG,True,3,tasty cheese block 500g,dairy,2026-08-22,2026-08-22T01:48:45.693659+00:00
+woolworths,807870,Mainland Extra Tasty Cheese Block 500g,Mainland,500g,10.5,11.8,21,1KG,True,4,tasty cheese block 500g,dairy,2026-08-22,2026-08-22T01:48:45.693659+00:00
+woolworths,182060,Bega Protein Tasty Cheese Block 500g,Bega,500g,11.2,11.2,22.4,1KG,False,5,tasty cheese block 500g,dairy,2026-08-22,2026-08-22T01:48:45.693659+00:00
+woolworths,310238,Woolworths Extra Tasty Cheese Block 500g,Woolworths,500g,7.7,7.7,15.4,1KG,False,6,tasty cheese block 500g,dairy,2026-08-22,2026-08-22T01:48:45.693659+00:00
+woolworths,17280,Dairyworks Tasty Block 500g,Dairyworks,500g,7.5,7.5,15,1KG,False,7,tasty cheese block 500g,dairy,2026-08-22,2026-08-22T01:48:45.693659+00:00
+woolworths,312204,Farmers Union Light Greek Yoghurt 1kg,Farmers Union,1kg,7.5,7.5,0.75,100G,False,1,greek yoghurt 1kg,dairy,2026-08-22,2026-08-22T01:49:02.103922+00:00
+woolworths,571487,Woolworths Natural Greek Style Yoghurt 1kg,Woolworths,1kg,4.2,4.2,0.42,100G,False,2,greek yoghurt 1kg,dairy,2026-08-22,2026-08-22T01:49:02.103922+00:00
+woolworths,31547,Farmers Union Greek Style Natural Yoghurt 1kg,Farmers Union,1kg,7.5,7.5,0.75,100G,False,3,greek yoghurt 1kg,dairy,2026-08-22,2026-08-22T01:49:02.103922+00:00
+woolworths,249086,Woolworths Pot Set Greek Style Yoghurt 1kg,Woolworths,1kg,6.7,6.7,0.67,100G,False,4,greek yoghurt 1kg,dairy,2026-08-22,2026-08-22T01:49:02.103922+00:00
+woolworths,768154,Jalna Sweet & Creamy Greek Style Yoghurt 1kg,Jalna,1kg,7.2,9,0.72,100G,True,5,greek yoghurt 1kg,dairy,2026-08-22,2026-08-22T01:49:02.103922+00:00
+woolworths,6039010,Five:Am Organic Greek Style Yoghurt 1kg,Five:Am,1kg,9.5,9.5,0.95,100G,False,6,greek yoghurt 1kg,dairy,2026-08-22,2026-08-22T01:49:02.103922+00:00
+woolworths,331963,Jalna Pot Set Greek Style Natural Yoghurt 1kg,Jalna,1kg,7.2,9,0.72,100G,True,7,greek yoghurt 1kg,dairy,2026-08-22,2026-08-22T01:49:02.103922+00:00
+woolworths,622935,Tamar Valley Dairy Greek Style Yoghurt 1kg,Tamar Valley,1kg,8.3,8.3,0.83,100G,False,8,greek yoghurt 1kg,dairy,2026-08-22,2026-08-22T01:49:02.103922+00:00
+woolworths,230871,Jalna Pot Set Greek Natural Yoghurt Plus Prebiotics 1kg,Jalna,1kg,7.2,9.2,0.72,100G,True,9,greek yoghurt 1kg,dairy,2026-08-22,2026-08-22T01:49:02.103922+00:00
+woolworths,1127086861,Advwin 12 Eggs Incubator with Egg Candler Automatic Egg Turning,Advwin,,79.9,79.9,,,False,1,eggs 12 pack,dairy,2026-08-22,2026-08-22T01:49:18.591346+00:00
+woolworths,1129970495,"12 Grid Egg Storage Box, Portable Egg Organizer, Egg Preservation Container",,,39.75,39.75,,,False,2,eggs 12 pack,dairy,2026-08-22,2026-08-22T01:49:18.591346+00:00
+woolworths,1125425979,Advwin Automatic 12 Eggs Incubator with Egg Candler,Advwin,1EA,79.9,79.9,,,False,3,eggs 12 pack,dairy,2026-08-22,2026-08-22T01:49:18.591346+00:00
+woolworths,1126480833,Colorful Dinosaur Fossil Digging Egg Set (12 Eggs),,,104.99,104.99,104.99,1EA,False,4,eggs 12 pack,dairy,2026-08-22,2026-08-22T01:49:18.591346+00:00
+woolworths,1104780162,Electric Egg Incubator Digital For Chicken Quail Poultry Birds Eggs 12 Eggs Incubator,,1EA,129.99,129.99,,,False,5,eggs 12 pack,dairy,2026-08-22,2026-08-22T01:49:18.591346+00:00
+woolworths,1128745685,12 Egg Incubator with Automatic Egg Turning & Humidity Control Eggs Tray Hatcher,Grozy,,65.99,65.99,,,False,6,eggs 12 pack,dairy,2026-08-22,2026-08-22T01:49:18.591346+00:00
+woolworths,1120986713,Aussie Traveller 12 Egg Carrier,Aussie Traveller,1EA,22,22,,,False,7,eggs 12 pack,dairy,2026-08-22,2026-08-22T01:49:18.591346+00:00
+woolworths,118213,Simply Eggs 12 Extra Large Cage Free Eggs 700g,Simply Eggs,700g,6.9,6.9,0.99,100G,False,8,eggs 12 pack,dairy,2026-08-22,2026-08-22T01:49:18.591346+00:00
+woolworths,1126389103,Advwin 2 Pcs Egg Incubator 12 Eggs Automatic Water Refill,Advwin,,132.9,132.9,,,False,9,eggs 12 pack,dairy,2026-08-22,2026-08-22T01:49:18.591346+00:00
+woolworths,1129297217,CARLA HOME Automatic Egg Incubator with LED Display & Candler - 12 Egg,Carla Home,,103.38,103.38,,,False,10,eggs 12 pack,dairy,2026-08-22,2026-08-22T01:49:18.591346+00:00
+woolworths,277728,Woolworths White Sandwich Bread Loaf 650g,Woolworths,650g,2.5,2.5,0.38,100G,False,1,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+woolworths,1119109537,Gund Pusheen Squisheen White Bread Loaf Plush 30cm,Gund,1EA,59.95,59.95,,,False,2,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+woolworths,233160,Woolworths Soft White Loaf 800g,Woolworths,800g,3.6,3.6,0.45,100G,False,3,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+woolworths,893462,Helga's Crafted White Sourdough Bread Loaf 700g,Helga's,700g,6.7,6.7,0.96,100G,False,4,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+woolworths,277578,Woolworths Free From Gluten White Bread Loaf 440g,Woolworths,440g,5.5,5.5,1.25,100G,False,5,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+woolworths,889314,Wonder 5 Star Soft White High Fibre Bread Loaf 680g,Wonder,680g,4.9,4.9,0.72,100G,False,6,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+woolworths,19899,Tip Top Sunblest Soft White Sandwich Slice Bread Loaf Bakery 650g,Tip Top,650g,3.9,3.9,0.6,100G,False,7,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+woolworths,713816,Tip Top The One White Sandwich Slice Bread Loaf Bakery 700g,Tip Top,700g,4.6,4.6,0.66,100G,False,8,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+woolworths,713834,Tip Top The One White Toast Slice Bread Loaf Bakery 700g,Tip Top,700g,4.6,4.6,0.66,100G,False,9,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+woolworths,6076251,Just White Loaf 700g,Just,700g,4,4,0.57,100G,False,10,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+coles,4901345,Coles Simply White Sandwich Loaf,Coles Simply,650g,2.5,,0.38,100g,False,1,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+coles,1856492,Just White Loaf,Just,700g,4,,0.57,100g,False,2,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+coles,3378289,Coles Soft White Toast Loaf,Coles,650g,2.8,,0.43,100g,False,3,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+coles,3860901,Wonder Mini Loaf White Sandwich Vitamin,Wonder,320g,3.6,,1.13,100g,False,4,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+coles,1089939,Helgas White Loaf,Helgas,700g,5.2,,0.74,100g,False,5,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+coles,1856517,Just Wholemeal Loaf,Just,700g,4,,0.57,100g,False,6,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+coles,7074016,Warburtons Gluten Free White Tiger Bloomer Loaf,Warburtons,400g,9.95,,2.49,100g,False,7,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+coles,8391309,Coles White Sandwich Loaf,Coles,800g,3.6,,0.45,100g,False,8,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+coles,7168969,Coles White Sandwich Loaf,Coles,680g,3.3,,0.49,100g,False,9,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+coles,7169000,Coles Hi Fibre Low Gi White Sandwich Loaf,Coles,680g,4,,0.59,100g,False,10,white bread loaf,bakery,2026-08-22,2026-08-22T01:49:35.304059+00:00
+woolworths,253921,Burgen Wholemeal & Seeds Bread Loaf 700g,Burgen,700g,6,6,0.86,100G,False,1,wholemeal bread loaf,bakery,2026-08-22,2026-08-22T01:49:37.117398+00:00
+woolworths,277579,Woolworths Free From Gluten Wholemeal Bread Loaf 450g,Woolworths,450g,5.5,5.5,1.22,100G,False,2,wholemeal bread loaf,bakery,2026-08-22,2026-08-22T01:49:37.117398+00:00
+woolworths,49613,Tip Top Sunblest Soft Wholemeal Bread Loaf Sandwich Bakery 650g,Tip Top,650g,3.9,3.9,0.6,100G,False,3,wholemeal bread loaf,bakery,2026-08-22,2026-08-22T01:49:37.117398+00:00
+woolworths,277578,Woolworths Free From Gluten White Bread Loaf 440g,Woolworths,440g,5.5,5.5,1.25,100G,False,4,wholemeal bread loaf,bakery,2026-08-22,2026-08-22T01:49:37.117398+00:00
+woolworths,6028342,Helga's Plus+ Lower Carb 5 Seed Bread Loaf 700g,Helga's,700g,4.9,5.8,0.7,100G,True,5,wholemeal bread loaf,bakery,2026-08-22,2026-08-22T01:49:37.117398+00:00
+woolworths,277577,Woolworths Free From Gluten Seeded Bread Loaf 450g,Woolworths,450g,5.5,5.5,1.22,100G,False,6,wholemeal bread loaf,bakery,2026-08-22,2026-08-22T01:49:37.117398+00:00
+woolworths,264174,Woolworths Free From Gluten Turkish Bread Loaf 200g,Woolworths,200g,5.1,5.1,2.55,100G,False,7,wholemeal bread loaf,bakery,2026-08-22,2026-08-22T01:49:37.117398+00:00
+woolworths,277728,Woolworths White Sandwich Bread Loaf 650g,Woolworths,650g,2.5,2.5,0.38,100G,False,8,wholemeal bread loaf,bakery,2026-08-22,2026-08-22T01:49:37.117398+00:00
+woolworths,893462,Helga's Crafted White Sourdough Bread Loaf 700g,Helga's,700g,6.7,6.7,0.96,100G,False,9,wholemeal bread loaf,bakery,2026-08-22,2026-08-22T01:49:37.117398+00:00
+woolworths,263634,Tip Top 9 Grain Wholemeal Sandwich Slice Bread Loaf Bakery 750g,Tip Top,750g,4.6,4.6,0.61,100G,False,10,wholemeal bread loaf,bakery,2026-08-22,2026-08-22T01:49:37.117398+00:00
+woolworths,634918,Woolworths White Wrap 8 pack,Woolworths,8 pack,2.2,2.2,0.61,100G,False,1,wraps 8 pack,bakery,2026-08-22,2026-08-22T01:49:53.659182+00:00
+woolworths,182138,Helga's Traditional White Wraps 8 pack,Helga's,8 pack,5.5,5.5,1.08,100G,False,2,wraps 8 pack,bakery,2026-08-22,2026-08-22T01:49:53.659182+00:00
+woolworths,182092,Helga's Traditional Wholemeal Wraps 8 pack,Helga's,8 pack,5.5,5.5,1.08,100G,False,3,wraps 8 pack,bakery,2026-08-22,2026-08-22T01:49:53.659182+00:00
+woolworths,6024445,Woolworths Large White Wraps 8 pack,Woolworths,8 pack,4,4,0.71,100G,False,4,wraps 8 pack,bakery,2026-08-22,2026-08-22T01:49:53.659182+00:00
+woolworths,389402,Mission Mini Wholegrain Wraps 8 pack,Mission,8 pack,5.6,5.6,1.46,100G,False,5,wraps 8 pack,bakery,2026-08-22,2026-08-22T01:49:53.659182+00:00
+woolworths,118406,Mountain Bread Natural Light Wraps 8 pack,Mountain Bread,8 pack,4.9,4.9,2.45,100G,False,6,wraps 8 pack,bakery,2026-08-22,2026-08-22T01:49:53.659182+00:00
+woolworths,390253,Simson's Pantry Mixed Wholegrain Wraps 8 pack,Simson's Pantry,8 pack,5.5,5.5,1.04,100G,False,7,wraps 8 pack,bakery,2026-08-22,2026-08-22T01:49:53.659182+00:00
+woolworths,389889,Simson's Pantry Premium White Large Wraps 8 pack,Simson's Pantry,8 pack,5.5,5.5,1.04,100G,False,8,wraps 8 pack,bakery,2026-08-22,2026-08-22T01:49:53.659182+00:00
+woolworths,1124329849,Easter Bunny Paper Cups & Wraps 8pk,,1EA,4.99,4.99,,,False,9,wraps 8 pack,bakery,2026-08-22,2026-08-22T01:49:53.659182+00:00
+woolworths,1122660189,Floral Bunny Wrap Paper Cups (Pack of 8),,,4.99,4.99,0.62,1EA,False,10,wraps 8 pack,bakery,2026-08-22,2026-08-22T01:49:53.659182+00:00
+woolworths,710953,Woolworths RSPCA Approved Chicken Breast Fillet per 350g,Woolworths,per 350g,8,12,8,1KG,True,1,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+woolworths,700228,Macro Chicken Breast Fillets Free Range 700g - 1.4kg,Macro,700g - 1.4kg,19.18,19.18,13.7,1KG,False,2,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+woolworths,119259,Woolworths RSPCA Approved Chicken Breast Fillet Skinless Small 500g - 650g,Woolworths,500g - 650g,9.43,9.43,14.5,1KG,False,3,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+woolworths,969723,Woolworths RSPCA Approved Chicken Breast Fillet 1.3kg - 1.7kg,Woolworths,1.3kg - 1.7kg,18.7,18.7,11,1KG,False,4,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+woolworths,902837,The Bare Bird Free Range Chicken Breast Fillets 600g,The Bare Bird,600g,13.5,13.5,22.5,1KG,False,5,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+woolworths,184628,Macro Chicken Breast Fillets Free Range 400g - 900g,Macro,400g - 900g,16.2,16.2,18,1KG,False,6,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+woolworths,1116116229,Blackdog Dog Treats Chicken Breast Fillet - 120g,Blackdog,1EA,16.99,16.99,14.16,100G,False,7,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+woolworths,229324,Macro Organic Chicken Breast Fillet 300g - 600g,Macro,300g - 600g,20.7,20.7,34.5,1KG,False,8,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+woolworths,1107743715,Blackdog Australian Chicken Breast Fillet Natural Dog Treats 500g,Blackdog,1EA,39.99,39.99,8,100G,False,9,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+woolworths,1106154515,Blackdog 1kg Naturally Good Pet/Dog Chicken Breast Fillets Healthy Treats/Food,Blackdog,1KG,62.9,62.9,6.29,100G,False,10,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,2263179,Coles RSPCA Approved Chicken Breast Fillets Large Pack,Coles,approx. 1.4kg,15.4,,11,1kg,False,1,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,7362270,The Bare Bird Chicken Breast Fillet,The Bare Bird,600g,13.5,,22.5,1kg,False,2,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,1158780,The Bare Bird Chicken Breast Steak,The Bare Bird,500g,13.5,,27,1kg,False,3,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,2263168,Coles RSPCA Approved Chicken Breast Fillets Small Pack,Coles,approx. 600g,8.7,,14.5,1g,False,4,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,8409186,Lilydale Free Range Chicken Breast Fillet,Lilydale,600g,13,,21.67,1kg,False,5,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,2303750,Lilydale Free Range Chicken Breast Fillets Bulk,Lilydale,approx. 1kg,17.5,,17.5,1g,False,6,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,1898460,Coles Free Range RSPCA Approved Chicken Breast Fillet,Coles,600g,12,,20,1kg,False,7,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,3228730,Coles RSPCA Approved Free Range Chicken Breast Fillet Small Pack,Coles,approx. 600g,10.8,,,1g,False,8,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,3227410,Coles RSPCA Approved Free Range Chicken Breast Large Pack,Coles,approx. 1.25kg,16.88,,13.5,1kg,False,9,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,9494624,Continental Kosher Butchers Chicken Breast Fillet Smoked,Continental Kosher Butchers,approx. 500g Pack,27.5,,55,1g,False,10,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,1403013,Coles RSPCA Approved Chicken Breast Fillet Value Pack,Coles,approx. 2Kg,18,,9,1kg,False,11,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,2962203,El- Amin's Halal Chicken Breast Fillets Large Pack,El- Amin's,approx. 1.3kg,16.9,,13,1kg,False,12,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,2903871,Coles RSPCA Approved Chicken Breast Fillet Crumb Sage & Rosemary,Coles,400g,10,,25,1kg,False,13,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,1331477,Inglewood Farms Free Range Organic Chicken Breast Fillets Skin Off,Inglewood Farms,approx. 488g each,16.84,,34.5,1g,False,14,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,1075912,El- Amin's Chicken Breast Small Pack,El- Amin's,approx. 600g,9,,15,1g,False,15,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+coles,8407646,Coles Free Range RSPCA Chicken Sweet Mustard Breast Fillet,Coles,500g,12,,24,1kg,False,16,chicken breast fillets,meat,2026-08-22,2026-08-22T01:50:10.474026+00:00
+woolworths,577863,Woolworths Beef Mince 500g,Woolworths,500g,8.5,8.5,17,1KG,False,1,beef mince 500g,meat,2026-08-22,2026-08-22T01:50:12.225875+00:00
+woolworths,577861,Woolworths Lean Beef Mince 500g,Woolworths,500g,10,11,20,1KG,False,2,beef mince 500g,meat,2026-08-22,2026-08-22T01:50:12.225875+00:00
+woolworths,577860,Woolworths Heart Smart Extra Lean Beef Mince 500g,Woolworths,500g,10.5,12,21,1KG,False,3,beef mince 500g,meat,2026-08-22,2026-08-22T01:50:12.225875+00:00
+woolworths,175570,Macro Grass Fed Australian Beef Mince 500g,Macro,500g,12.5,12.5,25,1KG,False,4,beef mince 500g,meat,2026-08-22,2026-08-22T01:50:12.225875+00:00
+woolworths,236845,Macro Grass Fed Lean Beef Mince 500g,Macro,500g,13,13,26,1KG,False,5,beef mince 500g,meat,2026-08-22,2026-08-22T01:50:12.225875+00:00
+woolworths,239598,Woolworths Pork & Beef Mince 500g,Woolworths,500g,7,7,14,1KG,False,6,beef mince 500g,meat,2026-08-22,2026-08-22T01:50:12.225875+00:00
+woolworths,672975,Macro Organic Lean Beef Mince 500g,Macro,500g,15.5,15.5,31,1KG,False,7,beef mince 500g,meat,2026-08-22,2026-08-22T01:50:12.225875+00:00
+woolworths,321551,Macro Organic Extra Lean Beef Mince 500g,Macro,500g,16.5,16.5,33,1KG,False,8,beef mince 500g,meat,2026-08-22,2026-08-22T01:50:12.225875+00:00
+woolworths,109099,Woolworths Beef Sausage Mince 500g,Woolworths,500g,5.5,5.5,11,1KG,False,9,beef mince 500g,meat,2026-08-22,2026-08-22T01:50:12.225875+00:00
+woolworths,714680,Hans Middle Bacon Rashers From the Deli per 170g,Hans,per 170g,17,19,17,1KG,True,1,bacon rashers 250g,meat,2026-08-22,2026-08-22T01:50:28.790007+00:00
+woolworths,901649,Woolworths 10 Beef Sausages 550g,Woolworths,550g,6.5,6.5,11.82,1KG,False,1,sausages beef,meat,2026-08-22,2026-08-22T01:50:45.578862+00:00
+woolworths,357418,Woolworths Classic Angus Beef Sausages 6 pack,Woolworths,6 pack,9,9,20,1KG,False,2,sausages beef,meat,2026-08-22,2026-08-22T01:50:45.578862+00:00
+woolworths,901510,Woolworths 6 Beef Sausages 505g,Woolworths,505g,7,7,13.86,1KG,False,3,sausages beef,meat,2026-08-22,2026-08-22T01:50:45.578862+00:00
+woolworths,6033469,Woolworths Gourmet Boerewors Sausage Beef & Pork 500g,Woolworths,500g,9,9,18,1KG,False,4,sausages beef,meat,2026-08-22,2026-08-22T01:50:45.578862+00:00
+woolworths,175566,Macro Grass Fed Australian Beef Sausage 500g,Macro,500g,8.5,8.5,17,1KG,False,5,sausages beef,meat,2026-08-22,2026-08-22T01:50:45.578862+00:00
+woolworths,901505,Woolworths 10 Herb & Garlic Beef Sausages 550g,Woolworths,550g,6.5,6.5,11.82,1KG,False,6,sausages beef,meat,2026-08-22,2026-08-22T01:50:45.578862+00:00
+woolworths,260670,Woolworths Cracked Black Pepper Wagyu Beef Sausages 450g,Woolworths,450g,9,9,20,1KG,False,7,sausages beef,meat,2026-08-22,2026-08-22T01:50:45.578862+00:00
+woolworths,1115829589,Stainless Steel Meat Mixer Blender Commercial Home Manual Sausage Ground Beef,Applebyco,1EA,302.39,302.39,,,False,8,sausages beef,meat,2026-08-22,2026-08-22T01:50:45.578862+00:00
+woolworths,1096536783,"15"" Beef Jerky Gun Food Grade Aluminium - Homemade Sausage Making Cannon Kit",Tooleroo,1EA,99.99,99.99,,,False,9,sausages beef,meat,2026-08-22,2026-08-22T01:50:45.578862+00:00
+woolworths,1128045985,"Manual Meat Grinder, Meat Mincer Sausage Maker with 1 Cutting Blade, 3 Sausage Tubes for Beef Pepper Mushroom",,,81.99,81.99,,,False,10,sausages beef,meat,2026-08-22,2026-08-22T01:50:45.578862+00:00
+woolworths,126497,Fresh Tasmanian Atlantic Salmon Fillets per 200g,,per 200g,42,42,42,1KG,False,1,salmon fillets,meat,2026-08-22,2026-08-22T01:51:02.443568+00:00
+woolworths,95171,Fresh Tasmanian Atlantic Skin On Salmon Fillets per 200g,Woolworths,per 200g,34,38,34,1KG,True,2,salmon fillets,meat,2026-08-22,2026-08-22T01:51:02.443568+00:00
+woolworths,259832,Woolworths Frozen Salmon Fillets Skin On 250g,Woolworths,250g,8.5,8.5,34,1KG,False,3,salmon fillets,meat,2026-08-22,2026-08-22T01:51:02.443568+00:00
+woolworths,917982,Woolworths COOK Tasmanian Salmon Fillets With Lemon Butter 270g,Woolworths,270g,14,14,51.85,1KG,False,4,salmon fillets,meat,2026-08-22,2026-08-22T01:51:02.443568+00:00
+woolworths,673742,Woolworths Tasmanian Salmon Fillet With Rice & Green Beans 400g,Woolworths,400g,14,14,3.5,100G,False,5,salmon fillets,meat,2026-08-22,2026-08-22T01:51:02.443568+00:00
+woolworths,6018091,Fast Fuel Air Fry Poached Atlantic Salmon Fillet 400g,Fast Fuel,400g,17,17,4.25,100G,False,6,salmon fillets,meat,2026-08-22,2026-08-22T01:51:02.443568+00:00
+woolworths,289214,Woolworths Cook Salmon Fillets With Miso & Maple Marinade 320g,Woolworths,320g,17,17,53.13,1KG,False,7,salmon fillets,meat,2026-08-22,2026-08-22T01:51:02.443568+00:00
+woolworths,237480,Applaws Tuna Fillet With Salmon Wet Cat Food 70g,Applaws,70g,2.4,2.4,3.43,100G,False,8,salmon fillets,meat,2026-08-22,2026-08-22T01:51:02.443568+00:00
+woolworths,133211,Cavendish Bananas each,,each,0.56,0.56,0.56,1EA,False,1,bananas,produce,2026-08-22,2026-08-22T01:51:18.806555+00:00
+woolworths,157649,Eat Later Cavendish Bananas each,,each,0.56,0.56,0.56,1EA,False,2,bananas,produce,2026-08-22,2026-08-22T01:51:18.806555+00:00
+woolworths,106218,Bananas Kids 5 pack,,5 pack,3.5,3.5,3.5,1EA,False,3,bananas,produce,2026-08-22,2026-08-22T01:51:18.806555+00:00
+woolworths,306510,Macro Organic Banana each,Macro,each,1.2,1.2,1.2,1EA,False,4,bananas,produce,2026-08-22,2026-08-22T01:51:18.806555+00:00
+woolworths,180148,Banana Red Tipped each,,each,1.11,1.11,1.11,1EA,False,5,bananas,produce,2026-08-22,2026-08-22T01:51:18.806555+00:00
+woolworths,133390,Banana Lady Finger each,,each,1.44,1.44,1.44,1EA,False,6,bananas,produce,2026-08-22,2026-08-22T01:51:18.806555+00:00
+woolworths,707281,Woolworths Banana Bread Slice 100g,Woolworths,100g,2,2,2,100G,False,7,bananas,produce,2026-08-22,2026-08-22T01:51:18.806555+00:00
+woolworths,328822,Woolworths Banana Bread Slices 5 pack,Woolworths,5 pack,5.75,5.75,1.15,100G,False,8,bananas,produce,2026-08-22,2026-08-22T01:51:18.806555+00:00
+woolworths,607875,Woolworths Mini Banana Muffin 8 pack,Woolworths,8 pack,4.5,4.5,0.56,1EA,False,9,bananas,produce,2026-08-22,2026-08-22T01:51:18.806555+00:00
+woolworths,6010720,Woolworths Banana Yoghurt Pouch 70g,Woolworths,70g,0.8,0.8,1.14,100G,False,10,bananas,produce,2026-08-22,2026-08-22T01:51:18.806555+00:00
+woolworths,105919,Fresh Pink Lady Apples each,,each,1.31,1.31,1.31,1EA,False,1,apples pink lady,produce,2026-08-22,2026-08-22T01:51:35.223119+00:00
+woolworths,310968,Woolworths Fresh Pink Lady Apples Punnet 1kg,Woolworths,1kg,7.5,7.5,7.5,1KG,False,2,apples pink lady,produce,2026-08-22,2026-08-22T01:51:35.223119+00:00
+woolworths,160888,Macro Organic Pink Lady Apple Punnet 1kg,Macro,1kg,9.5,9.5,9.5,1KG,False,3,apples pink lady,produce,2026-08-22,2026-08-22T01:51:35.223119+00:00
+woolworths,6007213,Woolworths Custard & Pink Lady Apple Scrolls 2 pack,Woolworths,2 pack,4.1,4.1,2.05,1EA,False,4,apples pink lady,produce,2026-08-22,2026-08-22T01:51:35.223119+00:00
+woolworths,6054860,Sam's Pantry Granola Pink Lady Apple & Cinnamon 700g,Sam's Pantry,700g,5.9,7.6,0.84,100G,True,5,apples pink lady,produce,2026-08-22,2026-08-22T01:51:35.223119+00:00
+woolworths,317953,Preshafruit Cold Pressed Pink Lady Apple Juice 350mL,Preshafruit,350mL,3.8,3.8,10.86,1L,False,6,apples pink lady,produce,2026-08-22,2026-08-22T01:51:35.223119+00:00
+woolworths,135369,Woolworths Australian Grown Carrots 1kg,Woolworths,1kg,2.4,2.4,2.4,1KG,False,1,carrots 1kg,produce,2026-08-22,2026-08-22T01:51:52.093548+00:00
+woolworths,289348,Bell Farms Frozen Carrots Peas & Corn 1kg,Bell Farms,1kg,3.9,3.9,3.9,1KG,False,2,carrots 1kg,produce,2026-08-22,2026-08-22T01:51:52.093548+00:00
+woolworths,768569,Woolworths Frozen Australian Carrots Peas & Corn 1kg,Woolworths,1kg,5,5,5,1KG,False,3,carrots 1kg,produce,2026-08-22,2026-08-22T01:51:52.093548+00:00
+woolworths,217969,Birds Eye Frozen Carrot Cauliflower & Broccoli 1kg,Birds Eye,1kg,6.5,6.5,6.5,1KG,False,4,carrots 1kg,produce,2026-08-22,2026-08-22T01:51:52.093548+00:00
+woolworths,255445,Birds Eye Frozen Carrot Peas & Corn 1kg,Birds Eye,1kg,6.5,6.5,6.5,1KG,False,5,carrots 1kg,produce,2026-08-22,2026-08-22T01:51:52.093548+00:00
+woolworths,247686,VIP Adult Chilled Fresh Dog Food Beef & Carrot Meatballs 1kg,VIP,1kg,5.85,6.5,0.59,100G,False,6,carrots 1kg,produce,2026-08-22,2026-08-22T01:51:52.093548+00:00
+woolworths,782979,Birds Eye Snap Frozen Baby Beans Carrot Corn & Broccoli 1kg,Birds Eye,1kg,6.5,6.5,6.5,1KG,False,7,carrots 1kg,produce,2026-08-22,2026-08-22T01:51:52.093548+00:00
+woolworths,246566,Potato Brushed each,,each,1.18,1.18,1.18,1EA,False,1,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+woolworths,124831,Woolworths Brushed Potatoes Bag 4kg,Woolworths,4kg,10,10,2.5,1KG,False,2,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+woolworths,1126424361,6 Pcs Vegetable Brush Scrubber Fruits Cleaning Brush Scrubber Potato Brush,,,26.95,26.95,,,False,3,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+woolworths,1124434485,"Potato Brush with Peeler 3 in 1 Brush, Peeler and Eye Remover for Potatoes and Other Fruits and Vegetables",,1EA,48.88,48.88,,,False,4,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+woolworths,1129395849,Joie Potato Brush Root Vegetables Dirt Remover Kitchen Scrubber Green 15x5x4cm,Joie,,12.95,12.95,,,False,5,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+woolworths,1124437023,2Pcs Multifunctional Fruit Brush Home Kitchen Clean Brush Potato Removal Brush,,1EA,22.94,22.94,,,False,6,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+woolworths,1115967731,2Pcs Multifunctional Fruit Brush Home Kitchen Clean Brush Potato Removal Brush,,1EA,20.95,20.95,,,False,7,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+woolworths,1125074513,JOYBUY 2Pcs Multifunctional Fruit Brush Home Kitchen Clean Brush Potato Removal Brush,,1EA,23.04,23.04,,,False,8,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+woolworths,244637,Woolworths Brushed Potatoes Bag 2kg,Woolworths,2kg,7.7,7.7,3.85,1KG,False,9,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+woolworths,1125258061,Nevenka 2 Pcs Vegetable Brushes Bendable Quick Cleaning Potato Carrots,Nevenka,1EA,20.89,20.89,,,False,10,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+coles,5024866,Coles Organic Potatoes Brushed,Coles Organic,2Kg,11.9,,5.95,1kg,False,1,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+coles,3958573,Coles Brushed Potatoes,Coles,2Kg,7.7,,3.85,1kg,False,2,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+coles,3958530,Coles Brushed Potatoes,Coles,4Kg,12,,3,1kg,False,3,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+coles,1022610,Coles Potatoes Creme Royale Brushed,Coles,approx. 200g,0.86,,4.3,1g,False,4,potatoes brushed,produce,2026-08-22,2026-08-22T01:52:08.470459+00:00
+woolworths,134034,Gourmet Tomato each,,each,0.54,0.54,0.54,1EA,False,1,tomatoes,produce,2026-08-22,2026-08-22T01:52:10.410193+00:00
+woolworths,169438,Truss Tomatoes each,,each,1.11,1.11,1.11,1EA,False,2,tomatoes,produce,2026-08-22,2026-08-22T01:52:10.410193+00:00
+woolworths,149864,Tomato Roma Red each,,each,0.8,0.8,0.8,1EA,False,3,tomatoes,produce,2026-08-22,2026-08-22T01:52:10.410193+00:00
+woolworths,149620,Woolworths Cherry Tomatoes Punnet 250g,Woolworths,250g,3.2,3.2,12.8,1KG,False,4,tomatoes,produce,2026-08-22,2026-08-22T01:52:10.410193+00:00
+woolworths,727144,Woolworths Sweet Solanato Tomato Punnet 200g,Woolworths,200g,3.5,3.5,17.5,1KG,False,5,tomatoes,produce,2026-08-22,2026-08-22T01:52:10.410193+00:00
+woolworths,747009,Woolworths Truss Cocktail Tomato Punnet 250g,Woolworths,250g,4.5,4.5,18,1KG,False,6,tomatoes,produce,2026-08-22,2026-08-22T01:52:10.410193+00:00
+woolworths,196442,Woolworths Tomato Truss Punnet 500g,Woolworths,500g,5.5,5.5,11,1KG,False,7,tomatoes,produce,2026-08-22,2026-08-22T01:52:10.410193+00:00
+woolworths,166144,Mini-Roma Tomato Punnet 250g,Mini-Roma,250g,3.5,3.5,14,1KG,False,8,tomatoes,produce,2026-08-22,2026-08-22T01:52:10.410193+00:00
+woolworths,143730,Woolworths Gourmet Tomatoes Punnet 1kg,Woolworths,1kg,4.9,4.9,4.9,1KG,False,9,tomatoes,produce,2026-08-22,2026-08-22T01:52:10.410193+00:00
+woolworths,760007,Woolworths Roma Tomato Punnet 480g,Woolworths,480g,4.9,4.9,10.21,1KG,False,10,tomatoes,produce,2026-08-22,2026-08-22T01:52:10.410193+00:00
+woolworths,134681,Fresh Broccoli each,,each,1.95,1.95,1.95,1EA,False,1,broccoli,produce,2026-08-22,2026-08-22T01:52:27.133264+00:00
+woolworths,187314,Woolworths Broccolini Bunch each,Woolworths,each,3.7,3.7,3.7,1EA,False,2,broccoli,produce,2026-08-22,2026-08-22T01:52:27.133264+00:00
+woolworths,768559,Woolworths Frozen Australian Broccoli Florets 500g,Woolworths,500g,4,4,8,1KG,False,3,broccoli,produce,2026-08-22,2026-08-22T01:52:27.133264+00:00
+woolworths,120139,Bell Farms Frozen Broccoli Florets 500g,Bell Farms,500g,3,3,6,1KG,False,4,broccoli,produce,2026-08-22,2026-08-22T01:52:27.133264+00:00
+woolworths,768561,Woolworths Frozen Australian Broccoli & Cauliflower 500g,Woolworths,500g,4,4,8,1KG,False,5,broccoli,produce,2026-08-22,2026-08-22T01:52:27.133264+00:00
+woolworths,217969,Birds Eye Frozen Carrot Cauliflower & Broccoli 1kg,Birds Eye,1kg,6.5,6.5,6.5,1KG,False,6,broccoli,produce,2026-08-22,2026-08-22T01:52:27.133264+00:00
+woolworths,117518,Birds Eye Frozen Veggie Rice Carrot Cauliflower & Broccoli 500g,Birds Eye,500g,5.5,5.5,11,1KG,False,7,broccoli,produce,2026-08-22,2026-08-22T01:52:27.133264+00:00
+woolworths,782977,Birds Eye Steamfresh Frozen Peas Beans Corn & Broccoli 750g,Birds Eye,750g,5.5,5.5,7.33,1KG,False,8,broccoli,produce,2026-08-22,2026-08-22T01:52:27.133264+00:00
+woolworths,180752,Birds Eye Steamfresh Frozen Carrot Cauliflower & Broccoli 750g,Birds Eye,750g,5.5,5.5,7.33,1KG,False,9,broccoli,produce,2026-08-22,2026-08-22T01:52:27.133264+00:00
+woolworths,782979,Birds Eye Snap Frozen Baby Beans Carrot Corn & Broccoli 1kg,Birds Eye,1kg,6.5,6.5,6.5,1KG,False,10,broccoli,produce,2026-08-22,2026-08-22T01:52:27.133264+00:00
+woolworths,144329,Onion Brown each,,each,0.63,0.63,0.63,1EA,False,1,brown onions,produce,2026-08-22,2026-08-22T01:52:43.499481+00:00
+woolworths,144336,Woolworths Onion Brown Bag 1kg,Woolworths,1kg,3.6,3.6,3.6,1KG,False,2,brown onions,produce,2026-08-22,2026-08-22T01:52:43.499481+00:00
+woolworths,144427,Woolworths Brown Onions Bag 2kg,Woolworths,2kg,5.5,5.5,2.75,1KG,False,3,brown onions,produce,2026-08-22,2026-08-22T01:52:43.499481+00:00
+woolworths,250673,Woolworths Brown Onion Instant Gravy 120g,Woolworths,120g,2.1,2.1,1.75,100G,False,4,brown onions,produce,2026-08-22,2026-08-22T01:52:43.499481+00:00
+woolworths,222992,Gravox Brown Onion Liquid Gravy Pouch 165g,Gravox,165g,3.7,3.7,2.24,100G,False,5,brown onions,produce,2026-08-22,2026-08-22T01:52:43.499481+00:00
+woolworths,38904,Gravox Brown Onion Gravy Mix Tin 120g,Gravox,120g,5,5,0.42,10G,False,6,brown onions,produce,2026-08-22,2026-08-22T01:52:43.499481+00:00
+woolworths,724831,Knorr Brown Onion South African Soup 50g,Knorr,50g,1.85,1.85,3.7,100G,False,7,brown onions,produce,2026-08-22,2026-08-22T01:52:43.499481+00:00
+woolworths,1129655363,"Velocity Woven Hanging Basket for Onion and Garlic Storage, Light Brown",,,25.99,25.99,,,False,8,brown onions,produce,2026-08-22,2026-08-22T01:52:43.499481+00:00
+woolworths,1121222109,Avanti 20cm Fabric/Jute Onion Storage Bag Preserving Fresh Produce Sack Brown,Avanti,1EA,23.35,23.35,,,False,9,brown onions,produce,2026-08-22,2026-08-22T01:52:43.499481+00:00
+woolworths,215448,Macro Organic Penne Pasta 500g,Macro,500g,1.95,1.95,0.39,100G,False,1,penne pasta 500g,pantry,2026-08-22,2026-08-22T01:52:59.804323+00:00
+woolworths,6026650,La Gina Penne Pasta 500g,La Gina,500g,2.2,2.8,0.44,100G,True,2,penne pasta 500g,pantry,2026-08-22,2026-08-22T01:52:59.804323+00:00
+woolworths,904775,Free From Gluten Penne Pasta 500g,Free From Gluten,500g,2.2,2.5,0.44,100G,True,3,penne pasta 500g,pantry,2026-08-22,2026-08-22T01:52:59.804323+00:00
+woolworths,83764,Barilla Pasta Penne Rigate 500g,Barilla,500g,2.9,3.5,0.58,100G,False,4,penne pasta 500g,pantry,2026-08-22,2026-08-22T01:52:59.804323+00:00
+woolworths,188800,Woolworths Essentials Pasta Penne 500g,Woolworths Essentials,500g,0.9,0.9,0.18,100G,False,5,penne pasta 500g,pantry,2026-08-22,2026-08-22T01:52:59.804323+00:00
+woolworths,346831,Woolworths Pasta Penne Rigate 500g,Woolworths,500g,1,1,0.2,100G,False,6,penne pasta 500g,pantry,2026-08-22,2026-08-22T01:52:59.804323+00:00
+woolworths,35742,San Remo Penne Pasta No 18 500g,San Remo,500g,2.3,2.95,0.46,100G,True,7,penne pasta 500g,pantry,2026-08-22,2026-08-22T01:52:59.804323+00:00
+woolworths,74787,La Molisana Pastificio Extra Di Lusso Penne Rigate Pasta 500g,La Molisana,500g,3.5,3.5,0.7,100G,False,8,penne pasta 500g,pantry,2026-08-22,2026-08-22T01:52:59.804323+00:00
+woolworths,758286,Dolmio Extra Bolognese Tomato Pasta Sauce 500g,Dolmio,500g,2.3,4.6,0.46,100G,True,1,pasta sauce 500g,pantry,2026-08-22,2026-08-22T01:53:16.127268+00:00
+woolworths,452031,Leggo's Tuna Bake Pasta Sauce 500g,Leggo's,500g,4.3,4.3,0.86,100G,False,2,pasta sauce 500g,pantry,2026-08-22,2026-08-22T01:53:16.127268+00:00
+woolworths,758377,Dolmio Classic Tomato With Basil Pasta Sauce 500g,Dolmio,500g,2.5,2.5,0.5,100G,False,3,pasta sauce 500g,pantry,2026-08-22,2026-08-22T01:53:16.127268+00:00
+woolworths,758299,Dolmio Extra Spicy Peppers Tomato Pasta Sauce 500g,Dolmio,500g,2.3,4.6,0.46,100G,True,4,pasta sauce 500g,pantry,2026-08-22,2026-08-22T01:53:16.127268+00:00
+woolworths,758342,Dolmio Extra Tomato Onion & Roast Garlic Pasta Sauce 500g,Dolmio,500g,2.3,4.6,0.46,100G,True,5,pasta sauce 500g,pantry,2026-08-22,2026-08-22T01:53:16.127268+00:00
+woolworths,450822,Leggo's Napoletana With Chunky Tomato & Herbs Pasta Sauce 500g,Leggo's,500g,3.3,3.3,0.66,100G,False,6,pasta sauce 500g,pantry,2026-08-22,2026-08-22T01:53:16.127268+00:00
+woolworths,450687,Leggo's Bolognese Chunky Tomato Garlic & Herbs Pasta Sauce 500g,Leggo's,500g,3.3,3.3,0.66,100G,False,7,pasta sauce 500g,pantry,2026-08-22,2026-08-22T01:53:16.127268+00:00
+woolworths,451923,Leggo's Roasted Garlic Chunky Tomato & Onion Pasta Sauce 500g,Leggo's,500g,3.3,3.3,0.66,100G,False,8,pasta sauce 500g,pantry,2026-08-22,2026-08-22T01:53:16.127268+00:00
+woolworths,451926,Leggo's Mushroom Bolognese With Chunky Tomato & Herbs Pasta Sauce 500g,Leggo's,500g,3.3,3.3,0.66,100G,False,9,pasta sauce 500g,pantry,2026-08-22,2026-08-22T01:53:16.127268+00:00
+woolworths,321163,Leggo's Bacon Flavour Bolognese Chunky Tomato & Herbs Pasta Sauce 500g,Leggo's,500g,3.3,3.3,0.66,100G,False,10,pasta sauce 500g,pantry,2026-08-22,2026-08-22T01:53:16.127268+00:00
+woolworths,601342,Woolworths Jasmine Rice 1kg,Woolworths,1kg,3.5,3.5,0.35,100G,False,1,jasmine rice 1kg,pantry,2026-08-22,2026-08-22T01:53:32.541017+00:00
+woolworths,267557,Sunrice Rice Jasmine 1kg,Sunrice,1kg,4.55,4.55,0.46,100G,False,2,jasmine rice 1kg,pantry,2026-08-22,2026-08-22T01:53:32.541017+00:00
+woolworths,334882,Nice Rice Jasmine Rice 1kg,Nice Rice,1kg,4.5,4.5,0.45,100G,False,3,jasmine rice 1kg,pantry,2026-08-22,2026-08-22T01:53:32.541017+00:00
+woolworths,961822,Sunrice Premium Thai Hom Mali Jasmine Rice 1kg,Sunrice,1kg,7.6,7.6,0.76,100G,False,4,jasmine rice 1kg,pantry,2026-08-22,2026-08-22T01:53:32.541017+00:00
+woolworths,793114,Weet-Bix Breakfast Cereal 575g,Weet-Bix,575g,5,5,0.87,100G,False,1,weet-bix 575g,pantry,2026-08-22,2026-08-22T01:53:48.807595+00:00
+woolworths,245169,Weet-Bix Blends Multi Grain+ Breakfast Cereal 575g,Weet-Bix,575g,6.5,6.5,1.13,100G,False,2,weet-bix 575g,pantry,2026-08-22,2026-08-22T01:53:48.807595+00:00
+woolworths,321220,Woolworths Rolled Traditional Oats 750g,Woolworths,750g,1.6,1.6,0.21,100G,False,1,rolled oats 750g,pantry,2026-08-22,2026-08-22T01:54:05.193119+00:00
+woolworths,321222,Woolworths Quick Oats 750g,Woolworths,750g,1.6,1.6,0.21,100G,False,2,rolled oats 750g,pantry,2026-08-22,2026-08-22T01:54:05.193119+00:00
+woolworths,1125895867,Protein Supplies Australia Whey Protein Powder Choc Peanut Butter 500g,Protein Supplies Australia,500G,44.95,44.95,8.99,100G,False,1,peanut butter 500g,pantry,2026-08-22,2026-08-22T01:54:21.447710+00:00
+woolworths,233925,Woolworths Crunchy Peanut Butter 500g,Woolworths,500g,3.4,3.4,0.68,100G,False,2,peanut butter 500g,pantry,2026-08-22,2026-08-22T01:54:21.447710+00:00
+woolworths,233922,Woolworths Smooth Peanut Butter 500g,Woolworths,500g,3.4,3.4,0.68,100G,False,3,peanut butter 500g,pantry,2026-08-22,2026-08-22T01:54:21.447710+00:00
+woolworths,6057018,Schmackos Strapz Dog Treats Temptin' Peanut Butter 500g,Schmackos,500g,13.6,17,2.72,100G,True,4,peanut butter 500g,pantry,2026-08-22,2026-08-22T01:54:21.447710+00:00
+woolworths,6016172,Baxter's Dog Treats Jerky Sticks Peanut Butter Flavour 500g,Baxter's,500g,8,8,1.6,100G,False,5,peanut butter 500g,pantry,2026-08-22,2026-08-22T01:54:21.447710+00:00
+woolworths,796439,Vegemite Spread 380g,Vegemite,380g,7.7,7.7,2.03,100G,False,1,vegemite 380g,pantry,2026-08-22,2026-08-22T01:54:37.814065+00:00
+woolworths,698956,Woolworths Spanish Extra Virgin Olive Oil 500mL,Woolworths,500mL,9,9,1.8,100ML,False,1,olive oil 500ml,pantry,2026-08-22,2026-08-22T01:54:54.053664+00:00
+woolworths,248084,Woolworths Extra Virgin Olive Oil 500mL,Woolworths,500mL,11,11,2.2,100ML,False,2,olive oil 500ml,pantry,2026-08-22,2026-08-22T01:54:54.053664+00:00
+woolworths,698866,Woolworths Mediterranean Mellow Olive Oil 500mL,Woolworths,500mL,9,9,1.8,100ML,False,3,olive oil 500ml,pantry,2026-08-22,2026-08-22T01:54:54.053664+00:00
+woolworths,49304,Moro Delicado Light Taste Olive Oil 500mL,Moro,500mL,16,16,3.2,100ML,False,4,olive oil 500ml,pantry,2026-08-22,2026-08-22T01:54:54.053664+00:00
+woolworths,49301,Moro Tradicional Mild Taste Olive Oil 500mL,Moro,500mL,16,16,3.2,100ML,False,5,olive oil 500ml,pantry,2026-08-22,2026-08-22T01:54:54.053664+00:00
+woolworths,1120429671,Glass Cooking Olive Oil 500ml 4 Pack Dispenser Bottles for Kitchen,,1EA,99.95,99.95,,,False,6,olive oil 500ml,pantry,2026-08-22,2026-08-22T01:54:54.053664+00:00
+woolworths,25065,Moro Primero Extra Virgin Olive Oil 500mL,Moro,500mL,16,16,3.2,100ML,False,7,olive oil 500ml,pantry,2026-08-22,2026-08-22T01:54:54.053664+00:00
+woolworths,6079345,Moro Organico Extra Virgin Olive Oil 500mL,Moro,500mL,17.5,17.5,3.5,100ML,False,8,olive oil 500ml,pantry,2026-08-22,2026-08-22T01:54:54.053664+00:00
+woolworths,807200,Monini Organic Extra Virgin Olive Oil 500mL,Monini,500mL,17.5,17.5,3.5,100ML,False,9,olive oil 500ml,pantry,2026-08-22,2026-08-22T01:54:54.053664+00:00
+woolworths,1118770269,Olive Oil Skin Care Company Conditioner 500ml - Rose Geranium,,500ML,28.6,28.6,5.72,100ML,False,10,olive oil 500ml,pantry,2026-08-22,2026-08-22T01:54:54.053664+00:00
+woolworths,33282,Woolworths Essentials Plain Flour 1kg,Woolworths Essentials,1kg,1.3,1.3,1.3,1KG,False,1,plain flour 1kg,pantry,2026-08-22,2026-08-22T01:55:10.316329+00:00
+woolworths,215462,Macro Organic Plain Flour 1kg,Macro,1kg,4.7,4.7,4.7,1KG,False,2,plain flour 1kg,pantry,2026-08-22,2026-08-22T01:55:10.316329+00:00
+woolworths,535605,Woolworths Wholemeal Plain Flour 1kg,Woolworths,1kg,2.2,2.2,2.2,1KG,False,3,plain flour 1kg,pantry,2026-08-22,2026-08-22T01:55:10.316329+00:00
+woolworths,33064,White Wings Plain Flour 1kg,White Wings,1kg,2.5,3.4,2.5,1KG,True,4,plain flour 1kg,pantry,2026-08-22,2026-08-22T01:55:10.316329+00:00
+woolworths,262665,Lighthouse Bread & Pizza Plain Flour 1kg,Lighthouse,1kg,4,4,4,1KG,False,5,plain flour 1kg,pantry,2026-08-22,2026-08-22T01:55:10.316329+00:00
+woolworths,142314,Vetta Smart Protein Plain Flour 1kg,Vetta,1kg,4.5,4.5,4.5,1KG,False,6,plain flour 1kg,pantry,2026-08-22,2026-08-22T01:55:10.316329+00:00
+woolworths,262660,Lighthouse Biscuit Pastry & Cake Plain Flour 1kg,Lighthouse,1kg,4,4,4,1KG,False,7,plain flour 1kg,pantry,2026-08-22,2026-08-22T01:55:10.316329+00:00
+woolworths,228764,White Wings Plain Flour Wholemeal 1kg,White Wings,1kg,3.4,3.4,3.4,1KG,False,8,plain flour 1kg,pantry,2026-08-22,2026-08-22T01:55:10.316329+00:00
+woolworths,180265,Macro Organic Australian Wholemeal Plain Flour Unbleached 1kg,Macro,1kg,4.7,4.7,4.7,1KG,False,9,plain flour 1kg,pantry,2026-08-22,2026-08-22T01:55:10.316329+00:00
+woolworths,230949,The Healthy Baker Plain Flour Easy Store 1kg,The Healthy Baker,1kg,3.25,3.25,3.25,1KG,False,10,plain flour 1kg,pantry,2026-08-22,2026-08-22T01:55:10.316329+00:00
+woolworths,33156,CSR White Sugar 1kg,CSR,1kg,2,2.3,0.2,100G,True,1,white sugar 1kg,pantry,2026-08-22,2026-08-22T01:55:26.833038+00:00
+woolworths,58537,Woolworths Essentials White Sugar 1kg,Woolworths Essentials,1kg,1.8,1.8,0.18,100G,False,2,white sugar 1kg,pantry,2026-08-22,2026-08-22T01:55:26.833038+00:00
+woolworths,1111987349,Aqua Naturals Sugar White 9kg,Aqua Natural,1EA,56.95,56.95,,,False,3,white sugar 1kg,pantry,2026-08-22,2026-08-22T01:55:26.833038+00:00
+woolworths,687062,Nescafe Gold Orginal Soluble Instant Coffee 200g,Nescafe,200g,23,23,11.5,100G,False,1,instant coffee 200g,pantry,2026-08-22,2026-08-22T01:55:43.541756+00:00
+woolworths,687036,Nescafe Gold Intense Soluble Instant Coffee 200g,Nescafe,200g,23,23,11.5,100G,False,2,instant coffee 200g,pantry,2026-08-22,2026-08-22T01:55:43.541756+00:00
+woolworths,92393,Moccona Freeze Dried Instant Coffee Indulgence Dark 200g,Moccona,200g,23.6,23.6,11.8,100G,False,3,instant coffee 200g,pantry,2026-08-22,2026-08-22T01:55:43.541756+00:00
+woolworths,248520,Moccona Freeze Dried Instant Coffee Classic Dark Roast 200g,Moccona,200g,14,23.6,7,100G,True,4,instant coffee 200g,pantry,2026-08-22,2026-08-22T01:55:43.541756+00:00
+woolworths,17605,Moccona Freeze Dried Instant Coffee Specialty Blend Indulgence 200g,Moccona,200g,23.6,23.6,11.8,100G,False,5,instant coffee 200g,pantry,2026-08-22,2026-08-22T01:55:43.541756+00:00
+woolworths,478354,Bushells Powdered Coffee Classic 200g,Bushells,200g,10,10,5,100G,False,6,instant coffee 200g,pantry,2026-08-22,2026-08-22T01:55:43.541756+00:00
+woolworths,341164,Moccona Freeze Dried Instant Coffee Mocha Kenya Style 200g,Moccona,200g,14,23.6,7,100G,True,7,instant coffee 200g,pantry,2026-08-22,2026-08-22T01:55:43.541756+00:00
+woolworths,6247,Moccona Freeze Dried Instant Coffee Specialty Blend Ristretto 200g,Moccona,200g,23.6,23.6,11.8,100G,False,8,instant coffee 200g,pantry,2026-08-22,2026-08-22T01:55:43.541756+00:00
+woolworths,371037,Moccona Freeze Dried Instant Coffee Specialty Blend Rich 200g,Moccona,200g,23.6,23.6,11.8,100G,False,9,instant coffee 200g,pantry,2026-08-22,2026-08-22T01:55:43.541756+00:00
+woolworths,35681,Moccona Freeze Dried Instant Coffee Classic Medium Roast 200g,Moccona,200g,14,23.6,7,100G,True,10,instant coffee 200g,pantry,2026-08-22,2026-08-22T01:55:43.541756+00:00
+woolworths,1119530093,Ahmad Tea Cardamom Tea Bags 100 Pack,,,19,19,19,100EA,False,1,tea bags 100 pack,pantry,2026-08-22,2026-08-22T01:56:00.153217+00:00
+woolworths,574821,Tetley Tea Bags 100 pack,Tetley,100 pack,4.3,4.3,0.04,1EA,False,2,tea bags 100 pack,pantry,2026-08-22,2026-08-22T01:56:00.153217+00:00
+woolworths,76493,Nerada Tea Bags 100 pack,Nerada,100 pack,5.6,5.6,0.06,1EA,False,3,tea bags 100 pack,pantry,2026-08-22,2026-08-22T01:56:00.153217+00:00
+woolworths,1119530097,Ahmad Tea English Breakfast Tea Bags 100 Pack,,,19,19,19,100EA,False,4,tea bags 100 pack,pantry,2026-08-22,2026-08-22T01:56:00.153217+00:00
+woolworths,156690,Tetley Decaffeinated Tea Bags 100 pack,Tetley,100 pack,6.9,6.9,0.07,1EA,False,5,tea bags 100 pack,pantry,2026-08-22,2026-08-22T01:56:00.153217+00:00
+woolworths,574769,Tetley Tagless Tea Bags 100 pack,Tetley,100 pack,3.8,3.8,0.04,1EA,False,6,tea bags 100 pack,pantry,2026-08-22,2026-08-22T01:56:00.153217+00:00
+woolworths,6025450,Zoetic Green Tea Bags 100 pack,Zoetic,100 pack,7,7,0.07,1EA,False,7,tea bags 100 pack,pantry,2026-08-22,2026-08-22T01:56:00.153217+00:00
+woolworths,1119514119,Ahmad Tea Earl Grey Black Tea Bags 100 Pack,,,19,19,19,100EA,False,8,tea bags 100 pack,pantry,2026-08-22,2026-08-22T01:56:00.153217+00:00
+woolworths,1119532581,Queen Victoria Green Premium Tea Bags 100 Pack,,,22,22,22,100EA,False,9,tea bags 100 pack,pantry,2026-08-22,2026-08-22T01:56:00.153217+00:00
+woolworths,1119532589,Queen Victoria Peppermint Premium Tea Bags 100 Pack,,,22,22,22,100EA,False,10,tea bags 100 pack,pantry,2026-08-22,2026-08-22T01:56:00.153217+00:00
+woolworths,770320,Woolworths Diced Italian Tomatoes 400g,Woolworths,400g,1.1,1.1,2.75,1KG,False,1,tinned tomatoes 400g,pantry,2026-08-22,2026-08-22T01:56:16.553299+00:00
+woolworths,37810,Annalisa Tomatoes Peeled 400g,Annalisa,400g,1.35,1.5,3.38,1KG,True,2,tinned tomatoes 400g,pantry,2026-08-22,2026-08-22T01:56:16.553299+00:00
+woolworths,38153,Annalisa Tomatoes Diced 400g,Annalisa,400g,1.35,1.5,3.38,1KG,True,3,tinned tomatoes 400g,pantry,2026-08-22,2026-08-22T01:56:16.553299+00:00
+woolworths,576220,Woolworths Diced Australian Tomatoes 400g,Woolworths,400g,1.3,1.3,3.25,1KG,False,4,tinned tomatoes 400g,pantry,2026-08-22,2026-08-22T01:56:16.553299+00:00
+woolworths,700642,Macro Organic Tomatoes Diced 400g,Macro,400g,1.6,1.6,4,1KG,False,5,tinned tomatoes 400g,pantry,2026-08-22,2026-08-22T01:56:16.553299+00:00
+woolworths,795621,Mutti Whole Peeled Tomatoes 400g,Mutti,400g,2.3,2.3,5.75,1KG,False,6,tinned tomatoes 400g,pantry,2026-08-22,2026-08-22T01:56:16.553299+00:00
+woolworths,6067023,Annalisa Finely Chopped Tomatoes 400g,Annalisa,400g,1.5,1.5,3.75,1KG,False,7,tinned tomatoes 400g,pantry,2026-08-22,2026-08-22T01:56:16.553299+00:00
+woolworths,290300,Mutti Whole Cherry Tomatoes 400g,Mutti,400g,2.7,2.7,6.75,1KG,False,8,tinned tomatoes 400g,pantry,2026-08-22,2026-08-22T01:56:16.553299+00:00
+woolworths,218918,Woolworths Italian Peeled Tomatoes 400g,Woolworths,400g,1.1,1.1,2.75,1KG,False,9,tinned tomatoes 400g,pantry,2026-08-22,2026-08-22T01:56:16.553299+00:00
+woolworths,808422,La Gina Peeled Tomatoes 400g,La Gina,400g,1.4,1.4,3.5,1KG,False,10,tinned tomatoes 400g,pantry,2026-08-22,2026-08-22T01:56:16.553299+00:00
+woolworths,476700,Woolworths Tuna In Springwater 95g,Woolworths,95g,1,1,10.53,1KG,False,1,tuna in springwater 95g,pantry,2026-08-22,2026-08-22T01:56:33.060804+00:00
+woolworths,144821,Sirena Tuna In Springwater 95g,Sirena,95g,2.3,2.95,24.21,1KG,True,2,tuna in springwater 95g,pantry,2026-08-22,2026-08-22T01:56:33.060804+00:00
+woolworths,941583,Woolworths Yellowfin Tuna In Springwater 95g,Woolworths,95g,1.4,1.4,14.74,1KG,False,3,tuna in springwater 95g,pantry,2026-08-22,2026-08-22T01:56:33.060804+00:00
+woolworths,331060,Sirena Tuna In Springwater & Lemon 95g,Sirena,95g,2.3,2.95,24.21,1KG,True,4,tuna in springwater 95g,pantry,2026-08-22,2026-08-22T01:56:33.060804+00:00
+woolworths,340411,John West Tuna Chunks In Springwater 95g,John West,95g,2.9,2.9,30.53,1KG,False,5,tuna in springwater 95g,pantry,2026-08-22,2026-08-22T01:56:33.060804+00:00
+woolworths,6079352,John West Tuna In Springwater Value 95g x 6 pack,John West,95g x 6 pack,9.8,9.8,17.19,1KG,False,6,tuna in springwater 95g,pantry,2026-08-22,2026-08-22T01:56:33.060804+00:00
+woolworths,44011,John West Tuna Chunks In Springwater Value 95g x 12 pack,John West,95g x 12 pack,18,18,15.79,1KG,False,7,tuna in springwater 95g,pantry,2026-08-22,2026-08-22T01:56:33.060804+00:00
+woolworths,32731,Coca-Cola Classic  Soft Drink Bottle 1.25L,Coca-Cola,1.25L,2.5,4.2,2,1L,True,1,coca cola 1.25l,drinks,2026-08-22,2026-08-22T01:56:49.419265+00:00
+woolworths,94493,Coca-Cola Diet Soft Drink Bottle 1.25L,Coca-Cola,1.25L,2.5,4.2,2,1L,True,2,coca cola 1.25l,drinks,2026-08-22,2026-08-22T01:56:49.419265+00:00
+woolworths,180941,Coca-Cola Vanilla  Soft Drink Bottle 1.25L,Coca-Cola,1.25L,2.5,4.2,2,1L,True,3,coca cola 1.25l,drinks,2026-08-22,2026-08-22T01:56:49.419265+00:00
+woolworths,623034,Coca-Cola Zero Sugar Soft Drink Bottle 1.25L,Coca-Cola,1.25L,2.5,4.2,2,1L,True,4,coca cola 1.25l,drinks,2026-08-22,2026-08-22T01:56:49.419265+00:00
+woolworths,803078,Coca-Cola Vanilla Zero Sugar Soft Drink Bottle 1.25L,Coca-Cola,1.25L,2.5,4.2,2,1L,True,5,coca cola 1.25l,drinks,2026-08-22,2026-08-22T01:56:49.419265+00:00
+woolworths,137848,Coca-Cola Caffeine Free Zero Sugar Soft Drink Bottle 1.25L,Coca-Cola,1.25L,2.5,4.2,2,1L,True,6,coca cola 1.25l,drinks,2026-08-22,2026-08-22T01:56:49.419265+00:00
+woolworths,825528,Woolworths Orange Juice 2L,Woolworths,2L,4.2,4.2,2.1,1L,False,1,orange juice 2l,drinks,2026-08-22,2026-08-22T01:57:05.668093+00:00
+woolworths,67056,Golden Circle Orange Fruit Juice 2L,Golden Circle,2L,6.5,6.5,3.25,1L,False,2,orange juice 2l,drinks,2026-08-22,2026-08-22T01:57:05.668093+00:00
+woolworths,787165,Golden Circle Orange & Mango Fruit Juice 2L,Golden Circle,2L,6.5,6.5,3.25,1L,False,3,orange juice 2l,drinks,2026-08-22,2026-08-22T01:57:05.668093+00:00
+woolworths,90211,Daily Juice Co Pulp Free Orange Fruit Juice 2L,Daily Juice Co,2L,5.95,5.95,2.98,1L,False,4,orange juice 2l,drinks,2026-08-22,2026-08-22T01:57:05.668093+00:00
+woolworths,6033180,Woolworths Orange Juice 2L,Woolworths,2L,5.5,5.5,2.75,1L,False,5,orange juice 2l,drinks,2026-08-22,2026-08-22T01:57:05.668093+00:00
+woolworths,104407,Golden Circle Pine Orange Fruit Juice 2L,Golden Circle,2L,4.8,4.8,2.4,1L,False,6,orange juice 2l,drinks,2026-08-22,2026-08-22T01:57:05.668093+00:00
+woolworths,104086,Juice Lovers Orange Low Pulp 2L,Juice Lovers,2L,6.8,6.8,3.4,1L,False,7,orange juice 2l,drinks,2026-08-22,2026-08-22T01:57:05.668093+00:00
+woolworths,104255,Juice Lovers Orange With Pulp 2L,Juice Lovers,2L,6.8,6.8,3.4,1L,False,8,orange juice 2l,drinks,2026-08-22,2026-08-22T01:57:05.668093+00:00
+woolworths,47123,Daily Juice Co Orange Fruit Juice With Pulp 2L,Daily Juice Co,2L,5.95,5.95,2.98,1L,False,9,orange juice 2l,drinks,2026-08-22,2026-08-22T01:57:05.668093+00:00
+woolworths,938216,Eastcoast Orange Juice Pulp Free 2L,Eastcoast,2L,7.5,7.5,3.75,1L,False,10,orange juice 2l,drinks,2026-08-22,2026-08-22T01:57:05.668093+00:00
+woolworths,799638,Woolworths Sparkling Mineral Water 1.25L,Woolworths,1.25L,1.1,1.1,0.88,1L,False,1,sparkling mineral water 1.25l,drinks,2026-08-22,2026-08-22T01:57:21.992142+00:00
+woolworths,221494,Mount Franklin Lightly Sparkling Water Passionfruit 1.25L,Mount Franklin,1.25L,2,2,1.6,1L,False,2,sparkling mineral water 1.25l,drinks,2026-08-22,2026-08-22T01:57:21.992142+00:00
+woolworths,178132,Mount Franklin Lightly Sparkling Water Raspberry 1.25L,Mount Franklin,1.25L,2,2,1.6,1L,False,3,sparkling mineral water 1.25l,drinks,2026-08-22,2026-08-22T01:57:21.992142+00:00
+woolworths,925726,Mount Franklin Lightly Sparkling Water Pineapple 1.25L,Mount Franklin,1.25L,2,2,1.6,1L,False,4,sparkling mineral water 1.25l,drinks,2026-08-22,2026-08-22T01:57:21.992142+00:00
+woolworths,725866,Mount Franklin Lightly Sparkling Water Lime Bottle 1.25L,Mount Franklin,1.25L,2,2,1.6,1L,False,5,sparkling mineral water 1.25l,drinks,2026-08-22,2026-08-22T01:57:21.992142+00:00
+woolworths,332730,Mount Franklin Lightly Sparkling Water Natural Bottle 1.25L,Mount Franklin,1.25L,2,2,1.6,1L,False,6,sparkling mineral water 1.25l,drinks,2026-08-22,2026-08-22T01:57:21.992142+00:00
+woolworths,332732,Mount Franklin Lightly Sparkling Water Lemon Bottle 1.25L,Mount Franklin,1.25L,2,2,1.6,1L,False,7,sparkling mineral water 1.25l,drinks,2026-08-22,2026-08-22T01:57:21.992142+00:00
+woolworths,36066,Arnott's Tim Tam Original Chocolate Biscuits 200g,Arnott's,200g,6,6,3,100G,False,1,tim tams,snacks,2026-08-22,2026-08-22T01:57:38.488489+00:00
+woolworths,32257,Arnott's Tim Tam Double Chocolate Biscuits 200g,Arnott's,200g,6,6,3,100G,False,2,tim tams,snacks,2026-08-22,2026-08-22T01:57:38.488489+00:00
+woolworths,117833,Arnott's Tim Tam Chewy Caramel Chocolate Biscuits 175g,Arnott's,175g,6,6,3.43,100G,False,3,tim tams,snacks,2026-08-22,2026-08-22T01:57:38.488489+00:00
+woolworths,6063767,Arnott's Tim Tam Choc Mint Biscuits 165g,Arnott's,165g,6,6,3.64,100G,False,4,tim tams,snacks,2026-08-22,2026-08-22T01:57:38.488489+00:00
+woolworths,84628,Arnott's Tim Tam Original Family Pack Chocolate Biscuits 365g,Arnott's,365g,8,8,2.19,100G,False,5,tim tams,snacks,2026-08-22,2026-08-22T01:57:38.488489+00:00
+woolworths,89972,Arnott's Tim Tam Dark Chocolate Biscuits 200g,Arnott's,200g,6,6,3,100G,False,6,tim tams,snacks,2026-08-22,2026-08-22T01:57:38.488489+00:00
+woolworths,332047,Arnott's Tim Tam White Chocolate Biscuits 165g,Arnott's,165g,6,6,3.64,100G,False,7,tim tams,snacks,2026-08-22,2026-08-22T01:57:38.488489+00:00
+woolworths,393671,Arnott's Gluten Free Tim Tam Biscuits 150g,Arnott's,150g,5.5,5.5,3.67,100G,False,8,tim tams,snacks,2026-08-22,2026-08-22T01:57:38.488489+00:00
+woolworths,6049855,Arnott's Tim Tam Mangoes & Cream Biscuits 165g,Arnott's,165g,6,6,3.64,100G,False,9,tim tams,snacks,2026-08-22,2026-08-22T01:57:38.488489+00:00
+woolworths,197271,Arnott's Tim Tam Deluxe Decadent Triple Choc Biscuits 175g,Arnott's,175g,6.5,6.5,3.71,100G,False,10,tim tams,snacks,2026-08-22,2026-08-22T01:57:38.488489+00:00
+woolworths,319969,Thins Sour Cream & Chives Potato Chips 175g,Thins,175g,5,5,2.86,100G,False,1,potato chips 175g,snacks,2026-08-22,2026-08-22T01:57:54.965330+00:00
+woolworths,396254,Woolworths Sea Salt Deli Style Potato Chips 175g,Woolworths,175g,3,3,1.71,100G,False,2,potato chips 175g,snacks,2026-08-22,2026-08-22T01:57:54.965330+00:00
+woolworths,6002706,Woolworths Deli Style Potato Chips Sea Salt & Balsamic Vinegar 175g,Woolworths,175g,3,3,1.71,100G,False,3,potato chips 175g,snacks,2026-08-22,2026-08-22T01:57:54.965330+00:00
+woolworths,6001632,Woolworths Deli Style Potato Chips Sweet Chilli & Sour Cream 175g,Woolworths,175g,3,3,1.71,100G,False,4,potato chips 175g,snacks,2026-08-22,2026-08-22T01:57:54.965330+00:00
+woolworths,707181,Smith's Thinly Cut Potato Chips Roast Chicken & Thyme 175g,Smith's,175g,2.5,2.5,1.43,100G,False,5,potato chips 175g,snacks,2026-08-22,2026-08-22T01:57:54.965330+00:00
+woolworths,339134,Smith's Thinly Cut Potato Chips Share Pack Original 175g,Smith's,175g,2.5,2.5,1.43,100G,False,6,potato chips 175g,snacks,2026-08-22,2026-08-22T01:57:54.965330+00:00
+woolworths,387119,Smith's Thinly Cut Potato Chips Share Pack Lightly Tangy 175g,Smith's,175g,2.5,2.5,1.43,100G,False,7,potato chips 175g,snacks,2026-08-22,2026-08-22T01:57:54.965330+00:00
+woolworths,339137,Smith's Thinly Cut Potato Chips Share Pack Salt & Vinegar 175g,Smith's,175g,2.5,2.5,1.43,100G,False,8,potato chips 175g,snacks,2026-08-22,2026-08-22T01:57:54.965330+00:00
+woolworths,332426,Smith's Thinly Cut Potato Chips Share Pack Sour Cream & Onion 175g,Smith's,175g,2.5,2.5,1.43,100G,False,9,potato chips 175g,snacks,2026-08-22,2026-08-22T01:57:54.965330+00:00
+woolworths,528441,Smith's Thinly Cut Potato Chips Share Pack Sweet Chilli & Sour Cream 175g,Smith's,175g,2.5,2.5,1.43,100G,False,10,potato chips 175g,snacks,2026-08-22,2026-08-22T01:57:54.965330+00:00
+woolworths,280467,Smarties Milk Chocolate Block 180g,Smarties,180g,7.5,7.5,4.17,100G,False,1,milk chocolate block 180g,snacks,2026-08-22,2026-08-22T01:58:11.849361+00:00
+woolworths,814479,Cadbury Dairy Milk Chocolate Block 180g,Cadbury,180g,4,8,2.22,100G,True,2,milk chocolate block 180g,snacks,2026-08-22,2026-08-22T01:58:11.849361+00:00
+woolworths,813865,Cadbury Baking Milk Chocolate Block 180g,Cadbury,180g,7.5,7.5,4.17,100G,False,3,milk chocolate block 180g,snacks,2026-08-22,2026-08-22T01:58:11.849361+00:00
+woolworths,96215,McCain Frozen Peas 1kg,McCain,1kg,6,6,6,1KG,False,1,frozen peas 1kg,frozen,2026-08-22,2026-08-22T01:58:28.117971+00:00
+woolworths,96845,Woolworths Essentials Frozen Peas 1kg,Woolworths Essentials,1kg,2.5,2.5,2.5,1KG,False,2,frozen peas 1kg,frozen,2026-08-22,2026-08-22T01:58:28.117971+00:00
+woolworths,754169,Woolworths Frozen Australian Peas 1kg,Woolworths,1kg,3.8,3.8,3.8,1KG,False,3,frozen peas 1kg,frozen,2026-08-22,2026-08-22T01:58:28.117971+00:00
+woolworths,93371,McCain Frozen Baby Peas 1kg,McCain,1kg,6.9,6.9,6.9,1KG,False,4,frozen peas 1kg,frozen,2026-08-22,2026-08-22T01:58:28.117971+00:00
+woolworths,768569,Woolworths Frozen Australian Carrots Peas & Corn 1kg,Woolworths,1kg,5,5,5,1KG,False,5,frozen peas 1kg,frozen,2026-08-22,2026-08-22T01:58:28.117971+00:00
+woolworths,95871,McCain Frozen Peas & Super Juicy Corn 1kg,McCain,1kg,7.3,7.3,7.3,1KG,False,6,frozen peas 1kg,frozen,2026-08-22,2026-08-22T01:58:28.117971+00:00
+woolworths,255445,Birds Eye Frozen Carrot Peas & Corn 1kg,Birds Eye,1kg,6.5,6.5,6.5,1KG,False,7,frozen peas 1kg,frozen,2026-08-22,2026-08-22T01:58:28.117971+00:00
+woolworths,289348,Bell Farms Frozen Carrots Peas & Corn 1kg,Bell Farms,1kg,3.9,3.9,3.9,1KG,False,8,frozen peas 1kg,frozen,2026-08-22,2026-08-22T01:58:28.117971+00:00
+woolworths,705677,Birds Eye Frozen Australian Peas & Corn 1kg,Birds Eye,1kg,6.5,6.5,6.5,1KG,False,9,frozen peas 1kg,frozen,2026-08-22,2026-08-22T01:58:28.117971+00:00
+woolworths,6059194,Birds Eye Frozen Australian Peas Corn & Capsicum 1kg,Birds Eye,1kg,6.5,6.5,6.5,1KG,False,10,frozen peas 1kg,frozen,2026-08-22,2026-08-22T01:58:28.117971+00:00
+woolworths,42620,Bulla Vanilla Ice Cream 2L,Bulla,2L,6,6,0.3,100ML,False,1,vanilla ice cream 2l,frozen,2026-08-22,2026-08-22T01:58:44.346008+00:00
+woolworths,40518,Peters Original Vanilla Ice Cream 2L,Peters,2L,5.95,5.95,0.3,100ML,False,2,vanilla ice cream 2l,frozen,2026-08-22,2026-08-22T01:58:44.346008+00:00
+woolworths,191043,Bulla Creamy Classics Ice Cream Vanilla 2L,Bulla,2L,7,7,0.35,100ML,False,3,vanilla ice cream 2l,frozen,2026-08-22,2026-08-22T01:58:44.346008+00:00
+woolworths,281393,Woolworths Essential Reduced Fat Ice Cream Vanilla 2L,Woolworths,2L,4.5,4.5,0.23,100ML,False,4,vanilla ice cream 2l,frozen,2026-08-22,2026-08-22T01:58:44.346008+00:00
+woolworths,574618,Bulla Creamy Classics Ice Cream Vanilla & Boysenberry 2L,Bulla,2L,7,7,0.35,100ML,False,5,vanilla ice cream 2l,frozen,2026-08-22,2026-08-22T01:58:44.346008+00:00
+woolworths,252640,McCain Pizza Meatlovers BBQ 500g,McCain,500g,8.8,8.8,1.76,100G,False,1,frozen pizza,frozen,2026-08-22,2026-08-22T01:59:00.746255+00:00
+woolworths,96406,McCain Pizza Ham & Pineapple 500g,McCain,500g,8.8,8.8,1.76,100G,False,2,frozen pizza,frozen,2026-08-22,2026-08-22T01:59:00.746255+00:00
+woolworths,112352,McCain Pizza Slice Snacks Cheese & Bacon 2 pack,McCain,2 pack,7.7,9.8,1.28,100G,True,3,frozen pizza,frozen,2026-08-22,2026-08-22T01:59:00.746255+00:00
+woolworths,93831,McCain Pizza Cheese & Bacon 500g,McCain,500g,8.8,8.8,1.76,100G,False,4,frozen pizza,frozen,2026-08-22,2026-08-22T01:59:00.746255+00:00
+woolworths,96415,McCain Supreme Pizza 500g,McCain,500g,8.8,8.8,1.76,100G,False,5,frozen pizza,frozen,2026-08-22,2026-08-22T01:59:00.746255+00:00
+woolworths,9660,McCain Lil Pizzas Snacks Ham & Cheese 4 pack,McCain,4 pack,7.8,7.8,1.95,100G,False,6,frozen pizza,frozen,2026-08-22,2026-08-22T01:59:00.746255+00:00
+woolworths,6042407,Buonissimo Pizza BBQ Meatlovers 500g,Buonissimo,500g,4,4,0.8,100G,False,7,frozen pizza,frozen,2026-08-22,2026-08-22T01:59:00.746255+00:00
+woolworths,3496,McCain Pizza Slice Snacks Ham & Pineapple 2 pack,McCain,2 pack,7.7,9.8,1.28,100G,True,8,frozen pizza,frozen,2026-08-22,2026-08-22T01:59:00.746255+00:00
+woolworths,112492,McCain Pizza Slice Snacks Meatlovers 2 pack,McCain,2 pack,7.7,9.8,1.28,100G,True,9,frozen pizza,frozen,2026-08-22,2026-08-22T01:59:00.746255+00:00
+woolworths,6043796,Buonissimo Pizza Ham & Pineapple 500g,Buonissimo,500g,4,4,0.8,100G,False,10,frozen pizza,frozen,2026-08-22,2026-08-22T01:59:00.746255+00:00
+woolworths,722,Kleenex Complete Clean Double Length Toilet Paper 12 pack,Kleenex,12 pack,13.5,13.5,0.31,100 sheets,False,1,toilet paper 12 pack,household,2026-08-22,2026-08-22T01:59:17.082850+00:00
+woolworths,1128532857,"Toilet Roll Storage,Toilet Paper Storage,Toilet Paper Organizer Basket for 12 Pcs Rolls",,,43.32,43.32,,,False,2,toilet paper 12 pack,household,2026-08-22,2026-08-22T01:59:17.082850+00:00
+woolworths,473213,Quilton Gold 4 Ply Toilet Paper 12 pack,Quilton,12 pack,10.3,10.3,0.61,100 sheets,False,3,toilet paper 12 pack,household,2026-08-22,2026-08-22T01:59:17.082850+00:00
+woolworths,1125423073,12x 10pc Quilton 180-Sheet Softness Tissue Roll 3-Ply White Toilet Paper,Quilton,,106.25,106.25,0.49,100 sheets,False,4,toilet paper 12 pack,household,2026-08-22,2026-08-22T01:59:17.082850+00:00
+woolworths,171303,Vevelle White 2 Ply Toilet Tissue 12 pack,Vevelle,12 pack,6,6,0.19,100 sheets,False,5,toilet paper 12 pack,household,2026-08-22,2026-08-22T01:59:17.082850+00:00
+woolworths,173155,Naturale 100% Recycled 3 Ply Toilet Tissue 12 pack,Naturale,12 pack,4.9,6,0.23,100 sheets,True,6,toilet paper 12 pack,household,2026-08-22,2026-08-22T01:59:17.082850+00:00
+woolworths,1122142351,Tork SmartOne Mini Toilet Roll 2Ply Advanced T9 White 12 Rolls (193),Tork,7440SS,102.81,102.81,1.38,100 sheets,False,7,toilet paper 12 pack,household,2026-08-22,2026-08-22T01:59:17.082850+00:00
+woolworths,1127781975,"CARLA HOME 2 Pack Toilet Paper Storage Basket, Holds 12 Rolls, Bamboo Lid, White",Carla Home,,69.28,69.28,,,False,8,toilet paper 12 pack,household,2026-08-22,2026-08-22T01:59:17.082850+00:00
+woolworths,1127630937,"CARLA HOME 2 Pack Toilet Paper Storage Basket, Holds 12 Rolls, Bamboo Lid, Black",Carla Home,,69.28,69.28,,,False,9,toilet paper 12 pack,household,2026-08-22,2026-08-22T01:59:17.082850+00:00
+woolworths,1127781973,"CARLA HOME 2 Pack Toilet Paper Storage Basket, Holds 12 Rolls, Bamboo Lid, Grey",Carla Home,,69.28,69.28,,,False,10,toilet paper 12 pack,household,2026-08-22,2026-08-22T01:59:17.082850+00:00
+woolworths,167699,Strike Pro 3 Ply Paper Towel 3 x 60 pack,Strike,3 x 60 pack,2.7,2.7,1.5,100 sheets,False,1,paper towel,household,2026-08-22,2026-08-22T01:59:33.654168+00:00
+woolworths,252037,Handee Ultra Paper Towel 3 x 60 pack,Handee,3 x 60 pack,3,5,1.67,100 sheets,True,2,paper towel,household,2026-08-22,2026-08-22T01:59:33.654168+00:00
+woolworths,176852,Viva White Paper Towel 2 x 60 pack,Viva,2 x 60 pack,4.5,4.5,3.75,100 sheets,False,3,paper towel,household,2026-08-22,2026-08-22T01:59:33.654168+00:00
+woolworths,171164,Strike 2 Ply Paper Towel 2 x 80 pack,Strike,2 x 80 pack,2.2,2.2,1.38,100 sheets,False,4,paper towel,household,2026-08-22,2026-08-22T01:59:33.654168+00:00
+woolworths,156865,icare Wipex Absorbent Recycled Pick A Size Paper Towel 3 x 100 pack,icare,3 x 100 pack,4.5,4.5,1.5,100 sheets,False,5,paper towel,household,2026-08-22,2026-08-22T01:59:33.654168+00:00
+woolworths,249921,Viva White Paper Towel 3 x 60 pack,Viva,3 x 60 pack,5,5,2.78,100 sheets,False,6,paper towel,household,2026-08-22,2026-08-22T01:59:33.654168+00:00
+woolworths,212842,Handee Ultra Double Length White Paper Towel 2 x 120 pack,Handee,2 x 120 pack,5.25,5.25,2.19,100 sheets,False,7,paper towel,household,2026-08-22,2026-08-22T01:59:33.654168+00:00
+woolworths,573468,Viva White Paper Towel 6 x 60 pack,Viva,6 x 60 pack,8,8,2.22,100 sheets,False,8,paper towel,household,2026-08-22,2026-08-22T01:59:33.654168+00:00
+woolworths,574728,Quilton Tuffy 4 Ply White Paper Towel 3 x 60 pack,Quilton,3 x 60 pack,3.5,5,1.94,100 sheets,True,9,paper towel,household,2026-08-22,2026-08-22T01:59:33.654168+00:00
+woolworths,435065,Strike Pro Double Length 3 Ply Paper Towel 3 x 120 pack,Strike,3 x 120 pack,4.9,4.9,1.36,100 sheets,False,10,paper towel,household,2026-08-22,2026-08-22T01:59:33.654168+00:00
+woolworths,753871,Earth Choice Dishwashing Liquid 900mL,Earth Choice,900mL,6,6,0.67,100ML,False,1,dishwashing liquid 900ml,household,2026-08-22,2026-08-22T01:59:49.848313+00:00
+woolworths,208112,Morning Fresh Dishwashing Liquid Original 900mL,Morning Fresh,900mL,5,10,0.56,100ML,True,2,dishwashing liquid 900ml,household,2026-08-22,2026-08-22T01:59:49.848313+00:00
+woolworths,208111,Morning Fresh Dishwashing Liquid Lemon 900mL,Morning Fresh,900mL,5,10,0.56,100ML,True,3,dishwashing liquid 900ml,household,2026-08-22,2026-08-22T01:59:49.848313+00:00
+woolworths,280546,Morning Fresh Dishwashing Liquid Lime 900mL,Morning Fresh,900mL,5,10,0.56,100ML,True,4,dishwashing liquid 900ml,household,2026-08-22,2026-08-22T01:59:49.848313+00:00
+woolworths,183863,Shine Ultra Dishwashing Liquid Pear & Peony 900mL,Shine,900mL,3,3,0.33,100ML,False,5,dishwashing liquid 900ml,household,2026-08-22,2026-08-22T01:59:49.848313+00:00
+woolworths,183864,Shine Ultra Dishwashing Liquid Concentrate Antibacterial 900mL,Shine,900mL,3,3,0.33,100ML,False,6,dishwashing liquid 900ml,household,2026-08-22,2026-08-22T01:59:49.848313+00:00
+woolworths,1126061529,Morning Fresh Dishwashing Liquid Raspberry Crisp Apple 900mL (8 Pack),Morning Fresh,,65.99,65.99,0.92,100ML,False,7,dishwashing liquid 900ml,household,2026-08-22,2026-08-22T01:59:49.848313+00:00
+woolworths,588994,Morning Fresh Dishwashing Liquid Raspberry & Crisp Apple 900mL,Morning Fresh,900mL,5,10,0.56,100ML,True,8,dishwashing liquid 900ml,household,2026-08-22,2026-08-22T01:59:49.848313+00:00
+woolworths,282626,Morning Fresh Summer Berries Dishwashing Liquid Washing Up Dish Wash 900mL,Morning Fresh,900mL,5,10,0.56,100ML,True,9,dishwashing liquid 900ml,household,2026-08-22,2026-08-22T01:59:49.848313+00:00
+woolworths,158605,Earth Choice Ultra Concentrate Dishwashing Liquid Red Apple 900mL,Earth Choice,900mL,6,6,0.67,100ML,False,10,dishwashing liquid 900ml,household,2026-08-22,2026-08-22T01:59:49.848313+00:00
+woolworths,88163,Cold Power Advanced Clean Laundry Liquid 2L,Cold Power,2L,26,26,13,1L,False,1,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+woolworths,6039878,Bosisto's Sensitive Laundry Liquid 2L,Bosisto's,2L,15,21.5,7.5,1L,True,2,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+woolworths,468552,OMO Sensitive Laundry Liquid 2L,OMO,2L,15,30,7.5,1L,True,3,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+woolworths,88870,Purity Sensitive Laundry Liquid 2L,Purity,2L,7.3,7.3,3.65,1L,False,4,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+woolworths,6039262,Bosisto's Power Plus Laundry Liquid 2L,Bosisto's,2L,23,23,11.5,1L,False,5,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+woolworths,1122866729,Radiant Commercial Blend Laundry Liquid 2L,Radiant,,9.99,9.99,5,1L,False,6,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+woolworths,88334,Cold Power Sensitive Clean Laundry Liquid 2L,Cold Power,2L,26,26,13,1L,False,7,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+woolworths,385987,Cold Power Plus Extreme Clean Laundry Liquid 2L,Cold Power,2L,26,26,13,1L,False,8,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+woolworths,385221,Cold Power Plus Fabric Softener Laundry Liquid 2L,Cold Power,2L,26,26,13,1L,False,9,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+woolworths,386082,Cold Power Plus Odour Fighter Laundry Liquid 2L,Cold Power,2L,26,26,13,1L,False,10,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,5004891,OMO Ultimate Laundry Liquid Detergent 40 Washes,OMO,2L,18,36,9,1l,False,1,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,1745888,Earthwise Laundry Liquid Frangipani,Earthwise,2L,20,,10,1l,False,2,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,3787969,Purity Concentrate Laundry Liquid,Purity,2L,7.3,,3.65,1l,False,3,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,5091637,OMO Ultimate Laundry Liquid Detergent Sensitive 40 Washes,OMO,2L,18,36,9,1l,False,4,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,3524358,Surf Laundry Liquid Detergent Tropical 40 Washes,Surf,2L,9,,4.5,1l,False,5,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,1388791,Bosisto's Sensitive Laundry Liquid,Bosisto's,2L,21.5,,10.75,1l,False,6,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,1388780,Bosisto's Power + Laundry Liquid,Bosisto's,2L,13.8,23,6.9,1l,False,7,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,3199010,Surf Laundry Liquid Detergent Coastal Luxury 40 Washes,Surf,2L,9,,4.5,1l,False,8,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,2731030,OMO Laundry Liquid Detergent Sensitive 40 Washes,OMO,2L,30,,15,1l,False,9,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,3888048,Coles Ultra Laundry Liquid Sensitive,Coles Ultra,2L,10.5,,5.25,1l,False,10,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,8020293,Earthwise Laundry Liquid Sensitive,Earthwise,2L,20,,10,1l,False,11,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,1388805,Coles Simply Cotton Fresh Laundry Liquid,Coles Simply,2L,2,,1,1l,False,12,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,2731007,OMO Laundry Liquid Detergent Active Clean 40 Washes,OMO,2L,30,,15,1l,False,13,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,3774606,Cold Power Laundry Liquid Sensitive,Cold Power,2L,13,26,6.5,1l,False,14,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,2900534,OMO Touch Of Comfort Laundry Liquid Detergent 40 Washes,OMO,2L,30,,15,1l,False,15,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,5091660,OMO Expert Odour Eliminator Laundry Liquid Detergent 40 Wash,OMO,2L,18,36,9,1l,False,16,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,8020045,Earthwise Laundry Liquid Orange & Eucalyptus,Earthwise,2L,20,,10,1l,False,17,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,5486577,OMO Scents Laundry Liquid Floral Indulgence,OMO,2L,30,,7.5,1l,False,18,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,7035218,Cold Power Laundry Liquid Odour Fighter,Cold Power,2L,13,26,6.5,1l,False,19,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,3774581,Cold Power Laundry Liquid Advanced Clean,Cold Power,2L,13,26,6.5,1l,False,20,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,7035375,Cold Power Laundry Liquid Extreme Clean,Cold Power,2L,13,26,6.5,1l,False,21,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,8053521,Earth Choice Ultra Concentrate Laundry Liquid Detergent Top & Front Loader,Earth Choice,2L,14,,7,1l,False,22,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,3774592,Cold Power Laundry Liquid Lemon Fresh,Cold Power,2L,13,26,6.5,1l,False,23,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,2899785,FAB Frangipani Front & Top Loader Laundry Liquid,FAB,2L,9,,4.5,1l,False,24,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,3888117,Coles Ultra Infusions Indulgent Escape Laundry Liquid,Coles,2L,6,,3,1l,False,25,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,4144352,Radiant Laundry Liquid Brightens Whites Or Colours,Radiant,2L,22,,11,1l,False,26,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,7035353,Cold Power Laundry Liquid With A Touch Of Fabric Softener,Cold Power,2L,13,26,6.5,1l,False,27,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,3919888,Coles Ultra Laundry Liquid Concentrate Front & Top Loader,Coles Ultra,2L,10.5,,5.25,1l,False,28,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,5417381,Earth Choice Laundry Liquid,Earth Choice,1L,3.3,,3.3,1l,False,29,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,8050410,One 4 In 1 Laundry Liquid Fresh Scent,One,2L,9,,4.5,1l,False,30,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,4144250,Radiant Laundry Liquid All-in-one Mixed Colours,Radiant,2L,22,,11,1l,False,31,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,5101311,OMO Ultimate Laundry Liquid Detergent 80 Washes,OMO,4L,30,,7.5,1l,False,32,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,3196667,Radiant Blacks & Darks Laundry Liquid Black Wash Detergent,Radiant,1L,6,12,6,1l,False,33,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,2910232,Coles Ultra Infusions Tropical Paradise Laundry Liquid Top & Front,Coles Ultra,2L,6,,3,1l,False,34,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,7035626,Dynamo Professional Odour Eliminating Laundry Liquid,Dynamo,2L,29,,14.5,1l,False,35,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,7035648,Dynamo Professional Oxi Plus Laundry Liquid,Dynamo,2L,29,,14.5,1l,False,36,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,1751111,Earth Choice Concentrate Laundry Liquid,Earth Choice,4L,18,,4.5,1l,False,37,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,1788756,OMO Expert Wonder Wash Laundry Liquid Sensitive,OMO,1.18L,21,,17.8,1l,False,38,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,1788745,OMO Expert Wonder Wash Laundry Liquid White,OMO,1.94L,32,,16.49,1l,False,39,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,1788643,OMO Expert Wonder Wash Laundry Liquid Sensitive,OMO,1.94L,32,,16.49,1l,False,40,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,2899719,Surf Laundry Liquid Detergent Tropical 80 Washes,Surf,4L,16.5,,4.13,1l,False,41,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,1015987,OMO Ultimate Sensitive Laundry Liquid Detergent 80 Washes,OMO,4L,30,,7.5,1l,False,42,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,7035670,Dynamo Professional Clean & Fresh Machine Laundry Liquid,Dynamo,2L,29,,14.5,1l,False,43,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,2731186,OMO Laundry Liquid Detergent Sensitive 80 Washes,OMO,4L,24,,6,1l,False,44,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,3774639,Cold Power Laundry Liquid Advanced Clean,Cold Power,4L,21,,5.25,1l,False,45,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,255861,Softly Delicates Specialty Washing Liquid,Softly,1.25L,9,,7.2,1l,False,46,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,4317508,Radiant Odour Removal Laundry Liquid Washing Detergent,Radiant,1.8L,11,22,6.11,1l,False,47,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+coles,3934509,Fab Frangipani Laundry Liquid,Fab,4L,16.5,,4.13,1l,False,48,laundry liquid 2l,household,2026-08-22,2026-08-22T02:00:06.367313+00:00
+woolworths,822391,Colgate Total Active Prevention Original Toothpaste 200g,Colgate,200g,6,7.5,3,100G,False,1,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+woolworths,197043,Colgate Advanced Whitening Toothpaste 200g,Colgate,200g,11,11,5.5,100G,False,2,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+woolworths,819777,Colgate Total Active Prevention Whitening Toothpaste 200g,Colgate,200g,11,11,5.5,100G,False,3,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+woolworths,197042,Colgate Total Active Prevention Gum Care Toothpaste 200g,Colgate,200g,11,11,5.5,100G,False,4,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+woolworths,6056171,Oral-B Complete Defence System Whitening Toothpaste 200g,Oral-B,200g,4.5,9,2.25,100G,True,5,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+woolworths,819776,Colgate Total Active Prevention Active Fresh Toothpaste 200g,Colgate,200g,11,11,5.5,100G,False,6,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+woolworths,852237,Colgate Total Active Prevention Mint Stripe Toothpaste 200g,Colgate,200g,6,7.5,3,100G,False,7,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+woolworths,819778,Colgate Total Active Prevention Deep Clean Toothpaste 200g,Colgate,200g,11,11,5.5,100G,False,8,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+woolworths,65172,Colgate Total Active Prevention Deep Clean With Charcoal Toothpaste 200g,Colgate,200g,11,11,5.5,100G,False,9,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+woolworths,659036,Oral-B Pro Health Complete Defense All Round Clean Toothpaste 200g,Oral-B,200g,5,12,2.5,100G,True,10,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,4842439,Colgate Advanced Whitening Toothpaste,Colgate,200g,11,,5.5,100g,False,1,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,5059930,Colgate Max Fresh Coolmint Toothpaste,Colgate,200g,11,,5.5,100g,False,2,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,4842392,Colgate Total Active Prevention Gum Care Toothpaste,Colgate,200g,5.5,11,2.75,100g,False,3,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,4842450,Colgate Advanced Whitening Toothpaste And Tartar Control,Colgate,200g,11,,5.5,100g,False,4,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3400956,Colgate Total Active Prevention Whitening Toothpaste,Colgate,200g,5.5,11,2.75,100g,False,5,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3400912,Colgate Total Active Prevention Fresh Toothpaste,Colgate,200g,5.5,11,2.75,100g,False,6,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3401074,Colgate Total Active Prevention Original Toothpaste,Colgate,200g,6,,3,100g,False,7,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3400832,Colgate Total Active Prevention Mint Stripe Toothpaste,Colgate,200g,6,,3,100g,False,8,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3400887,Colgate Total Active Prevention Deep Clean Toothpaste,Colgate,200g,5.5,11,2.75,100g,False,9,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3695168,Colgate Total Active Prevention Deep Clean Charcoal Toothpaste,Colgate,200g,5.5,11,2.75,100g,False,10,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,7525603,Red Seal Baking Soda Toothpaste,Red Seal,100g,4.8,,4.8,100g,False,11,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,1610029,Sensodyne Repair & Protect Twin Pack Toothpaste 2x100g,Sensodyne,200g,21,,10.5,100g,False,12,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,4842417,Colgate Advanced Whitening Toothpaste,Colgate,115g,3.5,7,3.04,100g,False,13,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3712573,Coles Kids Toothpaste Strawberry,Coles,98g,2.6,,2.65,100g,False,14,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,1610947,Oral B Gum & Enamel Daily Protection Clean Toothpaste,Oral B,200g,15,,7.5,100g,False,15,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,1610222,Oral B Gum & Enamel Protect For Sensitive Teeth Toothpaste,Oral B,200g,9,15,4.5,100g,False,16,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,5919277,Red Seal Toothpaste Herbal,Red Seal,100g,4.8,,4.8,100g,False,17,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,1609824,Colgate Total Active Prevention Enamel Strength Toothpaste,Colgate,200g,5.5,11,2.75,100g,False,18,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,7523801,Colgate Optic White Purple Toothpaste,Colgate,100g,5,10,5,100g,False,19,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,5887432,Colgate Advanced Whitening Purple Toothpaste,Colgate,120g,11,,9.17,100g,False,20,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,4847793,White Glo Professional Whitening Toothpaste,White Glo,205g,9,,4.39,100g,False,21,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,4842428,Colgate Max Fresh Coolmint Toothpaste,Colgate,115g,4.9,7,4.26,100g,False,22,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,4842440,Colgate Advanced Whitening Charcoal Toothpaste,Colgate,180g,11,,6.11,100g,False,23,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,4842406,Colgate Advanced Whitening Toothpaste And Tartar Control,Colgate,115g,3.5,7,3.04,100g,False,24,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,4504695,Colgate Triple Action Toothpaste,Colgate,165g,3.45,,2.09,100g,False,25,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,4504662,Colgate Triple Action Toothpaste,Colgate,80g,2,,2.5,100g,False,26,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,9061263,Colgate Optic White Toothpaste Natural Enzymes,Colgate,100g,5,10,5,100g,False,27,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3400898,Colgate Total Active Prevention Fresh Toothpaste,Colgate,115g,7,,6.09,100g,False,28,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,9061310,Colgate Toothpaste Kids Bluey Strawberry Pump,Colgate,85g,6,,7.06,100g,False,29,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,7524451,Colgate Max Fresh Rainbow Fresh Toothpaste,Colgate,100g,8,,8,100g,False,30,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3400934,Colgate Total Active Prevention Whitening Toothpaste,Colgate,115g,7,,6.09,100g,False,31,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3973475,Colgate Kids Mild Mint Minions Toothpaste,Colgate,90g,2.75,,3.06,100g,False,32,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3401008,Colgate Total Active Prevention Original Toothpaste,Colgate,115g,5,,4.35,100g,False,33,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,9061285,Colgate Advanced Whitening Baking Soda Toothpaste,Colgate,180g,11,,6.11,100g,False,34,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,238749,Colgate Maximum Cavity Protection Toothpaste Great Regular Flavour Pump,Colgate,130g,6,,4.62,100g,False,35,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,4884406,Grants Of Australia Whitening Spearmint Toothpaste,Grants Of Australia,110g,4.75,,4.32,100g,False,36,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,5167626,Grants Of Australia Mild Mint With Aloe Vera Natural Toothpaste,Grants Of Australia,110g,4.5,,4.09,100g,False,37,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,1609880,Colgate Harry Potter Toothpaste,Colgate,100g,8,,8,100g,False,38,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3130487,Oral B 3dwhite Luxe Glamorous Whitening Toothpaste,Oral B,95g,5,10,5.26,100g,False,39,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3130567,Oral B 3dwhite Luxe Perfection Whitening Toothpaste,Oral B,95g,10,,10.53,100g,False,40,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,4867713,Oral B Gum Care & Breath Purify Toothpaste,Oral B,110g,5,10,4.55,100g,False,41,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3978344,Oral B Gum Care & Intensive Clean Toothpaste,Oral B,110g,5,10,4.55,100g,False,42,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,2621097,Oral B Pro Health Advanced Whitening Toothpaste,Oral B,110g,6,,5.45,100g,False,43,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,5396485,Colgate Sensitive Whitening Toothpaste,Colgate,110g,4.5,9,4.09,100g,False,44,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3991681,Colgate Kids Toothpaste Bluey Mild Mint Gel,Colgate,90g,2.75,,3.06,100g,False,45,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,5927650,Jack N' Jill Toothpaste Natural Strawberry,Jack N' Jill,50g,6,7.5,12,100g,False,46,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3400854,Colgate Total Active Prevention Deep Clean Toothpaste,Colgate,115g,7,,6.09,100g,False,47,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+coles,3400821,Colgate Total Active Prevention Mint Stripe Toothpaste,Colgate,115g,5,,4.35,100g,False,48,toothpaste 200g,personal care,2026-08-22,2026-08-22T02:00:18.687390+00:00
+woolworths,1119389347,Sunsilk Longer & Stronger Shampoo 700 mL,Dulge,700ML,21.99,21.99,3.14,100ML,False,1,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+woolworths,6004126,Sunsilk Shampoo Coconut Hydration 700mL,Sunsilk,700mL,7.5,15,1.07,100ML,True,2,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+woolworths,463195,Sunsilk Shampoo Longer & Stronger 700mL,Sunsilk,700mL,7.5,15,1.07,100ML,True,3,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+woolworths,463194,Sunsilk Shampoo Soft & Smooth 700mL,Sunsilk,700mL,7.5,15,1.07,100ML,True,4,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+woolworths,46233,Palmolive Shampoo Naturals Active Nourishment 700mL,Palmolive,700mL,10,10,1.43,100ML,False,5,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+woolworths,46219,Palmolive Shampoo Naturals Intensive Moisture 700mL,Palmolive,700mL,10,10,1.43,100ML,False,6,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+woolworths,463193,Sunsilk Shampoo Addictive Brilliant Shine 700mL,Sunsilk,700mL,7.5,15,1.07,100ML,True,7,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+woolworths,46208,Palmolive Shampoo Naturals Smooth &Shine Keratin 700mL,Palmolive,700mL,10,10,1.43,100ML,False,8,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+woolworths,111461,Palmolive Shampoo Luminous Oils Argan Oil 700mL,Palmolive,700mL,11,11,1.57,100ML,False,9,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,5890970,Palmolive Naturals Active Nourishment Shampoo,Palmolive,700mL,10,,1.43,100ml,False,1,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,7200959,Palmolive Naturals Moisture Intense Shampoo,Palmolive,700mL,10,,1.43,100ml,False,2,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,7549576,Sunsilk Addictive Brilliant Shine Shampoo,Sunsilk,700mL,10.5,15,1.5,100ml,False,3,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9102564,Sunsilk Shampoo Coconut Hydration,Sunsilk,700mL,10.5,15,1.5,100ml,False,4,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,2672214,Sunsilk Soft & Smooth Shampoo,Sunsilk,700mL,10.5,15,1.5,100ml,False,5,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9972045,Sunsilk Longer & Stronger Shampoo,Sunsilk,700mL,10.5,15,1.5,100ml,False,6,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1645668,Palmolive Naturals Scalp Health Anti-dandruff 2 In 1 Shampoo & Conditioner,Palmolive,700mL,15,,2.14,100ml,False,7,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1645680,Palmolive Men Deep Clean Anti-dandruff 2 In 1 Shampoo & Conditioner,Palmolive,700mL,15,,2.14,100ml,False,8,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,3610915,Palmolive Luminous Oils Macadamia Argan Oil & Camellia Shampoo,Palmolive,700mL,11,,1.57,100ml,False,9,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9090589,Alpecin Caffeine Shampoo,Alpecin,375mL,18.9,,5.04,100ml,False,10,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,6310850,Dermaveen Oatmeal Shampoo,Dermaveen,500mL,22,,4.4,100ml,False,11,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1648860,John Frieda Profiller Shampoo,John Frieda,250mL,22,,8.8,100ml,False,12,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9086560,Redwin Coal Tar Shampoo,Redwin,500mL,13,,2.6,100ml,False,13,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9139961,OGX Bond Protein Shampoo,OGX,385mL,12.5,25,3.25,100ml,False,14,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9152551,Neutrogena T-gel Shampoo,Neutrogena,200mL,15,,7.5,100ml,False,15,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1646376,Ogx Peptides Progrowth Shampoo,Ogx,385mL,12.5,25,3.25,100ml,False,16,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,3303268,Garnier Fructis Normal Shampoo,Garnier,850mL,10,,1.18,100ml,False,17,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,3303100,Garnier Fructis Normal Shampoo,Garnier,315mL,4,8,1.27,100ml,False,18,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1645635,People Deep Cleanse Shampoo,People,350mL,8,16,2.29,100ml,False,19,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1645475,Dosetheory Lush Growth Shampoo,Dosetheory,330mL,7.95,15.9,2.41,100ml,False,20,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1645238,Dosetheory Ultra Gloss Shampoo,Dosetheory,330mL,7.95,15.9,2.41,100ml,False,21,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1646490,Aveeno Almond Oil Shampoo,Aveeno,354mL,19.5,,5.51,100ml,False,22,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1645555,Dosetheory Moisture Infuse Shampoo,Dosetheory,330mL,7.95,15.9,2.41,100ml,False,23,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,4708710,Palmolive Naturals Active Nourishment Shampoo,Palmolive,350mL,6,,1.71,100ml,False,24,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1645806,Dermaveen Soothing Oatmeal Shampoo,Dermaveen,1L,32,,3.2,100ml,False,25,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,6320489,People Blonde Shampoo,People,350mL,8,16,2.29,100ml,False,26,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,4957827,People Hydrate Shampoo,People,350mL,8,16,2.29,100ml,False,27,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,2994119,Sukin Hydrating Shampoo,Sukin,500mL,20,,4,100ml,False,28,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,6320503,People Curl Shampoo,People,350mL,8,16,2.29,100ml,False,29,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1648826,John Frieda Brilliant Brunette Shampoo,John Frieda,250mL,22,,8.8,100ml,False,30,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9059341,Qv Shampoo Gentle,Qv,500mL,17.5,25,3.5,100ml,False,31,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,3979493,Monday Shampoo Moisture,Monday,798mL,20,,2.51,100ml,False,32,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9059385,Qv Shampoo Nourishing,Qv,500mL,17.5,25,3.5,100ml,False,33,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,2940200,Hask Keratin Shampoo,Hask,355mL,17,,4.79,100ml,False,34,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,3723150,Monday Smooth Shampoo,Monday,354mL,6,12,1.69,100ml,False,35,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,3723161,Monday Smooth Shampoo,Monday,798mL,20,,2.51,100ml,False,36,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,3979460,Monday Shampoo Moisture,Monday,354mL,6,12,1.69,100ml,False,37,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9133342,L'Oreal Elvive Dream Long Shampoo,L'Oreal,800mL,10,20,1.25,100ml,False,38,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9132601,L'Oreal Elvive Dream Long Shampoo,L'Oreal,340mL,5,10,1.47,100ml,False,39,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1645930,Oil Garden Scalp Recharge Shampoo,Oil Garden,300mL,25,,8.33,100ml,False,40,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,5889777,Palmolive Naturals Intensive Moisture Shampoo,Palmolive,350mL,6,,1.71,100ml,False,41,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,3154940,Sukin Hydrating Shampoo,Sukin,1L,35,,3.5,100ml,False,42,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9139870,L'Oreal Elvive Growth Booster Shampoo,L'Oreal,200mL,9.5,19,4.75,100ml,False,43,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,1645602,Natures Organics Fruits Apple Shampoo,Natures Organics,1L,3.9,,0.39,100ml,False,44,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9132598,L'Oreal Elvive Colour Protect Shampoo,L'Oreal,800mL,10,20,1.25,100ml,False,45,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9132500,L'Oreal Elvive Colour Protect Shampoo,L'Oreal,340mL,5,10,1.47,100ml,False,46,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9137525,L'Oreal Elvive Hyaluron Pure Shampoo,L'Oreal,340mL,5.5,11,1.62,100ml,False,47,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
+coles,9137365,L'Oreal Elvive Hyaluron Plump Shampoo,L'Oreal,340mL,5.5,11,1.62,100ml,False,48,shampoo 700ml,personal care,2026-08-22,2026-08-22T02:00:22.371885+00:00
