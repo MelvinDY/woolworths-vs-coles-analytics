@@ -1,4 +1,12 @@
+# The default install. Everything here is needed to run the pipeline end to end
+# on DuckDB, which is the only target that has to work.
 duckdb>=1.0
 pandas>=2.0
 requests>=2.31
 rapidfuzz>=3.0
+dbt-core>=1.9
+dbt-duckdb>=1.9
+
+# Snowflake is optional and lives in requirements-snowflake.txt. It is not
+# listed here because the trial expires and the DuckDB path must not acquire a
+# dependency that outlives it.

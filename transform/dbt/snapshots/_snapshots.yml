@@ -1,0 +1,38 @@
+version: 2
+
+snapshots:
+
+  - name: snap_product_prices
+    description: >
+      SCD2 history of every listed product's price. One row per version:
+      dbt_valid_from is the day the price took the value, dbt_valid_to is the
+      day it stopped (NULL while current). See the header comment in
+      snapshots/snap_product_prices.sql for why the strategy is `check` and why
+      a product disappearing from the feed does not close its record.
+    data_tests:
+      # The SCD2 grain: one open-or-closed version per key per validity start.
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [product_key, dbt_valid_from]
+      # At most one *current* row per product. This is the test that catches a
+      # botched replay: run the days out of order and several rows end up open
+      # at once.
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [product_key]
+          config:
+            where: "dbt_valid_to is null"
+      # Windows run forwards. `>=` rather than `>` because a same-day re-fetch
+      # that corrects a price legitimately produces a zero-length version: the
+      # first reading was never true for any span, and saying so is better than
+      # hiding it.
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "dbt_valid_to >= dbt_valid_from"
+          config:
+            where: "dbt_valid_to is not null"
+    columns:
+      - name: product_key
+        data_tests: [not_null]
+      - name: price
+        data_tests: [not_null]

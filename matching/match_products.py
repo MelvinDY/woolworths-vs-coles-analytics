@@ -11,7 +11,13 @@ by tier:
 
 One-to-one assignment: pairs are accepted greedily by descending score, and a
 product participates in at most one pair. Results are written to the
-int_matched_products table in DuckDB with score and tier for auditability.
+matched_pairs table in the target warehouse with score and tier for
+auditability, and dbt picks them up from there as a declared source (rapidfuzz
+has no SQL equivalent, so pretending dbt builds this table would be a lie in
+the lineage graph).
+
+The rules themselves are untouched from v1 — entity resolution is this repo's
+strongest asset and the v2 port was not allowed to move a single pair.
 """
 
 from __future__ import annotations
@@ -19,11 +25,14 @@ from __future__ import annotations
 import logging
 import re
 
-import duckdb
 import pandas as pd
 from rapidfuzz import fuzz
 
+from warehouse import Warehouse
+
 log = logging.getLogger(__name__)
+
+TABLE = "matched_pairs"
 
 NAME_SCORE_NATIONAL = 80
 NAME_SCORE_OWN_BRAND = 75
@@ -70,8 +79,8 @@ def score_pair(w: pd.Series, c: pd.Series) -> tuple[str, float] | None:
     return ("national_brand", name_score) if name_score >= NAME_SCORE_NATIONAL else None
 
 
-def match_snapshot(con: duckdb.DuckDBPyConnection, snapshot_date: str) -> pd.DataFrame:
-    df = con.execute(
+def match_snapshot(wh: Warehouse, snapshot_date: str) -> pd.DataFrame:
+    df = wh.query_df(
         """
         SELECT retailer, product_id, name, brand, size_raw, canonical_qty,
                canonical_unit, price, search_term, category, snapshot_date
@@ -80,7 +89,7 @@ def match_snapshot(con: duckdb.DuckDBPyConnection, snapshot_date: str) -> pd.Dat
         ORDER BY retailer, search_term, product_id
         """,
         [snapshot_date],
-    ).df()
+    )
 
     candidates = []
     for term, group in df.groupby("search_term"):
@@ -144,15 +153,18 @@ def match_snapshot(con: duckdb.DuckDBPyConnection, snapshot_date: str) -> pd.Dat
     return pd.DataFrame(accepted)
 
 
-def run(con: duckdb.DuckDBPyConnection) -> None:
-    snapshots = [r[0] for r in con.execute(
-        "SELECT DISTINCT snapshot_date FROM stg_prices ORDER BY 1"
-    ).fetchall()]
-    frames = [match_snapshot(con, str(s)) for s in snapshots]
+def run(wh: Warehouse) -> None:
+    rows = wh.query_rows("SELECT DISTINCT snapshot_date FROM stg_prices ORDER BY 1")
+    days = [pd.Timestamp(r[0]).date() for r in rows]
+    frames = [match_snapshot(wh, str(day)) for day in days]
     matched = pd.concat([f for f in frames if not f.empty], ignore_index=True)
     if matched.empty:
         raise RuntimeError("Product matching produced zero pairs")
-    con.register("matched_df", matched)
-    con.execute("CREATE OR REPLACE TABLE int_matched_products AS SELECT * FROM matched_df")
-    con.unregister("matched_df")
-    log.info("int_matched_products: %d rows", len(matched))
+    # A date, not a midnight timestamp. Both drivers hand dates back as pandas
+    # Timestamps, and writing them straight back out lands this one column as
+    # TIMESTAMP while every other snapshot_date in the warehouse is a DATE.
+    # DuckDB compares the two happily; Snowflake's implicit casts are less
+    # forgiving, and a grain column with a different type on each engine is
+    # exactly the kind of divergence this project is meant not to have.
+    matched["snapshot_date"] = pd.to_datetime(matched["snapshot_date"]).dt.date
+    wh.replace_table(TABLE, matched)

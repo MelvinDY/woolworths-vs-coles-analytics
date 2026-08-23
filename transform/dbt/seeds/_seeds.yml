@@ -1,0 +1,49 @@
+version: 2
+
+seeds:
+
+  - name: basket_relevance
+    description: >
+      Per-basket-line rules for deciding whether a search hit is actually the
+      good the line asks for.
+
+      Deliberately sparse: a rule is added only where the collected data shows a
+      retailer's search returning something that is not the product. Both rule
+      types test product IDENTITY and neither looks at the price, because a
+      price-based filter would quietly discard real price movement, which is the
+      one thing this project exists to measure.
+
+      A line with a rule also stops being capped at the top five search hits.
+      The cap is a crude stand-in for relevance, and it is what broke on
+      2026-08-18: Woolworths' marketplace listings pushed the only real carton
+      of eggs from rank five to rank six and it left the basket. A line that can
+      say what it is looking for does not need to guess that it is near the top.
+    config:
+      column_types:
+        search_term: varchar
+        must_match: varchar
+        require_unit_basis: varchar
+        note: varchar
+    columns:
+      - name: search_term
+        description: Basket line this rule applies to. Must exist in seeds/basket.csv.
+        data_tests:
+          - not_null
+          - unique
+      - name: must_match
+        description: >
+          Optional lowercase regex the product name must match. Backslash-free,
+          per the rule in macros/cross_db.sql.
+      - name: require_unit_basis
+        description: >
+          Optional unit-price basis the product must carry, as computed in
+          stg_prices. Food lines are sold by weight or volume; the marketplace
+          hardware that pollutes the same search results is priced per each or
+          carries no unit price at all, so this separates them structurally
+          rather than by keyword.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['per_100g', 'per_100ml', 'per_each']
+      - name: note
+        description: Why the rule exists, and what was observed that prompted it.

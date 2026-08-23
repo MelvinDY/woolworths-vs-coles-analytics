@@ -1,0 +1,149 @@
+version: 2
+
+models:
+
+  - name: mart_pair_comparison
+    description: Matched pairs with both prices, dollar and percent gap, and the cheaper chain. Same-day view.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [wow_product_id, coles_product_id, snapshot_date]
+    columns:
+      - name: cheaper_at
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['woolworths', 'coles', 'tie']
+      - name: gap_dollars
+        data_tests: [not_null]
+
+  - name: mart_basket
+    description: Cheapest relevant line per basket term per retailer, kept only where both chains have a candidate.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [retailer, search_term, snapshot_date]
+    columns:
+      - name: price
+        data_tests: [not_null]
+
+  - name: mart_category_unit_price
+    description: Median $/100g and $/100ml per category per retailer, over unit-comparable rows only.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [snapshot_date, category, unit_price_basis, retailer]
+    columns:
+      - name: n_products
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 5
+                inclusive: true
+      - name: median_unit_price_per_100
+        data_tests: [not_null]
+
+  - name: mart_specials
+    description: Same-day specials share and median claimed discount depth per retailer.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [snapshot_date, retailer]
+    columns:
+      - name: pct_on_special
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 100
+                inclusive: true
+
+  - name: mart_price_history
+    description: >
+      Matched-pair prices per day, from the day the pair was first matched
+      onward. Never forward-filled: a day a product was not seen is a NULL price
+      and is_gap_day = true.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [pair_id, snapshot_date]
+      # The gap rule as an assertion rather than a comment: a row is a gap day
+      # if and only if one of the two prices is missing. If these ever disagree,
+      # something has started inventing continuity.
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "is_gap_day = (wow_price is null or coles_price is null)"
+      # And the corollary: a gap day cannot have a winner.
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "cheaper_at is null"
+          config:
+            where: "is_gap_day"
+    columns:
+      - name: pair_id
+        data_tests: [not_null]
+      - name: snapshot_date
+        data_tests: [not_null]
+      - name: cheaper_at
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['woolworths', 'coles', 'tie']
+              config:
+                where: "cheaper_at is not null"
+
+  - name: mart_special_behaviour
+    description: >
+      One row per promotion episode per product: depth against both the claimed
+      was-price and the price actually observed beforehand, duration, and what
+      the price did when the special ended.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [retailer, product_id, special_episode]
+      # days_observed can never exceed the calendar span it sits in.
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "days_observed <= calendar_days"
+    columns:
+      - name: special_episode
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+      - name: episode_start
+        data_tests: [not_null]
+      - name: days_observed
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+      - name: baseline_age_days
+        description: >
+          Days between the observation the baseline came from and the start of
+          the episode. Not always 1 — it is the gap to the previous day anyone
+          looked, and the collection has holes.
+      - name: special_kind
+        description: >
+          Whether the price actually moved when the badge appeared, measured
+          against the last price observed beforehand. NULL when there was no
+          prior observation, which is not the same as no_change.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['price_cut', 'no_change', 'price_rise']
+              config:
+                where: "special_kind is not null"
+      - name: outcome
+        description: >
+          restored_baseline = the price went back to where it was, so the
+          "special" was a cycle. genuine_cut = it settled lower. ongoing = the
+          episode was still running on the last day collected. no_baseline = the
+          product was already on special the first day we saw it.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['restored_baseline', 'genuine_cut', 'ongoing', 'no_baseline']

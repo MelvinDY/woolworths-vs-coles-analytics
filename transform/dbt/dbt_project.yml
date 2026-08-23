@@ -1,0 +1,37 @@
+name: 'wow_vs_coles'
+version: '2.0.0'
+config-version: 2
+
+profile: 'wow_vs_coles'
+
+model-paths: ["models"]
+snapshot-paths: ["snapshots"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+analysis-paths: ["analyses"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Every model is a physical table. The warehouse file is small (a few MB) and
+# the dashboard builder queries it directly with plain SQL, so views would only
+# push the work to read time for no benefit.
+#
+# No per-layer schemas: everything lands in the target's one schema (`main` on
+# DuckDB, $SNOWFLAKE_SCHEMA on Snowflake). The dashboard builder and the matcher
+# both query the warehouse with unqualified table names, and one schema keeps
+# that true on both engines.
+models:
+  wow_vs_coles:
+    +materialized: table
+
+snapshots:
+  wow_vs_coles:
+    +target_schema: "{{ target.schema }}"
+
+vars:
+  # Set by run_pipeline.py when replaying a historical day into the SCD2
+  # snapshot. Empty means "today's run, use the latest observed day".
+  snapshot_as_of: ''

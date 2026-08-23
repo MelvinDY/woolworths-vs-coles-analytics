@@ -1,0 +1,17 @@
+# Optional: only needed to build against the Snowflake target.
+#
+#     pip install -r requirements.txt -r requirements-snowflake.txt
+#
+# Kept out of requirements.txt on purpose. The Snowflake trial expires; the
+# DuckDB path must still install and run cleanly on a machine that has never
+# heard of Snowflake, and `pip install -r requirements.txt` is what the README
+# and the GitHub workflow both use.
+#
+# Be aware this pulls a large tree (pyarrow, boto3, cryptography) and that
+# snowflake-connector-python pins pandas below 3.0 — installing it will
+# downgrade pandas in a shared venv. That is harmless here (nothing in this
+# repo uses a pandas 3.0-only API) but it is the reason for the separate file.
+
+-r requirements.txt
+dbt-snowflake>=1.9
+snowflake-connector-python[pandas]>=3.12

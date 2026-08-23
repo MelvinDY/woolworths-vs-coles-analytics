@@ -126,6 +126,14 @@
   #tooltip .t-row .v { font-weight: 600; }
   #tooltip .t-row .s { color: var(--text-secondary); }
 
+  .smallmults { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px 24px; }
+  .sm .sm-title { font-size: 12.5px; font-weight: 600; margin: 0; line-height: 1.35; }
+  .sm .sm-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 0 4px; }
+
+  .legend .key.gapkey .rule { width: 18px; height: 0; border-top: 2px dashed var(--baseline); }
+
+  .kind-note { font-size: 13px; color: var(--text-secondary); margin: 14px 0 0; }
+
   .notes { font-size: 13px; color: var(--text-secondary); }
   .notes ul { margin: 8px 0 0; padding-left: 18px; }
   .notes li { margin-bottom: 4px; }
@@ -143,6 +151,23 @@
   <div class="card hero-card" id="hero"></div>
 
   <div class="kpis" id="kpis"></div>
+
+  <div class="card">
+    <h2>Basket cost over time</h2>
+    <p class="insight" id="history-insight"></p>
+    <div class="legend" id="history-legend"></div>
+    <div class="chart-scroll" id="history-chart"></div>
+    <p class="kind-note" id="history-note"></p>
+    <details class="tableview"><summary>Table view</summary><div id="history-table"></div></details>
+  </div>
+
+  <div class="card">
+    <h2>The pairs that moved</h2>
+    <p class="insight" id="pairhist-insight"></p>
+    <div class="legend" id="pairhist-legend"></div>
+    <div class="smallmults" id="pairhist-charts"></div>
+    <details class="tableview"><summary>Table view</summary><div id="pairhist-table"></div></details>
+  </div>
 
   <div class="card">
     <h2>Matched identical products</h2>
@@ -172,6 +197,14 @@
     <h2>Biggest price gaps on identical products</h2>
     <p class="insight" id="gaps-insight"></p>
     <div id="gaps-table"></div>
+  </div>
+
+  <div class="card">
+    <h2>What a &ldquo;Special&rdquo; actually did to the price</h2>
+    <p class="insight" id="episodes-insight"></p>
+    <div class="kpis" id="episodes-tiles"></div>
+    <div id="episodes-table"></div>
+    <p class="kind-note" id="episodes-caveat"></p>
   </div>
 
   <div class="card notes">
@@ -306,6 +339,186 @@ function makeTable(containerId, headers, rows) {
   container.appendChild(table);
 }
 
+// ---------- time-series helpers ----------
+// Everything below draws on a real time axis, never an evenly-spaced one. The
+// collection has holes in it (a missed morning cannot be refetched), and an
+// ordinal axis would quietly present a four-week gap as one step. A segment
+// that spans an interval nobody observed is drawn dashed for the same reason.
+const DAYS = DATA.days;
+const DAY_MS = 86400000;
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const dayT = (d) => Date.parse(d + "T00:00:00Z");
+const dayIndex = Object.fromEntries(DAYS.map((d, i) => [d, i]));
+const GAP_TOL = DATA.consecutive_tolerance;
+
+function fmtDay(d) {
+  const p = d.split("-");
+  return Number(p[2]) + " " + MONTHS[Number(p[1]) - 1];
+}
+function daysBetween(a, b) { return Math.round((dayT(b) - dayT(a)) / DAY_MS); }
+
+function niceTicksRange(min, max, count) {
+  const rough = (max - min) / count || 1;
+  const mag = Math.pow(10, Math.floor(Math.log10(rough)));
+  const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => (max - min) / s <= count) || 10 * mag;
+  const lo = Math.floor(min / step) * step;
+  const hi = Math.ceil(max / step) * step;
+  const ticks = [];
+  for (let v = lo; v <= hi + 1e-9; v += step) ticks.push(Math.round(v * 1000) / 1000);
+  return ticks;
+}
+
+// A run of consecutive collected days, or a hole. Used both to dash the line
+// and to shade the interval nobody looked at.
+function collectionGaps() {
+  const gaps = [];
+  for (let i = 1; i < DAYS.length; i++) {
+    const n = daysBetween(DAYS[i - 1], DAYS[i]);
+    if (n > GAP_TOL) gaps.push({ from: DAYS[i - 1], to: DAYS[i], days: n });
+  }
+  return gaps;
+}
+
+/**
+ * One line chart on a time axis.
+ *   series: [{ id, label, color, values }]  values aligned to DATA.days, null = not observed
+ */
+function lineChart(mount, series, opts) {
+  const o = Object.assign({
+    width: 960, height: 300, padL: 58, padR: 152, padT: 14, padB: 34,
+    compact: false, fmt: fmt$, yTickCount: 4, shadeGaps: true, directLabels: true,
+  }, opts || {});
+  // Axis ticks drop the cents when they are whole dollars; tooltips never do.
+  o.fmtAxis = o.fmtAxis || ((v) => "$" + (Math.round(v * 100) % 100 === 0 ? v.toFixed(0) : v.toFixed(2)));
+  const W = o.width, H = o.height;
+  const plotW = W - o.padL - o.padR;
+  const plotH = H - o.padT - o.padB;
+
+  const all = series.flatMap((s) => s.values).filter((v) => v !== null && v !== undefined);
+  if (!all.length) return null;
+  const ticks = niceTicksRange(Math.min(...all), Math.max(...all), o.yTickCount);
+  const yLo = ticks[0], yHi = ticks[ticks.length - 1];
+  const T0 = dayT(DAYS[0]), T1 = dayT(DAYS[DAYS.length - 1]);
+  const sx = (d) => o.padL + (T1 === T0 ? plotW / 2 : ((dayT(d) - T0) / (T1 - T0)) * plotW);
+  const sy = (v) => o.padT + plotH - ((v - yLo) / (yHi - yLo || 1)) * plotH;
+
+  const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, width: "100%", role: "img",
+    "aria-label": o.ariaLabel || "Price over time" });
+
+  // shaded intervals nobody collected
+  if (o.shadeGaps) {
+    for (const g of collectionGaps()) {
+      const x1 = sx(g.from), x2 = sx(g.to);
+      svg.appendChild(svgEl("rect", { x: x1, y: o.padT, width: Math.max(x2 - x1, 1), height: plotH,
+        fill: "var(--neutral-mid)", opacity: o.compact ? 0.55 : 0.7 }));
+      if (!o.compact && x2 - x1 > 70) {
+        const t = svgEl("text", { x: (x1 + x2) / 2, y: o.padT + 14, "font-size": "11",
+          fill: "var(--text-muted)", "text-anchor": "middle" });
+        t.textContent = g.days + " days not collected";
+        svg.appendChild(t);
+      }
+    }
+  }
+
+  // horizontal grid + y labels (solid hairlines, one shade off the surface)
+  for (const tv of ticks) {
+    const y = sy(tv);
+    svg.appendChild(svgEl("line", { x1: o.padL, y1: y, x2: o.padL + plotW, y2: y,
+      stroke: "var(--grid)", "stroke-width": 1 }));
+    const t = svgEl("text", { x: o.padL - 8, y: y + 4, "font-size": o.compact ? "10.5" : "11",
+      fill: "var(--text-muted)", "text-anchor": "end" });
+    t.textContent = o.fmtAxis(tv);
+    svg.appendChild(t);
+  }
+
+  // x ticks at every observation; only the ends are labelled, because four
+  // consecutive days inside a five-week window cannot carry four labels.
+  const axisY = o.padT + plotH;
+  svg.appendChild(svgEl("line", { x1: o.padL, y1: axisY, x2: o.padL + plotW, y2: axisY,
+    stroke: "var(--baseline)", "stroke-width": 1 }));
+  DAYS.forEach((d, i) => {
+    const x = sx(d);
+    svg.appendChild(svgEl("line", { x1: x, y1: axisY, x2: x, y2: axisY + 4,
+      stroke: "var(--baseline)", "stroke-width": 1 }));
+    if (i === 0 || i === DAYS.length - 1) {
+      const t = svgEl("text", { x, y: axisY + (o.compact ? 15 : 18),
+        "font-size": o.compact ? "10.5" : "11", fill: "var(--text-muted)",
+        "text-anchor": i === 0 ? "start" : "end" });
+      t.textContent = fmtDay(d);
+      svg.appendChild(t);
+    }
+  });
+
+  // series: one <line> per segment so an unobserved interval can be dashed
+  for (const s of series) {
+    const pts = [];
+    DAYS.forEach((d, i) => {
+      const v = s.values[i];
+      if (v === null || v === undefined) return;
+      pts.push({ x: sx(d), y: sy(v), date: d, value: v, i });
+    });
+    for (let k = 1; k < pts.length; k++) {
+      const a = pts[k - 1], b = pts[k];
+      const unobserved = b.i - a.i > 1 || daysBetween(a.date, b.date) > GAP_TOL;
+      const seg = svgEl("line", { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: s.color,
+        "stroke-width": 2, "stroke-linecap": "round" });
+      if (unobserved) seg.setAttribute("stroke-dasharray", "4 5");
+      svg.appendChild(seg);
+    }
+    for (const p of pts) {
+      svg.appendChild(svgEl("circle", { cx: p.x, cy: p.y, r: o.compact ? 3.4 : 4.5, fill: s.color,
+        stroke: "var(--surface-1)", "stroke-width": 2 }));
+    }
+    // direct label at the last observation — identity without relying on hue
+    if (o.directLabels && pts.length) {
+      const last = pts[pts.length - 1];
+      const g = svgEl("g", {});
+      g.appendChild(svgEl("rect", { x: last.x + 10, y: last.y - 5, width: 9, height: 9, rx: 2, fill: s.color }));
+      const t = svgEl("text", { x: last.x + 24, y: last.y + 4, "font-size": "12",
+        fill: "var(--text-secondary)" });
+      t.textContent = s.label + " " + o.fmt(last.value);
+      g.appendChild(t);
+      svg.appendChild(g);
+    }
+  }
+
+  // crosshair + shared tooltip, one hit band per observation
+  const rule = svgEl("line", { y1: o.padT, y2: axisY, stroke: "var(--baseline)",
+    "stroke-width": 1, opacity: 0 });
+  svg.appendChild(rule);
+  DAYS.forEach((d, i) => {
+    const x = sx(d);
+    const prev = i > 0 ? sx(DAYS[i - 1]) : o.padL;
+    const next = i < DAYS.length - 1 ? sx(DAYS[i + 1]) : o.padL + plotW;
+    const left = i === 0 ? o.padL : (prev + x) / 2;
+    const right = i === DAYS.length - 1 ? o.padL + plotW : (x + next) / 2;
+    const band = svgEl("rect", { x: left, y: o.padT, width: Math.max(right - left, 8),
+      height: plotH, fill: "transparent" });
+    const rows = () => series.map((s) => ({
+      color: s.color,
+      value: s.values[i] === null || s.values[i] === undefined ? "not observed" : o.fmt(s.values[i]),
+      label: s.label,
+    }));
+    band.addEventListener("pointerenter", (e) => {
+      rule.setAttribute("x1", x); rule.setAttribute("x2", x); rule.setAttribute("opacity", 1);
+      showTip(e, fmtDay(d) + " " + d.slice(0, 4), rows());
+    });
+    band.addEventListener("pointermove", moveTip);
+    band.addEventListener("pointerleave", () => { rule.setAttribute("opacity", 0); hideTip(); });
+    band.setAttribute("tabindex", "0");
+    band.addEventListener("focus", () => {
+      const r = band.getBoundingClientRect();
+      rule.setAttribute("x1", x); rule.setAttribute("x2", x); rule.setAttribute("opacity", 1);
+      showTip({ clientX: r.left + r.width / 2, clientY: r.top }, fmtDay(d) + " " + d.slice(0, 4), rows());
+    });
+    band.addEventListener("blur", () => { rule.setAttribute("opacity", 0); hideTip(); });
+    svg.appendChild(band);
+  });
+
+  mount.appendChild(svg);
+  return svg;
+}
+
 // ---------- header, hero, KPIs ----------
 const P = DATA.pairs_identical;
 const basketCats = Object.keys(DATA.basket).sort();
@@ -319,8 +532,10 @@ const basketGap = Math.abs(basketTotals.coles - basketTotals.woolworths);
 const nBasketTerms = basketCats.reduce((a, c) => a + DATA.basket[c].woolworths.n_terms, 0);
 
 document.getElementById("subtitle").textContent =
-  `Live snapshot ${DATA.snapshot_date} · ${DATA.n_products.toLocaleString()} prices across ` +
-  `${DATA.n_terms} common grocery items, captured the same day from both retailers' websites.`;
+  `${DATA.n_products.toLocaleString()} prices across ${DATA.n_terms} common grocery items, ` +
+  `captured the same day from both retailers' websites. Head-to-head as at ` +
+  `${DATA.snapshot_date}; price history over ${DATA.collection.n_days} collected days since ` +
+  `${DATA.collection.first_day}.`;
 
 const hero = document.getElementById("hero");
 {
@@ -375,6 +590,146 @@ tile(
   `${DATA.specials.woolworths.pct_on_special}% / ${DATA.specials.coles.pct_on_special}%`,
   "Woolworths / Coles"
 );
+
+// ---------- basket cost over time ----------
+{
+  const BH = DATA.basket_history;
+  const C0 = DATA.collection;
+  const series = [
+    { id: "woolworths", label: "Woolworths", color: C.wow, values: BH.woolworths },
+    { id: "coles", label: "Coles", color: C.coles, values: BH.coles },
+  ];
+
+  const first = { w: BH.woolworths[0], c: BH.coles[0] };
+  const last = {
+    w: BH.woolworths[BH.woolworths.length - 1],
+    c: BH.coles[BH.coles.length - 1],
+  };
+  const insight = document.getElementById("history-insight");
+  const strong = document.createElement("strong");
+  strong.textContent = `${C0.n_days} collection days`;
+  insight.append(
+    `The same fixed ${BH.n_terms}-line basket priced on every day collected so far — `
+  );
+  insight.append(strong);
+  insight.append(
+    ` spanning ${C0.calendar_days} calendar days. Woolworths moved ` +
+    `${fmt$(Math.abs(last.w - first.w))}, Coles ${fmt$(Math.abs(last.c - first.c))}. ` +
+    "The axis starts above zero to show the movement; the shaded band is time nobody collected."
+  );
+
+  legend("history-legend", [
+    { label: "Woolworths", color: C.wow },
+    { label: "Coles", color: C.coles },
+  ]);
+  {
+    const el = document.getElementById("history-legend");
+    const key = document.createElement("span");
+    key.className = "key gapkey";
+    const rule = document.createElement("span");
+    rule.className = "rule";
+    const lbl = document.createElement("span");
+    lbl.textContent = "dashed / shaded = no collection in between";
+    key.append(rule, lbl);
+    el.appendChild(key);
+  }
+
+  lineChart(document.getElementById("history-chart"), series, {
+    ariaLabel: "Fixed-basket cost at each retailer on every collected day",
+  });
+
+  // The fixed basket and the same-day basket at the top of the page are not the
+  // same basket, and on some days they disagree about who is cheaper. Saying so
+  // is cheaper than letting a reader find the contradiction themselves.
+  {
+    const note = document.getElementById("history-note");
+    const dropped = BH.dropped_terms || [];
+    const parts = [];
+    if (dropped.length) {
+      parts.push(
+        `Held constant by dropping ${dropped.length} basket line` +
+        `${dropped.length === 1 ? "" : "s"} that ${dropped.length === 1 ? "was" : "were"} not ` +
+        `answered by both chains on every collected day (${dropped.join(", ")}), which is why ` +
+        `these totals sit below the ${nBasketTerms}-item same-day basket at the top of the page.`
+      );
+      const fixedWinner = last.w <= last.c ? "Woolworths" : "Coles";
+      if (fixedWinner !== basketWinner.label) {
+        parts.push(
+          `On ${C0.last_day} the two disagree: the full same-day basket is cheaper at ` +
+          `${basketWinner.label}, the fixed basket at ${fixedWinner}. One dropped line is ` +
+          `enough to flip a $4 verdict — which is the honest size of the gap between these chains.`
+        );
+      }
+    }
+    note.textContent = parts.join(" ");
+  }
+
+  makeTable("history-table",
+    [{ label: "Date" }, { label: "Woolworths", num: true }, { label: "Coles", num: true },
+     { label: "Gap", num: true }],
+    DAYS.map((d, i) => {
+      const w = BH.woolworths[i], c = BH.coles[i];
+      return [d,
+        w === null ? "—" : fmt$(w),
+        c === null ? "—" : fmt$(c),
+        (w === null || c === null) ? "—" : fmt$(Math.abs(c - w))];
+    }));
+}
+
+// ---------- headline pair price histories (small multiples) ----------
+{
+  const PH = DATA.pair_histories;
+  const insight = document.getElementById("pairhist-insight");
+  if (!PH.length) {
+    insight.textContent = "Not enough collected days yet to draw a price history.";
+  } else {
+    const strong = document.createElement("strong");
+    strong.textContent = "identical products";
+    insight.append("The ", String(PH.length), " ");
+    insight.append(strong);
+    insight.append(
+      " whose prices moved most across the series, each panel on its own scale. " +
+      "A break in a line means the product was not in that day's results — the price " +
+      "is not carried forward, because a product nobody could see did not hold its price."
+    );
+
+    legend("pairhist-legend", [
+      { label: "Woolworths", color: C.wow },
+      { label: "Coles", color: C.coles },
+    ]);
+
+    const grid = document.getElementById("pairhist-charts");
+    for (const p of PH) {
+      const cell = document.createElement("div");
+      cell.className = "sm";
+      const h = document.createElement("p");
+      h.className = "sm-title";
+      h.textContent = p.label;
+      const sub = document.createElement("p");
+      sub.className = "sm-sub";
+      sub.textContent = p.size;
+      cell.append(h, sub);
+      grid.appendChild(cell);
+      lineChart(cell, [
+        { id: "woolworths", label: "Woolworths", color: C.wow, values: p.wow },
+        { id: "coles", label: "Coles", color: C.coles, values: p.coles },
+      ], {
+        width: 320, height: 128, padL: 44, padR: 12, padT: 10, padB: 24,
+        compact: true, yTickCount: 2, directLabels: false,
+        ariaLabel: `Price history for ${p.label}`,
+      });
+    }
+
+    const headers = [{ label: "Product" }, { label: "At" }]
+      .concat(DAYS.map((d) => ({ label: fmtDay(d), num: true })));
+    const rows = [];
+    for (const p of PH) {
+      rows.push([p.label, "Woolworths"].concat(p.wow.map((v) => v === null ? "—" : fmt$(v))));
+      rows.push(["", "Coles"].concat(p.coles.map((v) => v === null ? "—" : fmt$(v))));
+    }
+    makeTable("pairhist-table", headers, rows);
+  }
+}
 
 // ---------- verdict stacked bar ----------
 {
@@ -619,11 +974,93 @@ tile(
     }));
 }
 
+// ---------- what a "Special" actually did ----------
+{
+  const SB = DATA.special_behaviour;
+  const K = SB.kinds;
+  const insight = document.getElementById("episodes-insight");
+
+  if (!SB.n_with_baseline) {
+    insight.textContent =
+      "Not enough collected days yet: no promotion has a price observed before it started.";
+  } else {
+    const notCut = K.no_change + K.price_rise;
+    const strong = document.createElement("strong");
+    strong.textContent = `${notCut} of ${SB.n_with_baseline} were not price cuts`;
+    insight.append(
+      `A single day's data can tell you a product is flagged "Special". Only a series can ` +
+      `tell you whether the price actually fell. Of ${SB.n_episodes} promotion episodes, ` +
+      `${SB.n_with_baseline} began on a day we had already priced the product — and `
+    );
+    insight.append(strong);
+    insight.append(
+      K.price_rise ? `, including ${K.price_rise} where the shelf price went up.` : "."
+    );
+
+    const tiles = document.getElementById("episodes-tiles");
+    const tile2 = (label, value, note) => {
+      const t = document.createElement("div");
+      t.className = "tile";
+      const l = document.createElement("div");
+      l.className = "label";
+      l.textContent = label;
+      const v = document.createElement("div");
+      v.className = "value";
+      v.textContent = value;
+      const n = document.createElement("div");
+      n.className = "note";
+      n.textContent = note;
+      t.append(l, v, n);
+      tiles.appendChild(t);
+    };
+    tile2("Price actually fell", String(K.price_cut), `of ${SB.n_with_baseline} testable episodes`);
+    tile2("Price unchanged", String(K.no_change), "flagged, but no cheaper");
+    tile2("Price went up", String(K.price_rise), "flagged, and dearer");
+    tile2(
+      "Advertised was-price verified",
+      SB.was_price_tested ? `${SB.was_price_matched} / ${SB.was_price_tested}` : "—",
+      "matched the price we had seen"
+    );
+
+    if (SB.not_cuts.length) {
+      makeTable("episodes-table",
+        [{ label: "Product" }, { label: "Size" }, { label: "Price before", num: true },
+         { label: "Price on special", num: true }, { label: "Change", num: true },
+         { label: "At" }],
+        SB.not_cuts.map((e) => {
+          const color = e.retailer === "woolworths" ? C.wow : C.coles;
+          const cell = document.createElement("span");
+          cell.className = "winner-cell";
+          const sw = document.createElement("span");
+          sw.className = "swatch";
+          sw.style.background = color;
+          cell.append(sw, e.retailer === "woolworths" ? "Woolworths" : "Coles");
+          const delta = e.special_price - e.baseline;
+          return [e.name, e.size, fmt$(e.baseline), fmt$(e.special_price),
+            (delta > 0 ? "+" : delta < 0 ? "−" : "") + fmt$(Math.abs(delta)), cell];
+        }));
+    }
+
+    document.getElementById("episodes-caveat").textContent =
+      `Read with the denominator in mind: "before" is the last day this project priced the ` +
+      `product, a median of ${SB.median_baseline_age_days} days earlier, not necessarily the ` +
+      `previous day. ${SB.n_unresolved} of ${SB.n_episodes} episodes were still running on ` +
+      `${DATA.collection.last_day} or began before we first saw the product, so whether a ` +
+      `special ends in a restored price or a lasting cut is a question this series cannot ` +
+      `answer yet — it needs days on both sides of a promotion.`;
+  }
+}
+
 // ---------- notes ----------
 {
   const O = DATA.pairs_own_brand;
+  const C0 = DATA.collection;
+  const S2 = DATA.scd2;
   const notes = [
-    `Prices captured ${DATA.snapshot_date} from the retailers' public websites (national online pricing); in-store and state pricing can differ.`,
+    `Head-to-head figures above are the ${DATA.snapshot_date} snapshot, from the retailers' public websites (national online pricing); in-store and state pricing can differ.`,
+    `History covers ${C0.n_days} collected days between ${C0.first_day} and ${C0.last_day} — ${C0.calendar_days} calendar days, so the series has holes. Every history figure on this page carries that denominator.`,
+    `Days nobody collected are shaded and lines across them are dashed. A product missing from a day's results leaves a break, never a carried-forward price.`,
+    `Price changes are tracked as a slowly-changing dimension: ${S2.versions.toLocaleString()} price versions across ${S2.products.toLocaleString()} products, of which ${S2.closed_versions.toLocaleString()} have since been superseded.`,
     `Scope is a fixed basket of ${DATA.n_terms} everyday grocery search terms — this is not a whole-of-store price index.`,
     `"Identical products" match on brand, pack size (±2%), and product name similarity ≥80; every match carries an audit score in the warehouse.`,
     `Own-brand substitutes (e.g. Woolworths vs Coles home-brand milk) are matched separately: ${O.n} pairs, ${O.wow_wins} cheaper at Woolworths, ${O.coles_wins} at Coles, ${O.ties} tied.`,
@@ -636,7 +1073,8 @@ tile(
     ul.appendChild(li);
   }
   document.getElementById("footer").textContent =
-    "Built with Python, DuckDB and rapidfuzz · single-day snapshot · data from public product-search endpoints.";
+    "Built with Python, dbt, DuckDB and rapidfuzz · " + DATA.collection.n_days +
+    " collected days · data from public product-search endpoints.";
 }
 </script>
 </body>

@@ -1,0 +1,70 @@
+version: 2
+
+sources:
+
+  - name: raw
+    description: >
+      Landed price snapshots. `ingest/load_raw.py` loads every
+      data/raw/prices_*.csv into one table in the target warehouse before dbt
+      runs — CSVs are read directly on DuckDB and would not be reachable at all
+      from Snowflake, so the load is the one step that is Python's job on both
+      engines rather than dbt's.
+    schema: "{{ target.schema }}"
+
+    tables:
+      - name: raw_prices
+        description: One row per (retailer, product_id, search_term, snapshot_date). Immutable once written.
+        config:
+          loaded_at_field: fetched_at
+          freshness:
+            # The collector runs daily from a Windows scheduled task. 36 h means
+            # one missed morning is loud; 96 h means a long weekend of downtime
+            # fails the check rather than merely warning. A snapshot cannot be
+            # backfilled, so a stale collector is the most expensive silent
+            # failure this project has.
+            warn_after: {count: 36, period: hour}
+            error_after: {count: 96, period: hour}
+        data_tests:
+          - dbt_utils.unique_combination_of_columns:
+              arguments:
+                combination_of_columns: [retailer, product_id, search_term, snapshot_date]
+        columns:
+          - name: retailer
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['woolworths', 'coles']
+          - name: product_id
+            data_tests: [not_null]
+          - name: price
+            description: Shelf price on the day. Rows with no usable price are dropped in staging, not here.
+          - name: snapshot_date
+            data_tests: [not_null]
+          - name: fetched_at
+            description: UTC timestamp the row was pulled. Drives the source freshness check.
+            data_tests: [not_null]
+
+  - name: matching
+    description: >
+      Output of the Python entity-resolution step (matching/match_products.py).
+      It is a source rather than a model because rapidfuzz has no SQL
+      equivalent and dbt does not build it — declaring it honestly as a source
+      keeps the lineage graph true instead of pretending dbt owns the table.
+    schema: "{{ target.schema }}"
+
+    tables:
+      - name: matched_pairs
+        description: One row per accepted cross-retailer pair per snapshot day, with match tier and score.
+        data_tests:
+          - dbt_utils.unique_combination_of_columns:
+              arguments:
+                combination_of_columns: [wow_product_id, coles_product_id, snapshot_date]
+        columns:
+          - name: match_type
+            data_tests:
+              - accepted_values:
+                  arguments:
+                    values: ['national_brand', 'own_brand']
+          - name: name_score
+            data_tests: [not_null]

@@ -1,0 +1,76 @@
+version: 2
+
+models:
+
+  - name: int_product_prices_daily
+    description: >
+      The product-level daily price series: one row per (retailer, product_id,
+      snapshot_date). Everything that reasons about time reads this, not
+      stg_prices.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [retailer, product_id, snapshot_date]
+    columns:
+      - name: price
+        data_tests: [not_null]
+      - name: snapshot_date
+        data_tests: [not_null]
+
+  - name: int_day_coverage
+    description: >
+      Per-day basket coverage, and the is_complete_day flag the basket mart
+      filters on. Exists because 2026-08-22 was written as a normal day with
+      three of fifty Coles lines on it; see docs/data_quality.md.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [snapshot_date]
+    columns:
+      - name: snapshot_date
+        data_tests: [not_null]
+      - name: coverage_pct
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 100
+      - name: is_complete_day
+        data_tests: [not_null]
+
+  - name: int_matched_products
+    description: Accepted cross-retailer pairs, one row per pair per day, from the Python matcher.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [wow_product_id, coles_product_id, snapshot_date]
+    columns:
+      - name: wow_price
+        data_tests: [not_null]
+      - name: coles_price
+        data_tests: [not_null]
+      - name: match_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['national_brand', 'own_brand']
+
+  - name: int_matched_pairs
+    description: >
+      Pair identity across the whole series — one row per pair, ever, with a
+      stable surrogate pair_id and the window of days it was matched on.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [wow_product_id, coles_product_id]
+    columns:
+      - name: pair_id
+        data_tests: [not_null, unique]
+      - name: first_matched_date
+        data_tests: [not_null]
+      - name: days_matched
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true

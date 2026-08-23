@@ -1,0 +1,34 @@
+# Two targets, one project. DuckDB is the default and is the only one that has
+# to work: it is local, free and permanent. Snowflake is additive — see
+# docs/snowflake.md for what was and was not verified on it.
+#
+# The target is chosen by DBT_TARGET so that `python run_pipeline.py` is the
+# same command on both engines.
+
+wow_vs_coles:
+  target: "{{ env_var('DBT_TARGET', 'duckdb') }}"
+
+  outputs:
+
+    duckdb:
+      type: duckdb
+      # Absolute path when run_pipeline.py drives dbt; the relative default
+      # makes a bare `dbt build` from this directory work too.
+      path: "{{ env_var('DUCKDB_PATH', '../../data/warehouse.duckdb') }}"
+      schema: main
+      threads: 4
+
+    snowflake:
+      type: snowflake
+      # Defaults are empty rather than absent on purpose: dbt renders every
+      # output in this file, so a bare env_var() here would make the DuckDB
+      # target unusable on a machine that has never seen Snowflake.
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT', '') }}"
+      user: "{{ env_var('SNOWFLAKE_USER', '') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD', '') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'ACCOUNTADMIN') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'GROCERY_WH') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'GROCERY') }}"
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'ANALYTICS') }}"
+      threads: 4
+      client_session_keep_alive: false

@@ -1,0 +1,44 @@
+version: 2
+
+models:
+
+  - name: stg_prices
+    description: >
+      Cleaned price rows. One row per (retailer, product_id, search_term,
+      snapshot_date) — search_term is part of the grain because one product can
+      answer several basket lines and mart_basket compares per line.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [retailer, product_id, search_term, snapshot_date]
+    columns:
+      - name: retailer
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['woolworths', 'coles']
+      - name: product_id
+        data_tests: [not_null]
+      - name: price
+        description: Shelf price on the day, always > 0 (rows without one are dropped).
+        data_tests: [not_null]
+      - name: snapshot_date
+        data_tests: [not_null]
+      - name: canonical_qty
+        description: >
+          Pack size in grams, millilitres or units. NULL when the size string
+          could not be parsed — a real state, not a defect, and the matcher
+          refuses to pair on it.
+      - name: canonical_unit
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['g', 'ml', 'each']
+      - name: unit_price_per_100
+        description: The retailer's own unit price rebased to $/100g, $/100ml or $/each.
+      - name: unit_price_basis
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['per_100g', 'per_100ml', 'per_each']

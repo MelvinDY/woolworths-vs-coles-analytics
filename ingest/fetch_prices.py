@@ -25,6 +25,15 @@ RAW_DIR = PROJECT_ROOT / "data" / "raw"
 REQUEST_DELAY_S = 0.6
 RETRIES = 3
 
+# A run must cover at least this share of the basket at BOTH retailers or it is
+# thrown away rather than written. See the guard at the end of run().
+MIN_COVERAGE = 0.8
+
+# Coles pins its JSON endpoint to a deployed buildId. When they ship, the id we
+# resolved at the start of the run starts answering 500 and every subsequent
+# term comes back empty. Re-resolve after this many consecutive empty terms.
+COLES_REFRESH_AFTER = 3
+
 RAW_COLUMNS = [
     "retailer",
     "product_id",
@@ -172,6 +181,12 @@ def run(snapshot_date: str | None = None) -> Path:
 
     all_rows: list[dict] = []
     counts = {"woolworths": 0, "coles": 0}
+    # Coverage is counted in basket lines answered, not rows returned. A
+    # retailer can hand back hundreds of rows for three search terms and still
+    # have told us nothing about the basket.
+    terms_covered = {"woolworths": 0, "coles": 0}
+    coles_misses = 0
+
     for i, item in enumerate(basket, 1):
         term, category = item["search_term"], item["category"]
         fetched_at = dt.datetime.now(dt.timezone.utc).isoformat()
@@ -180,6 +195,23 @@ def run(snapshot_date: str | None = None) -> Path:
         time.sleep(REQUEST_DELAY_S)
         col = fetch_coles(session, build_id, term) if build_id else []
         time.sleep(REQUEST_DELAY_S)
+
+        # A run of empty Coles responses usually means they deployed and the
+        # buildId went stale mid-run, which one re-resolve fixes. Retry the term
+        # that tripped it so the refresh does not itself cost a basket line.
+        if build_id and not col:
+            coles_misses += 1
+            if coles_misses >= COLES_REFRESH_AFTER:
+                log.warning("Coles empty for %d terms running; re-resolving buildId", coles_misses)
+                refreshed = resolve_coles_build_id(session)
+                coles_misses = 0
+                if refreshed and refreshed != build_id:
+                    log.info("Coles buildId changed %s -> %s; retrying %s", build_id, refreshed, term)
+                    build_id = refreshed
+                    col = fetch_coles(session, build_id, term)
+                    time.sleep(REQUEST_DELAY_S)
+        elif col:
+            coles_misses = 0
 
         for rows in (wow, col):
             for rank, row in enumerate(rows, 1):
@@ -190,11 +222,29 @@ def run(snapshot_date: str | None = None) -> Path:
             all_rows.append(row)
         counts["woolworths"] += len(wow)
         counts["coles"] += len(col)
+        terms_covered["woolworths"] += 1 if wow else 0
+        terms_covered["coles"] += 1 if col else 0
         log.info("[%d/%d] %-32s wow=%-3d coles=%-3d", i, len(basket), term, len(wow), len(col))
 
-    for retailer, n in counts.items():
-        if n == 0:
-            raise RuntimeError(f"No products fetched from {retailer} — aborting run")
+    # The guard that 2026-08-22 got past. It checked "did this retailer return
+    # any rows at all", and Coles had returned 144 rows across three terms, so
+    # the day was written: 47 basket lines from Woolworths, 3 from Coles.
+    #
+    # A partial day is worse than a missing one. A missing day is visible and
+    # the marts already model it; a partial day looks complete and silently
+    # compares a different basket at each retailer. A snapshot cannot be
+    # backfilled either way, so the only question is whether the day is written
+    # honestly or not at all — and not at all is the safe answer.
+    for retailer, n_terms in terms_covered.items():
+        coverage = n_terms / len(basket) if basket else 0
+        if coverage < MIN_COVERAGE:
+            raise RuntimeError(
+                f"{retailer} answered only {n_terms}/{len(basket)} basket lines "
+                f"({coverage:.0%}, floor is {MIN_COVERAGE:.0%}) — aborting without "
+                f"writing. Nothing is lost that was not already lost: re-run today."
+            )
+        log.info("%s covered %d/%d basket lines (%.0f%%), %d rows",
+                 retailer, n_terms, len(basket), coverage * 100, counts[retailer])
 
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     out_path = RAW_DIR / f"prices_{snapshot_date}.csv"
