@@ -27,3 +27,6 @@ logs/
 transform/dbt/target/
 transform/dbt/dbt_packages/
 transform/dbt/logs/
+# dbt writes an anonymous per-machine install id here. Machine-local, not project
+# config, and it has no business in a repo someone else might clone.
+transform/dbt/.user.yml
