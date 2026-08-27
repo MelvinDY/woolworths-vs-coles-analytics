@@ -116,3 +116,38 @@ models:
               arguments:
                 min_value: 0
                 inclusive: true
+
+  - name: int_bucket_assignment
+    description: >
+      Matched pairs mapped onto the pre-registered 80-item basket (commit
+      51cb891). Longest matching pattern wins, so 'tinned tomato' takes a tin
+      from 'tomato' rather than both claiming it; ties break on item_key.
+      Pairs matching no registered pattern are out of scope and dropped, not
+      pooled into a residual.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [pair_set, pair_id]
+    columns:
+      - name: aisle_group
+        description: The axis under test. Produce and packaged staples are both price-visible.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['produce', 'packaged_staple', 'opaque']
+      - name: brand_tier
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['national_brand', 'own_brand']
+      - name: item_key
+        data_tests: [not_null]
+      - name: n_patterns_matched
+        description: How many registered patterns this pair matched before the tie-break. Carried so ambiguity is countable.
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true

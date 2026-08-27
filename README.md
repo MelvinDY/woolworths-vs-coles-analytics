@@ -106,6 +106,52 @@ days (34.4% against 33.3%).
 store brand, both pair sets. The promotional week is the unit of Australian
 grocery pricing, and a 10-day study cannot see it.
 
+### The registered test, scored
+
+Predictions were fixed at commit `51cb891` before any of these numbers existed
+(full scorecard in [docs/results_bucket_test.md](docs/results_bucket_test.md)).
+**Seven of twelve landed inside the registered range** — packaged staples 5 of
+6, fresh produce 2 of 6.
+
+The claim that mattered was P3, a deliberate robustness test of the store-brand
+finding above: does it survive holding aisle constant, or was it an aisle-mix
+artefact? The registration committed to retracting it publicly if the latter.
+
+**It survives — and is more specific than first published:**
+
+| Share of days a price moved | Name brand | Store brand | Ratio |
+|---|---|---|---|
+| Packaged staples | 8.9% | 1.1% | **8.1x** |
+| Fresh produce | 10.2% | 7.4% | **1.4x** |
+
+The pooled 3.5x is an average of two regimes. **Store brands holding still is a
+packaged-goods phenomenon and nearly vanishes in fresh produce** — crop and
+weather move a price whoever's name is on it, while private-label pricing
+discipline is something you can only exercise over a manufactured good.
+
+**The prediction that failed hardest is the most interesting result.** Produce
+was registered to show low parity but *high* correlation — same crop, same
+weather, moving together without matching. Median per-pair correlation between
+the two chains:
+
+| | Daily | Monthly means | Registered |
+|---|---|---|---|
+| Produce x name brand | **-0.08** | 0.28 | 0.6-0.85 |
+| Staple x name brand | **-0.01** | 0.24 | 0.8-0.95 |
+| Staple x store brand | 0.39 | **0.72** | — |
+
+Day to day, national-brand prices at the two chains are **uncorrelated** — not
+weakly, zero. Monthly smoothing recovers ~0.25, so shared movement exists but is
+swamped at daily frequency, and the rest of the results say why: national brands
+are the promotional vehicles and the two chains run their cycles **out of
+phase**, so prices take turns rather than moving together. Store brands, lightly
+promoted, track each other far more closely (0.72) because what remains is
+shared cost.
+
+So the axis separating correlated from uncorrelated prices is not
+fresh-versus-packaged. It is **promoted versus not** — which is to say, name
+brand versus store brand.
+
 ### Two pair sets, one grading the other
 
 `backfill_pairs` holds both, and `pair_set` is part of the grain of every model
@@ -403,5 +449,6 @@ not an open data licence — and it is the scope any reuse here stays inside.
 - [PRD-v2.md](PRD-v2.md) — v2: price history, SCD2, incremental, second warehouse
 - [PRD-v3.md](PRD-v3.md) — v3: backfilled history from a verified external source, and a pre-registered bucket test
 - [docs/preregistration.md](docs/preregistration.md) — the bucket assignment and the predictions, registered 51cb891 before any bucket-level figure existed
+- [docs/results_bucket_test.md](docs/results_bucket_test.md) — the registered test, scored: 7 of 12 predictions inside range, and the one that failed hardest
 - [docs/snowflake.md](docs/snowflake.md) — what is and is not verified on Snowflake
 - [docs/reconciliation.md](docs/reconciliation.md) — proof the dbt port moved no published number
