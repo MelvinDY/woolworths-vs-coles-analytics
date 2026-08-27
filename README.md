@@ -140,9 +140,29 @@ with this project's own collection, which is also what the verification gate
 checks the backfill against.
 
 Arm A also **cannot be pre-registered** — the data already exists. It is
-observational, it is labelled as such, and the pre-registered test (Arm B) is
-still to come: `seeds/buckets.csv` is deliberately not committed yet, and
-nothing bucket-level has been computed.
+observational and labelled as such: predictions fixed before measurement on
+pre-existing data is a blind analysis, not a pre-registration. Arm B is the
+true one.
+
+The assignment is registered (`51cb891`, [docs/preregistration.md](docs/preregistration.md))
+and nothing bucket-level has been measured yet. Checking pattern coverage before
+registering found something that changed the design: **the 40 price-opaque items
+match three pairs in the entire backfill.** Not because the matcher rejects them
+— a cross-retailer pair needs the product at both chains, and Hot Prices barely
+stocks the tail and stocks it lopsidedly (flea treatment 19 Woolworths and 0
+Coles; greeting cards 0 and 6; plungers and clothes pegs absent from both).
+
+So **Arm A cannot test the visible/opaque split at all.** It tests produce
+against packaged staples crossed with brand tier. The visibility axis belongs to
+Arm B, the only arm that can point a collector at the tail on purpose — which
+needs `seeds/basket.csv` expanded past its 50 head lines, and that has not been
+done.
+
+Worth saying plainly, because it narrows a claim already published above: v2's
+"household" aisle is toilet paper, paper towel, dishwashing liquid and laundry
+liquid — mid-tail supermarket lines. **No version of this project has yet
+measured the true long tail**, so the 62.5%-to-7.1% parity spread is a spread
+across the head of the range.
 
 ## Architecture
 
@@ -382,5 +402,6 @@ not an open data licence — and it is the scope any reuse here stays inside.
 - [PRD.md](PRD.md) — v1: same-day comparison, entity resolution
 - [PRD-v2.md](PRD-v2.md) — v2: price history, SCD2, incremental, second warehouse
 - [PRD-v3.md](PRD-v3.md) — v3: backfilled history from a verified external source, and a pre-registered bucket test
+- [docs/preregistration.md](docs/preregistration.md) — the bucket assignment and the predictions, registered 51cb891 before any bucket-level figure existed
 - [docs/snowflake.md](docs/snowflake.md) — what is and is not verified on Snowflake
 - [docs/reconciliation.md](docs/reconciliation.md) — proof the dbt port moved no published number

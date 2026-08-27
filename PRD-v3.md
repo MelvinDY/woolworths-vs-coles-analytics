@@ -312,7 +312,7 @@ and no bucket-level figure exists.**
 
 | # | Goal | Outcome |
 |---|------|---------|
-| G1 | Bucket hypothesis becomes a test | **Not started.** `seeds/buckets.csv` is not committed and nothing bucket-level has been computed. Deliberately: §11's disclosure only holds while that stays true |
+| G1 | Bucket hypothesis becomes a test | **Registered 51cb891, 2026-08-27.** 80 items and the predictions committed before any bucket-level figure existed — [docs/preregistration.md](docs/preregistration.md). Coverage checking before registering found that Arm A cannot test the visibility axis at all; see below. Still open as a *result*: nothing bucket-level has been measured |
 | G2 | Backfill verified, not trusted | **Met.** 20,222 of 20,227 comparable observations agree exactly — **99.98%**, five disagreements, all Woolworths. `scripts/verify_backfill.py`, gated at 99.0% inside the pipeline |
 | G3 | Promotion vs position at scale | **Met.** 30,398 national-brand gap episodes across a year; 97.7% close, median closed episode **7 days** |
 | G4 | v2 pairs get their history back | **Met.** 154 of 160 v2 pairs extended with zero re-matching, on an equality join |
@@ -451,6 +451,43 @@ against 52.5%).
 1. ~~Resolve the data licence with the Hot Prices author (§8).~~ **Done
    2026-08-27** — permission granted by email for personal-project use.
    Publication of Arm A figures is no longer blocked.
-2. **Commit `seeds/buckets.csv`** before computing anything bucket-level. G1
-   depends on that ordering and §11's disclosure expires the moment it is broken.
-3. Arm B's four measures still wait on collected days, not on code.
+2. ~~Commit the bucket assignment before computing anything bucket-level.~~
+   **Done 51cb891.** Registered as `transform/dbt/seeds/buckets.csv` (path
+   deviation from FR-5, which said `seeds/buckets.csv`: it is consumed by dbt
+   models, so it belongs with the other dbt seeds) plus
+   [docs/preregistration.md](docs/preregistration.md).
+3. **Expand `seeds/basket.csv` past its 50 head lines to the 40 registered
+   opaque items.** This is now the blocking step for the whole visibility
+   hypothesis, and it is a change to the daily collector rather than to
+   analysis, so it is called out rather than made quietly.
+4. **Run the Arm A produce-vs-staples test** against the registered predictions,
+   citing 51cb891 beside every figure.
+5. Arm B's four measures still wait on collected days, not on code — and now
+   on a wider basket too.
+
+### The coverage finding, and what it costs
+
+Registering forced a check that had not been done: do the 80 patterns match
+anything? The 40 price-opaque items match **three pairs** in the entire
+backfill.
+
+The tail is not being rejected by the matcher. A cross-retailer pair needs the
+product at *both* chains, and Hot Prices barely carries the tail and carries it
+lopsidedly — flea treatment 19 Woolworths and 0 Coles, greeting cards 0 and 6,
+LED globes 4 and 18, while plungers, picture hooks, reading glasses, worming
+tablets and clothes pegs are absent from both.
+
+**Arm A therefore cannot test the price-visible / price-opaque split, and no
+amount of window widening changes that.** It can test produce against packaged
+staples crossed with brand tier — 179, 32, 265 and 23 pairs across the four
+cells — and that is what is registered for it.
+
+It also reframes v2. Its "household" aisle is toilet paper, paper towel,
+dishwashing liquid and laundry liquid: mid-tail supermarket lines, not the tail.
+**No version of this project has yet measured the long tail**, and the
+62.5%-to-7.1% parity spread is a spread across the head of the range, which is a
+narrower claim than it has been read as.
+
+Had the buckets been applied without checking coverage first, the opaque bucket
+would have quietly contained three pairs and produced a confident, meaningless
+number. Registering before measuring is what surfaced it.
