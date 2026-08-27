@@ -12,13 +12,13 @@ day the collector does not run is a day of history that can never be recovered.
 That is why the repo tracks `data/raw/` and why the warehouse does not.
 
 **Status: complete.** Collection ran from 2026-07-15 to 2026-08-23 and the study
-is closed at **10 complete days**. An 11th day, 2026-08-22, was collected and is
+now holds **13 complete days**. A further day, 2026-08-22, was collected and is
 deliberately excluded: see `docs/data_quality.md`.
 
-**Finding (2026-08-23, from 10 complete days):** neither chain wins the basket.
+**Finding (from 13 complete days):** neither chain wins the basket.
 The 48-line basket comes to **$190.71 at Coles and $191.47 at Woolworths — a gap
-of 76 cents.** Across the ten days the winner flips repeatedly: Coles takes 4,
-Woolworths 6, and Woolworths averages **$6.47 cheaper**. Of 128 identical
+of 76 cents.** Across the thirteen days the winner flips repeatedly: Coles takes
+6, Woolworths 7, and Woolworths averages **$6.07 cheaper**. Of 128 identical
 products, **43% are priced exactly the same**, with Coles and Woolworths
 splitting the rest 37–36.
 
@@ -45,21 +45,21 @@ where they cannot.
 
 **Findings only the history can produce:**
 
-- A "Special" badge is not the same thing as a lower price. Of 203 promotion
-  episodes, 121 began on a day this project had already priced the product.
-  **17 of those 121 were not price cuts** — 6 unchanged and 11 *up*, including
+- A "Special" badge is not the same thing as a lower price. Of 319 promotion
+  episodes, 186 began on a day this project had already priced the product.
+  **25 of those 186 were not price cuts** — 9 unchanged and 16 *up*, including
   four Schweppes mineral waters moving $3.00 → $3.30 while flagged on special.
-  All 17 were at Coles.
-- **39 of the 44 promotions that ended went straight back to the price they
-  started at.** The median one was 41% off and ran 7 days. Nine in ten specials
+  All 25 were at Coles, whose 20 genuine cuts are outnumbered by Woolworths' 141.
+- **87 of the 93 promotions that ended went straight back to the price they
+  started at.** The median one was 38% off and ran 7 days. Nine in ten specials
   are a promotional cycle, not a price change.
-- Reference pricing checks out. All **100** advertised "was" prices that could
+- Reference pricing checks out. All **157** advertised "was" prices that could
   be tested against an earlier observation of our own matched it. This is not
   fake was-prices; it is the badge and the shelf price being managed apart.
 
-## v3 — a year of history, and the store-brand split
+## v3 — three years of history, and the store-brand split
 
-The 10-day study above has a limitation it states itself: the aisle finding was
+The 13-day study above has a limitation it states itself: the aisle finding was
 *found in the data, not predicted before it*. v3 addresses that in two arms, and
 [PRD-v3.md](PRD-v3.md) is the design. **Arm A is built; Arm B is not started.**
 
@@ -386,7 +386,7 @@ collected is never filled in.**
   written for.
 
 Inventing continuity is how a price series starts lying. The final series
-covers **10 complete days across 40 calendar days**, and that denominator is
+covers **13 complete days across 44 calendar days**, and that denominator is
 printed next to every history figure on the page.
 
 ## Run it
@@ -445,7 +445,7 @@ numeric column, which DuckDB accepts and Snowflake rejects.
   comparable candidate and leave the basket rather than being compared across
   different sizes.
 - Scope is a fixed 50-term everyday basket, not a whole-of-store price index.
-- **10 complete days is a short series**, with a four-week hole between
+- **13 complete days is a short series**, with a four-week hole between
   2026-07-15 and 2026-08-12 where the collection was not yet automated. Of 203
   promotion episodes, only 44 have observed days on *both* sides of the
   promotion. Those 44 are the whole basis of the restored-versus-genuine-cut
