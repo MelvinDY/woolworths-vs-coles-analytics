@@ -141,3 +141,54 @@ Nothing is retracted. P3 held, so the §12 headline stands.
 Two things are now stated more precisely than before: the store-brand repricing
 effect is concentrated in packaged goods rather than uniform, and the two chains'
 national-brand prices do not track each other day to day at all.
+
+---
+
+## Re-run on the full history — 2026-08-27 (appended)
+
+Appended, not edited. The scorecard above was computed on a twelve-month window
+and stands as the record of what was measured first.
+
+**The window was wrong, and not by a date.** Eligibility and analysis window were
+driven by one variable, so asking for a longer window also demanded that every
+pair span the whole of it, which cut the pair set from 1,523 to 67. Separated —
+a product needs a year of history to be *matchable*, each matched pair is then
+*measured* over every day it has — the same 1,523 pairs carry **775,418
+pair-days back to 2023-09-26**, against 557,418 before.
+
+The registration named no window, so nothing here is a re-registration. It is
+the same registered test on 39% more data.
+
+### Every directional claim held
+
+| | 12 months | Full history | |
+|---|---|---|---|
+| **P1** parity higher on staples, name brand | 53.7 vs 46.1 | **53.7 vs 45.6** | holds |
+| **P1** parity higher on staples, store brand | 66.8 vs 37.1 | **66.9 vs 43.8** | holds |
+| **P2** median gap larger on produce | 9.8 vs 0.0 | **10.5 vs 0.0** | holds |
+| **P3** store brands move less, staples | 8.1× | **8.7×** | holds, stronger |
+| **P3** store brands move less, produce | 1.4× | **1.6×** | holds, still weak |
+| **P4** median closed episode | 7 days | **7 days** | holds |
+
+P4's one failure improved rather than vanished: store-brand packaged staples ran
+13.5 days over twelve months and **9 days** over three, still the only cell away
+from seven.
+
+### What the extra data changed
+
+The correlation result got **less** extreme and no less damning. Name-brand
+monthly correlation rises from 0.24–0.28 to **0.345–0.346**, still nowhere near
+the registered 0.80–0.95, and store brands still track far more closely at
+**0.73**. Three years of data did not rescue the prediction; it just measured
+its failure more precisely.
+
+Two findings only the longer series can support, both now on the portfolio page:
+
+- **Gap size is bimodal.** 51.5% of pair-days are priced identically to the
+  cent, 34% sit more than 20% apart, and the entire band from 1% to 5% holds
+  2.4%. Prices are matched exactly or they are nowhere near each other, which is
+  why every measure here is a rate or a median and never a mean.
+- **December is the floor, three years running.** Repricing runs at 7 to 11% of
+  pair-days in most months and drops to 5.4%, 6.1% and 6.0% in the Decembers of
+  2023, 2024 and 2025. Both chains stop moving prices over Christmas. A
+  twelve-month window shows this once and cannot tell it from noise.

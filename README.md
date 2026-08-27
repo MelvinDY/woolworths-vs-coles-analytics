@@ -63,16 +63,20 @@ The 10-day study above has a limitation it states itself: the aisle finding was
 *found in the data, not predicted before it*. v3 addresses that in two arms, and
 [PRD-v3.md](PRD-v3.md) is the design. **Arm A is built; Arm B is not started.**
 
-**Arm A backfills a year of prices this project could never have collected.**
+**Arm A backfills three years of prices this project could never have collected.**
 [Hot Prices AU](https://hotprices.org/) has scraped both chains daily since
-September 2023 and publishes the result as two gzipped JSON files. The source
-reaches back three years; **the analysis window is one year**, 2025-08-27 to
-2026-08-27, and every Arm A figure below is that window. Widening it is a one-line
-change to the `backfill_start` var and costs only build time, because the history
-behind it is already on disk. It keys
+September 2023 and publishes the result as two gzipped JSON files. It keys
 products by the retailers' own product ids — the same ids collected here — so
 v2's matched pairs extend backwards on an equality join, with **no re-matching
-at all**.
+at all**. The analysis window is the whole of it, 2023-09-26 to 2026-08-27.
+
+Getting there needed a fix, not just a wider date. Eligibility and window were
+driven by one var, so widening the window also demanded that every pair span it
+— which left **67 pairs out of 1,523**, because the upstream tracker only grew
+its own catalogue over time. They are separate knobs now: `backfill_min_history`
+decides which products are old enough to match, `backfill_start` decides how far
+back the series is built, and each pair is measured over every day it actually
+has. Same 1,523 pairs, **775,418 pair-days instead of 557,418**.
 
 **The backfill is verified, not trusted.** For every day this project priced a
 product itself, the backfill is asked what price it implies for that day and the
@@ -100,18 +104,17 @@ matching at all. Pooling them makes every measure ambiguous — and leaves the
 aisle finding above unfalsifiable, because private-label share varies by aisle
 and a pooled parity rate could move from pantry to household on mix alone.
 
-One year, 2025-08-27 to 2026-08-27. Both pair sets agree on every direction
+Three years, 2023-09-26 to 2026-08-27. Both pair sets agree on every direction
 despite being built from different brand mechanisms and different blocking:
 
 | | name brand | store brand |
 |---|---|---|
 | Pairs | 1,361 | 162 |
-| Price-change events | 47,821 | 1,687 |
-| **Share of days a price moved** | **9.6%** | **2.9%** |
-| Parity rate | 50.4% | 60.8% |
-| 90th-percentile gap | 51.4% | 20.7% |
-| Days more than 5% apart | 47.9% | 32.0% |
-| Median closed-episode depth | 30.2% | 14.3% |
+| Price-change events | 67,128 | 2,346 |
+| **Share of pair-days a price moved** | **9.7%** | **2.9%** |
+| Parity rate | 50.3% | 61.7% |
+| 90th-percentile gap | 50.8% | 19.4% |
+| Median closed gap episode | 7 days | 7 days |
 
 **Store brands are repriced about three and a half times less often than name
 brands**, sit at parity more often, and when they do diverge the gap is half as

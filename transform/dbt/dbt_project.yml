@@ -36,9 +36,22 @@ vars:
   # snapshot. Empty means "today's run, use the latest observed day".
   snapshot_as_of: ''
 
-  # v3 Arm A. The left edge of the backfill analysis window; the right edge is
-  # always the day the Hot Prices dump was fetched. A var rather than a literal
-  # because the window is a stated choice that belongs beside every figure it
-  # produces, not a number buried in a model. Widening it costs only build time
-  # — the history behind it is already on disk.
-  backfill_start: '2025-08-27'
+  # v3 Arm A. Two different dates, and conflating them was a real bug.
+  #
+  # backfill_start is the ANALYSIS WINDOW: the left edge of the series the marts
+  # build. It is now the first day the upstream source holds, so every pair
+  # contributes every day of history it actually has. int_backfill_pair_daily
+  # opens each pair at its own history_start, so a wide window costs build time
+  # and nothing else.
+  #
+  # backfill_min_history is ELIGIBILITY: a product must have been observed by
+  # this date to be matchable at all, which is how "at least a year of history"
+  # is enforced. It is NOT the window.
+  #
+  # Passing one date to both is what made widening look ruinous. Requiring every
+  # pair to span a 3-year window left 67 pairs out of 1,523, because the upstream
+  # source only grew its own coverage over time. Separated, the same 1,523 pairs
+  # carry a mean of 508 days each rather than 366, and 773,895 pair-days rather
+  # than 557,418.
+  backfill_start: '2023-09-26'
+  backfill_min_history: '2025-08-27'

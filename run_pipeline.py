@@ -131,10 +131,16 @@ def run_backfill(wh: warehouse.Warehouse, window_start: str | None) -> None:
     log.info("Verifying the backfill against this project's own collected days")
     verify_backfill.run(wh, fail_under=BACKFILL_AGREEMENT_GATE)
 
-    start = window_start or dbt_runner.project_var("backfill_start")
-    match_backfill.run(wh, window_start=dt.date.fromisoformat(start))
+    # Two dates, deliberately not the same one. `backfill_min_history` decides
+    # which products are old enough to match; `backfill_start` decides how far
+    # back the series is built. Using the analysis window for eligibility means
+    # demanding every pair span the whole window, which threw away 96% of the
+    # pair set the first time this ran.
+    analysis_start = window_start or dbt_runner.project_var("backfill_start")
+    min_history = dbt_runner.project_var("backfill_min_history")
 
-    dbt_runner.build_selected(BACKFILL_MODELS, dbt_vars={"backfill_start": start})
+    match_backfill.run(wh, window_start=dt.date.fromisoformat(min_history))
+    dbt_runner.build_selected(BACKFILL_MODELS, dbt_vars={"backfill_start": analysis_start})
 
 
 def main() -> None:
