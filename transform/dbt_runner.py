@@ -81,6 +81,38 @@ def snapshot(as_of: str | None = None) -> None:
     invoke(args)
 
 
+def project_var(name: str) -> str:
+    """Read a var's default straight out of dbt_project.yml.
+
+    So that a window the models already have an opinion about is not restated as
+    a second default in Python. One value, declared in the dbt project, used by
+    both the models and the code that selects them.
+    """
+    import yaml
+
+    with open(PROJECT_DIR / "dbt_project.yml", encoding="utf-8") as fh:
+        project = yaml.safe_load(fh)
+    try:
+        return str(project["vars"][name])
+    except KeyError as exc:
+        raise KeyError(f"var {name!r} is not declared in dbt_project.yml") from exc
+
+
+def build_selected(models: list[str], dbt_vars: dict[str, str] | None = None) -> None:
+    """`dbt build` over a named subset, tests included.
+
+    Used for the v3 backfill models, which are a research arm on somebody else's
+    three-year series rather than part of the daily collection — the morning run
+    should not pay to rebuild them. Tests come along because a subset built
+    without its assertions is not a build, it is a refresh.
+    """
+    args = ["build", "--select", *models]
+    if dbt_vars:
+        rendered = ", ".join(f"{k}: {v}" for k, v in dbt_vars.items())
+        args += ["--vars", f"{{{rendered}}}"]
+    invoke(args)
+
+
 def build(full_refresh: bool = False, as_of: str | None = None) -> None:
     args = ["build"]
     if as_of:

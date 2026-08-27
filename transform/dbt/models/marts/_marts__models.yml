@@ -147,3 +147,125 @@ models:
           - accepted_values:
               arguments:
                 values: ['restored_baseline', 'genuine_cut', 'ongoing', 'no_baseline']
+
+  - name: mart_gap_episodes
+    description: >
+      v3 Arm A. One row per run of days where the two chains were more than 5%
+      apart, and whether it closed while we were watching. This is the model
+      that separates a promotion from a pricing position — the question a single
+      snapshot cannot answer at all.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [pair_set, pair_id, episode_start]
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "episode_end >= episode_start"
+      # Every episode is wide by construction, so a peak at or under the
+      # threshold means the islanding has grouped the wrong rows.
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "peak_gap_pct > 5"
+    columns:
+      - name: cheaper_at
+        description: >
+          Single-valued within an episode: direction is part of the island key,
+          so a gap that reopens with the other chain on top is a separate row.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['woolworths', 'coles']
+      - name: outcome
+        description: "'closed' is a measured duration; 'open' is a lower bound."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['closed', 'open']
+      - name: brand_tier
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['national_brand', 'own_brand']
+      - name: episode_days
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+
+  - name: mart_brand_tier_gaps
+    description: >
+      v3 Arm A headline. Parity, gap size, gap persistence and promotion-vs-position
+      per brand tier per pair set. Store brands and name brands are never pooled
+      here: a name brand is the same physical good on both shelves and a gap is a
+      pricing decision, while a store brand is a substitute and a gap is partly a
+      product difference. Pooling them would also let a shifting private-label mix
+      masquerade as the aisle finding v2 reported.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [pair_set, brand_tier]
+      # The effective sample size must be smaller than the row count, or the
+      # change-point grain has been misunderstood somewhere upstream.
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "n_change_events <= n_pair_days"
+    columns:
+      - name: brand_tier
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['national_brand', 'own_brand']
+      - name: parity_rate_pct
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 100
+                inclusive: true
+      - name: n_pairs
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+
+  - name: mart_bucket_gaps
+    description: >
+      The registered Arm A test: produce against packaged staples, crossed with
+      brand tier, scored against predictions fixed at commit 51cb891 before any
+      of these numbers existed. The `opaque` group holds three pairs and is not
+      the test — it is carried so its emptiness is visible.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [pair_set, aisle_group, brand_tier]
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "n_change_events <= n_pair_days"
+    columns:
+      - name: aisle_group
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['produce', 'packaged_staple', 'opaque']
+      - name: parity_rate_pct
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 100
+                inclusive: true
+      - name: n_pairs
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true

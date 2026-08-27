@@ -45,6 +45,49 @@ sources:
             description: UTC timestamp the row was pulled. Drives the source freshness check.
             data_tests: [not_null]
 
+      - name: raw_hotprices
+        description: >
+          v3 Arm A. The Hot Prices AU canonical dumps, unpacked by
+          ingest/load_hotprices.py. One row per observed PRICE CHANGE, not per
+          day — the upstream format stores only the dates a price moved, which
+          is why ~780k rows cover three years of 44k products.
+
+          No freshness check. This is somebody else's series on somebody else's
+          schedule, and a stale dump is a fact about them, not a failure of this
+          collector. The freshness that matters is on raw_prices above.
+        data_tests:
+          - dbt_utils.unique_combination_of_columns:
+              arguments:
+                combination_of_columns: [retailer, product_id, change_date]
+        columns:
+          - name: retailer
+            description: Mapped from Hot Prices' 'woolies'/'coles' at load time.
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['woolworths', 'coles']
+          - name: product_id
+            description: >
+              The retailer's own product id — the same id space this project
+              collects, which is what makes PRD-v3 FR-3 a join rather than a
+              second matching problem.
+            data_tests: [not_null]
+          - name: change_date
+            description: Date the price changed to this value.
+            data_tests: [not_null]
+          - name: price
+            data_tests: [not_null]
+          - name: fetched_date
+            description: >
+              Date this project downloaded the dump. Dates the product
+              attributes, and bounds how far the last price window may be
+              carried forward.
+            data_tests: [not_null]
+          - name: source_url
+            description: Where the row came from. Provenance travels with the data.
+            data_tests: [not_null]
+
   - name: matching
     description: >
       Output of the Python entity-resolution step (matching/match_products.py).
@@ -67,4 +110,44 @@ sources:
                   arguments:
                     values: ['national_brand', 'own_brand']
           - name: name_score
+            data_tests: [not_null]
+
+      - name: backfill_pairs
+        description: >
+          v3 Arm A pair identity, written by matching/match_backfill.py. Two
+          pair sets live here side by side and pair_set is part of the grain:
+          'v2_extended' pairs were accepted by v2's matcher on a retailer brand
+          field and a search-term block, 'wide' pairs by a name-prefix brand
+          proxy and a size bucket. They are not the same quality of evidence,
+          they may cover the same products, and that overlap is deliberate —
+          it is how the weaker derivation gets graded (PRD-v3 FR-4).
+        data_tests:
+          - dbt_utils.unique_combination_of_columns:
+              arguments:
+                combination_of_columns: [pair_set, wow_product_id, coles_product_id]
+        columns:
+          - name: pair_set
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['v2_extended', 'wide']
+          - name: brand_tier
+            description: >
+              Store brand or name brand. Never pooled downstream — see
+              matching/brands.py for why the two are different questions.
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['national_brand', 'own_brand']
+          - name: brand_tier_basis
+            description: How the tier was decided, since the two pair sets do not decide it the same way.
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['retailer_brand_field', 'derived_from_name']
+          - name: history_start
+            description: Later of the two products' first observed change points. The pair's series cannot open before it.
             data_tests: [not_null]

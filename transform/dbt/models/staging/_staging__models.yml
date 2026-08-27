@@ -42,3 +42,37 @@ models:
           - accepted_values:
               arguments:
                 values: ['per_100g', 'per_100ml', 'per_each']
+
+  - name: stg_hotprices
+    description: >
+      v3 Arm A. Hot Prices change points turned into explicit validity windows —
+      the same SCD2 shape as snap_product_prices, but arriving pre-built rather
+      than replayed a day at a time. valid_to is the day before the next change,
+      or the fetch date for the final window, which the dump's current `price`
+      field witnesses directly. Nothing is carried past fetched_date and nothing
+      is invented before a product's first change point.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [retailer, product_id, valid_from]
+      # A window that ends before it starts would silently drop every day of the
+      # series it was supposed to cover.
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "valid_to >= valid_from"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "valid_to <= fetched_date"
+    columns:
+      - name: retailer
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['woolworths', 'coles']
+      - name: price
+        data_tests: [not_null]
+      - name: valid_from
+        data_tests: [not_null]
+      - name: valid_to
+        data_tests: [not_null]

@@ -1,0 +1,81 @@
+item_key,bucket,aisle,match_pattern,rationale
+bananas,price_visible,produce,banana,Cheapest and most frequently bought item in the shop. The reference price everyone carries.
+carrots,price_visible,produce,carrot,Weekly staple sold loose by the kilo with a familiar per-kg price.
+brown_onions,price_visible,produce,brown onion,Bought most weeks and priced per kg on the shelf edge.
+potatoes,price_visible,produce,potato,Sold loose by the kilo and bought in volume.
+tomatoes,price_visible,produce,tomato,Loose per-kg produce with a widely known price point.
+apples,price_visible,produce,apple,Sold loose per kg and bought most weeks.
+broccoli,price_visible,produce,broccoli,Per-kg produce whose price is quoted in cost-of-living coverage.
+baby_spinach,price_visible,produce,baby spinach,Standard salad line stocked in a fixed pack size at both chains.
+avocado,price_visible,produce,avocado,Single-unit price is watched closely and reported on.
+lettuce,price_visible,produce,lettuce,The line whose price became national news in 2022. Highly visible.
+capsicum,price_visible,produce,capsicum,Loose per-kg produce bought regularly.
+cucumber,price_visible,produce,cucumber,Loose or pre-packed produce with a simple unit price.
+mushrooms,price_visible,produce,mushroom,Per-kg produce with a familiar shelf price.
+sweet_potato,price_visible,produce,sweet potato,Loose per-kg produce bought most weeks.
+zucchini,price_visible,produce,zucchini,Loose per-kg produce.
+lemons,price_visible,produce,lemon,Sold by the each or per kg with a known price.
+grapes,price_visible,produce,grape,Seasonal per-kg produce whose price is widely quoted.
+strawberries,price_visible,produce,strawberr,Punnet price is a well-known reference point.
+pumpkin,price_visible,produce,pumpkin,Loose per-kg produce.
+celery,price_visible,produce,celery,Loose produce bought regularly.
+full_cream_milk,price_visible,dairy,full cream milk,The archetypal known-value item. Both chains price 2L milk to the cent.
+white_bread,price_visible,bakery,white bread,Everyday loaf. A price shoppers can quote from memory.
+eggs,price_visible,dairy,egg,Bought weekly and the subject of sustained price coverage.
+tasty_cheese,price_visible,dairy,tasty cheese,Block cheese in a standard pack size stocked by both chains.
+butter,price_visible,dairy,butter,Standard 250g and 500g packs with a widely known price.
+rice,price_visible,pantry,rice,Bulk pantry staple in fixed pack sizes.
+spaghetti,price_visible,pantry,spaghetti,Dry pasta is a low-price staple compared across chains.
+white_sugar,price_visible,pantry,sugar,1kg pantry staple with a long-standing price point.
+plain_flour,price_visible,pantry,flour,1kg pantry staple in a fixed pack.
+weet_bix,price_visible,pantry,weet-bix,National-brand cereal with near-universal household penetration.
+tinned_tomatoes,price_visible,pantry,tinned tomato,400g tin is a pantry staple bought in multiples.
+tuna_tin,price_visible,pantry,tuna in springwater,Small tin bought in volume with a familiar price.
+baked_beans,price_visible,pantry,baked bean,Tinned staple with a long-standing reference price.
+coca_cola,price_visible,drinks,coca-cola,Soft drink is a classic price-perception line for both chains.
+instant_coffee,price_visible,pantry,instant coffee,Frequently promoted national-brand line with a watched price.
+tea_bags,price_visible,pantry,tea bags,Bought in large packs with a known unit price.
+olive_oil,price_visible,pantry,olive oil,Price rises here drew national coverage. Closely watched.
+chicken_breast,price_visible,meat,chicken breast,Per-kg meat price is compared directly between chains.
+beef_mince,price_visible,meat,beef mince,Per-kg mince price is a standard cost-of-living reference.
+frozen_peas,price_visible,frozen,frozen pea,Frozen staple in a fixed pack bought regularly.
+sink_plunger,price_opaque,household,plunger,Bought under duress and rarely. No reference price exists.
+drain_cleaner,price_opaque,household,drain clean,Emergency purchase. Nobody compares chains for it.
+mousetrap,price_opaque,household,mouse trap,Bought once when needed and never priced beforehand.
+super_glue,price_opaque,household,super glue,Occasional low-value purchase with no memorised price.
+picture_hooks,price_opaque,household,picture hook,Bought rarely and in the aisle rather than on a list.
+aa_batteries,price_opaque,household,aa batteries,Bought when something stops working. No planned comparison.
+led_globe,price_opaque,household,led globe,Replacement purchase. Price is discovered at the shelf.
+tape_measure,price_opaque,household,tape measure,Hardware line stocked as convenience rather than destination.
+baby_food_pouch,price_opaque,baby,baby food,Bought on brand and stage rather than price.
+nappy_rash_cream,price_opaque,baby,nappy rash,Distress purchase with no reference price.
+dummy,price_opaque,baby,dummy,Low-frequency purchase chosen on brand fit.
+teething_gel,price_opaque,baby,teething,Bought urgently and rarely.
+bottle_teat,price_opaque,baby,bottle teat,Replacement part bought on compatibility not price.
+bottle_brush,price_opaque,baby,bottle brush,Infrequent purchase with no memorised price.
+baby_nail_clippers,price_opaque,baby,baby nail,Bought once. No basis for comparison.
+bibs,price_opaque,baby,bib,Occasional purchase chosen on design.
+paracetamol,price_opaque,health,paracetamol,Bought when needed rather than planned. Price rarely checked.
+adhesive_bandages,price_opaque,health,band-aid,Restocked occasionally and grabbed without comparison.
+digital_thermometer,price_opaque,health,thermometer,Bought once every few years.
+denture_tablets,price_opaque,health,denture,Narrow-audience line with no competitive pressure.
+reading_glasses,price_opaque,health,reading glasses,Convenience purchase at whatever price is on the shelf.
+saline_spray,price_opaque,health,saline,Bought when unwell rather than on a planned shop.
+lip_balm,price_opaque,health,lip balm,Impulse purchase at the checkout.
+tweezers,price_opaque,health,tweezer,Bought once and rarely replaced.
+cat_litter,price_opaque,pet,cat litter,Bulky pet line bought on habit rather than price comparison.
+flea_treatment,price_opaque,pet,flea,High-value pet line bought on brand and animal weight.
+worming_tablet,price_opaque,pet,worming,Bought on veterinary advice rather than price.
+pet_nail_clippers,price_opaque,pet,pet nail,Bought once for the life of the animal.
+dog_chew,price_opaque,pet,dog chew,Repeat purchase chosen on the animal preference not price.
+bird_seed,price_opaque,pet,bird seed,Narrow audience with no cross-chain comparison.
+fish_flakes,price_opaque,pet,fish food,Very low value and very infrequent.
+litter_scoop,price_opaque,pet,litter scoop,Accessory bought once alongside the litter.
+birthday_candles,price_opaque,occasion,birthday candle,Occasion purchase where price is irrelevant to the buyer.
+shoe_polish,price_opaque,occasion,shoe polish,Declining category bought rarely.
+sewing_kit,price_opaque,occasion,sewing,Emergency purchase with no reference price.
+greeting_card,price_opaque,occasion,greeting card,Occasion purchase chosen on design.
+gift_wrap,price_opaque,occasion,wrapping paper,Occasion purchase bought at whatever is stocked.
+tea_towel,price_opaque,occasion,tea towel,Replacement homeware bought on appearance.
+clothes_pegs,price_opaque,occasion,clothes peg,Bought once every several years.
+sink_strainer,price_opaque,occasion,sink strainer,Replacement part bought when the old one fails.

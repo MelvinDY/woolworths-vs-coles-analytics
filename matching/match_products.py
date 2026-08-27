@@ -28,6 +28,7 @@ import re
 import pandas as pd
 from rapidfuzz import fuzz
 
+from matching.brands import OWN_BRAND_FIELDS as OWN_BRANDS
 from warehouse import Warehouse
 
 log = logging.getLogger(__name__)
@@ -38,10 +39,10 @@ NAME_SCORE_NATIONAL = 80
 NAME_SCORE_OWN_BRAND = 75
 SIZE_TOLERANCE = 0.02
 
-OWN_BRANDS = {
-    "woolworths": {"woolworths", "essentials", "macro", "macro organic"},
-    "coles": {"coles", "coles simply", "coles finest", "coles natures kitchen", "coles kitchen"},
-}
+# OWN_BRANDS moved to matching/brands.py so v3's backfill and this matcher
+# answer "store brand or name brand" from one definition. The set is imported
+# unchanged and this module's behaviour is identical — the rules stay untouched,
+# as the docstring above promises.
 
 
 def norm_text(s: str) -> str:

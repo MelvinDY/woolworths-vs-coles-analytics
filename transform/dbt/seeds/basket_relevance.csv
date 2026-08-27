@@ -1,2 +1,14 @@
-search_term,must_match,require_unit_basis,note
-eggs 12 pack,12 pack|12pack|eggs 12,per_100g,Woolworths search returns marketplace incubators and toys here and Coles returns 6- 18- and 30-packs; the unit basis drops the hardware and the name rule holds both sides to a dozen
+"search_term","must_match","must_not_match","require_unit_basis","note"
+"eggs 12 pack","12 pack|12pack|eggs 12","","per_100g","Woolworths search returns marketplace incubators and toys here and Coles returns 6- 18- and 30-packs; the unit basis drops the hardware and the name rule holds both sides to a dozen"
+"sink plunger","plunger","","","Coles returns 'Coles Sink Strainer' as its top hit for this term, which is a different product and is also its own basket line. Requires the word."
+"reading glasses","reading glass|magnif","","","Coles returns 'Cook & Dine Double Walled Coffee Glasses'. Drinking glasses are not reading glasses."
+"worming tablets dog","worm","","","Coles returns 'Nature's Gift Adult Chilled Fresh Dog Food'. Dog food is not a wormer."
+"wrapping paper","wrap","","","Coles returns 'Hallmark Medium Gift Bag'. A gift bag is not wrapping paper."
+"picture hooks","picture|hook","","","Both chains answer with adjacent hanging hardware; this keeps the line to products that name the job."
+"baby dummy","dummy|soother|pacifier","","","'dummy' is a common word in product copy. Anchors the line to the actual product category."
+"adhesive bandages","bandage|band-aid|band aid","","","Both chains lead with novelty-branded packs. They are bandages, but the rule stops the line drifting to unrelated first aid."
+"digital thermometer","thermometer","","","Coles returns a Fisher-Price toy above real thermometers. Requiring the word is the most this can screen without judging the product."
+"cat litter scoop","scoop|rake","","","Shares a prefix with the 'cat litter' line and would otherwise collect litter itself."
+"baby nail clippers","clipper","","","Coles returns a generic 'Coles Nail Clippers'; the rule keeps the line on clippers rather than adjacent grooming."
+"butter 500g","butter","buttery|spread|blend","","Both chains rank margarine into this line and the word games are the point: 'Nuttelex Buttery Spread' contains 'butter' as a substring, and 'Western Star Spreadable Butter Blend' is a dairy blend, not butter. Positive matching alone cannot separate them, which is why must_not_match exists."
+"paper towel","paper towel","","","Coles ranks 'Coles Simply Facial Tissues' second and toilet paper third for this line, and the basket took the tissues at $1.90. Tissues and toilet paper are not paper towel."

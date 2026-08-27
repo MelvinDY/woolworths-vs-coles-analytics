@@ -35,3 +35,10 @@ vars:
   # Set by run_pipeline.py when replaying a historical day into the SCD2
   # snapshot. Empty means "today's run, use the latest observed day".
   snapshot_as_of: ''
+
+  # v3 Arm A. The left edge of the backfill analysis window; the right edge is
+  # always the day the Hot Prices dump was fetched. A var rather than a literal
+  # because the window is a stated choice that belongs beside every figure it
+  # produces, not a number buried in a model. Widening it costs only build time
+  # — the history behind it is already on disk.
+  backfill_start: '2025-08-27'

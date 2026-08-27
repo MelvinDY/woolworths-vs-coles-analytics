@@ -19,7 +19,11 @@ import requests
 log = logging.getLogger(__name__)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-SEED_PATH = PROJECT_ROOT / "seeds" / "basket.csv"
+# The basket lives with the dbt seeds so the collector and the warehouse read
+# one file. int_day_coverage and mart_basket both need a line's panel, and two
+# copies of the basket is exactly how a denominator drifts under a published
+# figure. Moved from seeds/basket.csv in v3.
+SEED_PATH = PROJECT_ROOT / "transform" / "dbt" / "seeds" / "basket.csv"
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 
 REQUEST_DELAY_S = 0.6
@@ -185,10 +189,15 @@ def run(snapshot_date: str | None = None) -> Path:
     # retailer can hand back hundreds of rows for three search terms and still
     # have told us nothing about the basket.
     terms_covered = {"woolworths": 0, "coles": 0}
+    # Split by panel: only the everyday panel can abort a run (see the guard at
+    # the end of run()).
+    everyday_covered = {"woolworths": 0, "coles": 0}
+    tail_covered = {"woolworths": 0, "coles": 0}
     coles_misses = 0
 
     for i, item in enumerate(basket, 1):
         term, category = item["search_term"], item["category"]
+        panel = item.get("panel", "everyday")
         fetched_at = dt.datetime.now(dt.timezone.utc).isoformat()
 
         wow = fetch_woolworths(session, term)
@@ -224,6 +233,9 @@ def run(snapshot_date: str | None = None) -> Path:
         counts["coles"] += len(col)
         terms_covered["woolworths"] += 1 if wow else 0
         terms_covered["coles"] += 1 if col else 0
+        counter = everyday_covered if panel == "everyday" else tail_covered
+        counter["woolworths"] += 1 if wow else 0
+        counter["coles"] += 1 if col else 0
         log.info("[%d/%d] %-32s wow=%-3d coles=%-3d", i, len(basket), term, len(wow), len(col))
 
     # The guard that 2026-08-22 got past. It checked "did this retailer return
@@ -235,16 +247,23 @@ def run(snapshot_date: str | None = None) -> Path:
     # compares a different basket at each retailer. A snapshot cannot be
     # backfilled either way, so the only question is whether the day is written
     # honestly or not at all — and not at all is the safe answer.
-    for retailer, n_terms in terms_covered.items():
-        coverage = n_terms / len(basket) if basket else 0
+    # Only the EVERYDAY panel decides. v3 added 40 long-tail lines -- plungers,
+    # denture tablets, worming tablets -- so Arm B can test the bucket split that
+    # the backfill source cannot reach. They are thinly stocked by design, and a
+    # tail line going out of stock at one chain must never be able to throw away
+    # a day of milk and bread prices. Tail coverage is logged, never enforced.
+    everyday_lines = sum(1 for i in basket if i.get("panel", "everyday") == "everyday")
+    for retailer, n_terms in everyday_covered.items():
+        coverage = n_terms / everyday_lines if everyday_lines else 0
         if coverage < MIN_COVERAGE:
             raise RuntimeError(
-                f"{retailer} answered only {n_terms}/{len(basket)} basket lines "
-                f"({coverage:.0%}, floor is {MIN_COVERAGE:.0%}) — aborting without "
+                f"{retailer} answered only {n_terms}/{everyday_lines} everyday basket "
+                f"lines ({coverage:.0%}, floor is {MIN_COVERAGE:.0%}) — aborting without "
                 f"writing. Nothing is lost that was not already lost: re-run today."
             )
-        log.info("%s covered %d/%d basket lines (%.0f%%), %d rows",
-                 retailer, n_terms, len(basket), coverage * 100, counts[retailer])
+        log.info("%s covered %d/%d everyday lines (%.0f%%) and %d/%d tail lines, %d rows",
+                 retailer, n_terms, everyday_lines, coverage * 100,
+                 tail_covered[retailer], len(basket) - everyday_lines, counts[retailer])
 
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     out_path = RAW_DIR / f"prices_{snapshot_date}.csv"
