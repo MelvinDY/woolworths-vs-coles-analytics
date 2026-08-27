@@ -1,12 +1,13 @@
 # Data quality
 
-Two failures reached published figures before they were caught. Both are
+Three failures reached published figures before they were caught. Both are
 recorded here in full, because the interesting part of each is not the bug but
 what it says about the difference between a script that ran once and a pipeline
 that runs every morning.
 
-Neither was found by a failing test. Both were found by looking at a number
-that was the wrong size.
+None was found by a failing test. The first two were found by looking at a
+number that was the wrong size; the third by a routine change that forced a
+check nobody had thought to run. The third also reversed a headline.
 
 ---
 
@@ -142,10 +143,127 @@ was meant to repair and moved nothing else.
 
 ---
 
-## What both have in common
+## 3. The basket that compared 2 L of milk to 1 L — every day, from the first
 
-The v1 study ran once, by hand, and someone looked at the output. Both of these
-failures are what that looks like when nobody is looking any more:
+This one is different from the other two. They were incidents: a bad morning,
+a bad line. This ran from the first collected day to 2026-08-27, passed every
+test, and **reversed the headline finding.**
+
+### What happened
+
+`mart_basket` takes the cheapest relevant hit per basket line and never checked
+that the hit was the size the line asked for. So:
+
+| Line | What was priced |
+|---|---|
+| `skim milk 2l` | Woolworths Skim Milk **1 L** |
+| `vegemite 380g` | Vegemite Spread **150 g** |
+| `full cream milk 2l` | a2 Milk Full Cream **1 L** |
+| `greek yoghurt 1kg` | Chobani Greek Yogurt **160 g** |
+| `carrots 1kg` | Coles Carrots Loose, **170 g** |
+| `tasty cheese block 500g` | Kenilworth Roast Garlic, **165 g** |
+
+A basket that prices a 1 kg line on a 170 g pack is not measuring price. It is
+measuring pack size.
+
+### Why it was not symmetric, and why that mattered
+
+If the error had hit both chains equally it would have added noise. It did not:
+
+| | Sized basket rows | Wrong pack size | Of which **smaller** than the line |
+|---|---|---|---|
+| **Coles** | 415 | **149 (35.9%)** | **124** |
+| Woolworths | 415 | 13 (3.1%) | 13 |
+
+Twelve times the error rate at Coles, overwhelmingly toward *smaller* packs —
+which are cheaper. The bug applied a systematic discount to one side of the
+comparison, and it was the side the published finding named as cheaper.
+
+The cause is upstream and mundane: the two retailers' search endpoints rank
+differently. Coles returns small formats high; Woolworths returns the format you
+asked for. Nothing in the pipeline knew the difference.
+
+### Why no test caught it
+
+Every published test still passed. The grain was unique, the prices were
+non-null and positive, the day was complete, both retailers had a candidate for
+every line. Each row was a real product at a real price. The basket was simply
+about something other than what it claimed.
+
+This is the same shape as the other two failures on this page, and the reason
+that section exists: **the failure mode of an automated collection is not a
+crash, it is a number that is still a number.**
+
+### The fix
+
+The size the line asks for is parsed from the line itself — `full cream milk 2l`
+already says `2l` — and a hit must match it within **2%**, which is the tolerance
+`matching/match_products.SIZE_TOLERANCE` already uses to decide two packs are the
+same size. Lines naming no size (`bananas`, `salmon fillets`) are unconstrained.
+
+Deriving the requirement from the search term rather than configuring it per line
+in `basket_relevance` is deliberate: the term is the thing being asked for, so a
+derived screen cannot drift away from it.
+
+**A line that names a size also stops being capped at the top five hits**, which
+is the same rule `basket_relevance` already applies and for the same reason — a
+line that can say what it is looking for does not need to guess that it is near
+the top. That half is not optional. Screening on size while keeping the cap is
+worse than either alone: at Coles on 2026-08-27 the correct 2 L Coles Full Cream
+Milk at $3.55 sits at **rank 6**, so the cap discarded the right product and the
+basket priced Pura at $4.65 instead. Applied that way the correction overshot
+wildly, putting Woolworths ahead on 13 days of 13 by a mean of $24.
+
+Two lines lose their Coles side permanently and leave the basket, which is the
+honest outcome: Coles stocks no 250 g bacon rashers and no 750 g rolled oats.
+**The basket is 48 lines, not 50.**
+
+### What it changed
+
+Decomposed, over all 13 complete days:
+
+| | Coles cheaper | Mean gap (Woolworths − Coles) |
+|---|---|---|
+| As published | 11 of 13 | **+$8.10** |
+| Size screen only, cap kept — *wrong* | 0 of 13 | −$24.04 |
+| Size screen replacing the cap — **correct** | 6 of 13 | **−$5.02** |
+
+Restricted to the same ten days the study published:
+
+| | As published | Corrected |
+|---|---|---|
+| Basket lines | 50 | 48 |
+| Coles cheaper on | **9 of 10 days** | **4 of 10 days** |
+| Mean basket | Coles $200.85 / Woolworths $214.77 | Coles $192.19 / Woolworths $187.23 |
+| Headline gap (2026-08-23) | **$13.92, Coles cheaper** | **$0.11, Coles cheaper** |
+
+The published claim that Coles wins the basket does not survive. The two chains
+are level to about a dollar on the headline day, the winner flips repeatedly, and
+across ten days Woolworths is on average **$4.96 cheaper**, not Coles by $13.92.
+
+That is a better answer as well as a truer one. A basket gap that flips sign and
+averages near zero is what genuine competition between two national chains looks
+like; a stable $13.92 lead was always more likely to be a measurement artefact
+than a market fact, and it was.
+
+### What it did not change
+
+Nothing that comes from matched pairs. `mart_pair_comparison` compares products
+resolved by the matcher, which has always enforced pack size within 2% — the
+screen this mart was missing. On 2026-08-23 it still reports **128 pairs, 43%
+priced identically**, exactly as published, and the parity-by-aisle spread of
+62.5% in pantry to 7.1% in household is untouched.
+
+The lesson is uncomfortable and worth keeping: **the matcher was right and the
+basket was wrong, and the basket was the number on the front page.** The careful
+component existed all along; the headline was computed by the crude one.
+
+---
+
+## What they have in common
+
+The v1 study ran once, by hand, and someone looked at the output. All three of
+these failures are what that looks like when nobody is looking any more:
 
 - A retailer's search ranking is **not a stable interface**. It is tuned
   continuously, and it will hand back something that is not the product without
@@ -155,4 +273,13 @@ failures are what that looks like when nobody is looking any more:
   that is still a number, still passes every type and uniqueness test, and is
   quietly about something else.
 
-Every test in this project passed on both bad days.
+- A guard on **identity** is not a guard on **comparability**. Every row in
+  case 3 was a real product at a real price; it was the wrong size.
+- An error that is **asymmetric between the things being compared** does not add
+  noise, it adds bias — and it will point wherever the ranking happens to point.
+
+Every test in this project passed on all three.
+
+Two of the three were found by looking at a number that was the wrong size. The
+third was found because a routine change forced a check nobody had run. None was
+found by a failing test, which is the whole argument for looking.
