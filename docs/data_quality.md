@@ -18,8 +18,8 @@ The third reversed a headline.
 
 Coles pins its search JSON to a deployed `buildId`. The collector resolves one
 at the start of a run and reuses it for all fifty search terms. On 22 August
-that id began answering `HTTP 500` partway through the run, and forty-seven of
-the fifty terms came back empty. The last three recovered on their own.
+that id began answering `HTTP 500` partway through the run, and forty-three of
+the fifty terms came back empty. Seven answered.
 
 The run wrote the day anyway: 597 rows, of which Woolworths supplied fifty
 basket lines and Coles supplied seven.
@@ -33,9 +33,17 @@ for retailer, n in counts.items():
 ```
 
 The guard asked whether a retailer had returned *any rows at all*. Coles had
-returned 144 of them, across three search terms. A row count cannot tell the
+returned 189 of them, across seven search terms. A row count cannot tell the
 difference between a retailer that answered the basket and a retailer that
 answered a fraction of it very thoroughly.
+
+*Corrected 2026-08-27.* This paragraph read "144 of them, across three search
+terms", and the sentence above it said forty-seven terms came back empty. Both
+were wrong, and the page contradicted itself: the paragraph before already said
+Coles supplied seven. `data/raw/prices_2026-08-22.csv` is the system of record
+and holds 189 Coles rows across seven terms, which is also the 14% coverage
+`int_day_coverage` reports for that day. The argument is unaffected and the
+arithmetic now matches the file.
 
 ### Why it matters more than a missing day
 
