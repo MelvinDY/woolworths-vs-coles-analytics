@@ -74,3 +74,45 @@ models:
               arguments:
                 min_value: 1
                 inclusive: true
+
+  - name: int_backfill_pair_daily
+    description: >
+      v3 Arm A. Matched-pair prices for every day in the backfill window, with
+      the gap, the parity flag and the brand tier on the grain. The Arm A
+      counterpart to mart_price_history; pair_set is part of the key so the two
+      pair sets can never be pooled by accident (PRD-v3 G5).
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [pair_set, pair_id, price_date]
+      # The parity flag and the gap must agree. If a row is at parity the gap is
+      # zero, and if they ever disagree one of the two is being computed wrong.
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "abs_gap_pct is null or is_parity = (abs_gap_pct < 0.01)"
+      # A gap day carries no prices, and a non-gap day carries both. This is the
+      # v2 rule (a gap is a gap) asserted rather than merely intended.
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "is_gap_day = (wow_price is null or coles_price is null)"
+    columns:
+      - name: pair_set
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['v2_extended', 'wide']
+      - name: brand_tier
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['national_brand', 'own_brand']
+      - name: price_date
+        data_tests: [not_null]
+      - name: abs_gap_pct
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true

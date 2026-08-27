@@ -4,6 +4,7 @@ Usage:
     python run_pipeline.py                  # full run including live fetch
     python run_pipeline.py --skip-fetch     # rebuild the warehouse from stored raw CSVs
     python run_pipeline.py --full-refresh   # rebuild incremental marts from scratch
+    python run_pipeline.py --backfill       # also build v3 Arm A from the Hot Prices history
     python run_pipeline.py --target snowflake
 
 The warehouse is chosen by DBT_TARGET (default `duckdb`), which --target sets
@@ -33,13 +34,31 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import warehouse  # noqa: E402
 from dashboard import build_dashboard  # noqa: E402
-from ingest import fetch_prices, load_raw  # noqa: E402
-from matching import match_products  # noqa: E402
+from ingest import fetch_hotprices, fetch_prices, load_hotprices, load_raw  # noqa: E402
+from matching import match_backfill, match_products  # noqa: E402
+from scripts import verify_backfill  # noqa: E402
 from transform import dbt_runner  # noqa: E402
 
 log = logging.getLogger("pipeline")
 
 REPLAY_LEDGER = "snapshot_replay_log"
+
+# v3 Arm A models. Selected explicitly rather than built by default, because the
+# backfill is a research arm on a three-year external series and the daily job
+# is a collection arm on this project's own — the daily run should not pay for
+# rebuilding somebody else's history every morning.
+BACKFILL_MODELS = [
+    "stg_hotprices",
+    "int_backfill_pair_daily",
+    "mart_gap_episodes",
+    "mart_brand_tier_gaps",
+]
+
+# The agreement rate below which Arm A figures must not be published. Set from
+# the measured rate (99.98%) with room for a handful of same-week price moves
+# where the two collectors sit on opposite sides of a change; a real break in
+# the id-space join or the change-point semantics would land far below it.
+BACKFILL_AGREEMENT_GATE = 99.0
 
 
 def collected_days(wh: warehouse.Warehouse) -> list[dt.date]:
@@ -96,6 +115,28 @@ def replay_snapshot(wh: warehouse.Warehouse) -> list[dt.date]:
     return pending
 
 
+def run_backfill(wh: warehouse.Warehouse, window_start: str | None) -> None:
+    """v3 Arm A: land the Hot Prices history, verify it, pair it, model it.
+
+    The order is the point. Verification runs before any pair is built and
+    before any model is refreshed, because PRD-v3 FR-2 makes agreement with this
+    project's own collection the gate on the whole arm rather than a report
+    printed after the figures are already in the warehouse. If a future dump
+    stops agreeing — an id space changed, the change-point semantics shifted —
+    the run stops here with nothing published.
+    """
+    fetch_hotprices.run()
+    load_hotprices.run(wh)
+
+    log.info("Verifying the backfill against this project's own collected days")
+    verify_backfill.run(wh, fail_under=BACKFILL_AGREEMENT_GATE)
+
+    start = window_start or dbt_runner.project_var("backfill_start")
+    match_backfill.run(wh, window_start=dt.date.fromisoformat(start))
+
+    dbt_runner.build_selected(BACKFILL_MODELS, dbt_vars={"backfill_start": start})
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -105,6 +146,10 @@ def main() -> None:
                         help="rebuild incremental marts from scratch instead of appending a day")
     parser.add_argument("--target", choices=["duckdb", "snowflake"],
                         help="warehouse to build into (default: $DBT_TARGET, else duckdb)")
+    parser.add_argument("--backfill", action="store_true",
+                        help="also build v3 Arm A from the Hot Prices dumps (fetches if absent)")
+    parser.add_argument("--backfill-start", default=None,
+                        help="left edge of the Arm A window (default: dbt var backfill_start)")
     args = parser.parse_args()
 
     # force=True: importing dbt installs a root log handler, which makes a plain
@@ -141,6 +186,11 @@ def main() -> None:
         # this file as hand-written Python; they are dbt tests now.
         latest = collected_days(wh)[-1]
         dbt_runner.build(full_refresh=args.full_refresh, as_of=str(latest))
+
+        # After the main build: FR-3 reads int_matched_pairs and FR-2 reads
+        # int_product_prices_daily, so both need the v2 graph to exist first.
+        if args.backfill:
+            run_backfill(wh, args.backfill_start)
 
         build_dashboard.run(wh)
 
