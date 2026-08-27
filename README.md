@@ -63,9 +63,13 @@ The 10-day study above has a limitation it states itself: the aisle finding was
 *found in the data, not predicted before it*. v3 addresses that in two arms, and
 [PRD-v3.md](PRD-v3.md) is the design. **Arm A is built; Arm B is not started.**
 
-**Arm A backfills three years this project could never have collected.**
+**Arm A backfills a year of prices this project could never have collected.**
 [Hot Prices AU](https://hotprices.org/) has scraped both chains daily since
-September 2023 and publishes the result as two gzipped JSON files. It keys
+September 2023 and publishes the result as two gzipped JSON files. The source
+reaches back three years; **the analysis window is one year**, 2025-08-27 to
+2026-08-27, and every Arm A figure below is that window. Widening it is a one-line
+change to the `backfill_start` var and costs only build time, because the history
+behind it is already on disk. It keys
 products by the retailers' own product ids — the same ids collected here — so
 v2's matched pairs extend backwards on an equality join, with **no re-matching
 at all**.

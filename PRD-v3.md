@@ -39,7 +39,7 @@ splits v3 into two arms that answer different questions and check each other.
 |  | Arm A — Backfill | Arm B — Pre-registered test |
 |---|---|---|
 | Source | Hot Prices AU public dumps | This repo's own daily collector |
-| Window | 2023-09-26 → today (~3 years) | Forward from the day buckets are committed |
+| Window | **Analysed: 2025-08-27 → 2026-08-27, one year.** Source reaches back to 2023-09-26; the extra two years are on disk and unanalysed, behind the `backfill_start` var | Forward from the day buckets are committed |
 | Scale | 1,568 candidate pairs · 80,292 change events in 12 months | ~80 items, as v2 collects |
 | Pre-registered? | **No — the data already exists.** Observational | **Yes.** Buckets committed to git before collection |
 | Carries `was_price` / `is_on_special`? | **No.** Price only | **Yes** |
