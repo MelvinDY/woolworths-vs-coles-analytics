@@ -98,6 +98,12 @@ screened as (
         else
             (nullif(r.must_match, '') is null
                 or {{ regex_contains('lower(c.name)', "nullif(r.must_match, '')") }})
+            -- The negative half. Some lines cannot be separated by a positive
+            -- pattern alone: 'Nuttelex Buttery Spread' contains 'butter' as a
+            -- substring and 'Western Star Spreadable Butter Blend' genuinely
+            -- says butter, but neither is what 'butter 500g' is asking for.
+            and (nullif(r.must_not_match, '') is null
+                or not {{ regex_contains('lower(c.name)', "nullif(r.must_not_match, '')") }})
             and (nullif(r.require_unit_basis, '') is null
                 or c.unit_price_basis = r.require_unit_basis)
     end

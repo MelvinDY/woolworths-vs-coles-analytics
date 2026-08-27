@@ -16,9 +16,9 @@ is closed at **10 complete days**. An 11th day, 2026-08-22, was collected and is
 deliberately excluded: see `docs/data_quality.md`.
 
 **Finding (2026-08-23, from 10 complete days):** neither chain wins the basket.
-The 48-line basket comes to **$188.36 at Coles and $188.47 at Woolworths — a gap
-of 11 cents.** Across the ten days the winner flips repeatedly: Coles takes 4,
-Woolworths 6, and Woolworths averages **$4.96 cheaper**. Of 128 identical
+The 48-line basket comes to **$190.71 at Coles and $191.47 at Woolworths — a gap
+of 76 cents.** Across the ten days the winner flips repeatedly: Coles takes 4,
+Woolworths 6, and Woolworths averages **$6.47 cheaper**. Of 128 identical
 products, **43% are priced exactly the same**, with Coles and Woolworths
 splitting the rest 37–36.
 
@@ -30,8 +30,12 @@ splitting the rest 37–36.
 > almost always toward smaller, cheaper packs. It applied a systematic discount
 > to the side the finding named as cheaper. Two lines left the basket because
 > Coles stocks no 250 g bacon and no 750 g oats, hence 48 lines rather than 50.
-> Full write-up, including what it did and did not change, in
-> [docs/data_quality.md](docs/data_quality.md#3-the-basket-that-compared-2-l-of-milk-to-1-l--every-day-from-the-first).
+> A second fault surfaced while checking that fix: `butter 500g` was priced on
+> margarine at both chains and `paper towel` on facial tissues at Coles, so
+> `basket_relevance` gained a `must_not_match` column — 'Nuttelex Buttery Spread'
+> contains the word butter, and a positive pattern cannot exclude it. Both lines
+> now land level at $7.00 and $2.20. Full write-up of both in
+> [docs/data_quality.md](docs/data_quality.md).
 
 **The finding worth the build:** the average hides everything. Split the same
 pairs by aisle and parity runs from **62.5% in pantry to 7.1% in household**,

@@ -1,13 +1,14 @@
 # Data quality
 
-Three failures reached published figures before they were caught. Both are
+Four failures reached published figures before they were caught. Both are
 recorded here in full, because the interesting part of each is not the bug but
 what it says about the difference between a script that ran once and a pipeline
 that runs every morning.
 
 None was found by a failing test. The first two were found by looking at a
 number that was the wrong size; the third by a routine change that forced a
-check nobody had thought to run. The third also reversed a headline.
+check nobody had thought to run; the fourth by reading the output of the third.
+The third reversed a headline.
 
 ---
 
@@ -228,7 +229,8 @@ Decomposed, over all 13 complete days:
 | Size screen only, cap kept — *wrong* | 0 of 13 | −$24.04 |
 | Size screen replacing the cap — **correct** | 6 of 13 | **−$5.02** |
 
-Restricted to the same ten days the study published:
+Restricted to the same ten days the study published. These isolate the size fix;
+case 4 shifts them again and carries the current figures:
 
 | | As published | Corrected |
 |---|---|---|
@@ -260,9 +262,89 @@ component existed all along; the headline was computed by the crude one.
 
 ---
 
+## 4. The butter that was margarine — every day, from the first
+
+Found while reading the output of the case 3 fix, which is the point of reading
+the output of a fix.
+
+### What happened
+
+With pack sizes finally correct, two lines were still pricing the wrong product:
+
+| Line | Coles | Woolworths |
+|---|---|---|
+| `butter 500g` | Nuttelex Buttery **Spread** $4.50 | Meadowlea Original **Spread** $4.00 |
+| `paper towel` | Coles Simply Facial **Tissues** $1.90 | Strike 2 Ply Paper Towel $2.20 |
+
+Both chains rank margarine into a butter search, and both are 500 g, so the
+case 3 size screen passed them happily. Coles ranks facial tissues second and
+toilet paper third for `paper towel`, and the basket took the tissues.
+
+A size screen answers "is this the right amount of something". It has nothing to
+say about whether it is the right something.
+
+### Why must_not_match had to exist
+
+`basket_relevance` could only require a pattern, and a positive pattern cannot
+separate these:
+
+- **`Nuttelex Buttery Spread` contains the string `butter`.** Any rule matching
+  butter matches buttery.
+- **`Western Star Original Spreadable Butter Blend` genuinely says butter.** It
+  is a dairy blend cut with vegetable oil, and at $6.80 it would have undercut
+  every real 500 g butter at Woolworths and won the line.
+
+So the seed gained a `must_not_match` column, applied after `must_match`, which
+lets a rule admit a family and then carve exceptions out of it. `butter 500g` is
+now `must_match: butter`, `must_not_match: buttery|spread|blend`.
+
+`paper towel` needed only the positive half, `must_match: paper towel` — tissues
+and toilet paper do not contain the phrase.
+
+### What it changed
+
+Both lines now compare like with like, and both land level:
+
+| Line | Coles | Woolworths |
+|---|---|---|
+| `butter 500g` | Coles Simply Salted Butter **$7.00** | Woolworths Salted Butter 500g **$7.00** |
+| `paper towel` | Coles Simply Paper Towel **$2.20** | Strike 2 Ply Paper Towel **$2.20** |
+
+Worth noting that `Coles Simply Paper Towel` at $2.20 was never in the top five
+hits. It only becomes reachable because a line carrying a rule stops being
+capped — the same mechanism case 2 introduced and case 3 extended to sized
+lines, doing its job a third time.
+
+Headline effect, over the ten published days, relative to the case 3 figures:
+
+| | After case 3 | After case 4 |
+|---|---|---|
+| Mean Coles basket | $192.19 | **$194.30** |
+| Mean Woolworths basket | $187.23 | **$187.83** |
+| Mean gap | −$4.96 | **−$6.47** |
+| 2026-08-23 | $0.11, Coles cheaper | **$0.76, Coles cheaper** |
+| Coles cheaper on | 4 of 10 days | **4 of 10 days** |
+
+Removing the margarine raised the Coles basket more than the Woolworths one,
+because Coles was the side being priced on $4.50 Nuttelex. The conclusion from
+case 3 is unchanged and slightly reinforced: the two chains are level on the
+headline day, the winner flips repeatedly, and across ten days Woolworths is
+cheaper on average.
+
+### What is still not fixed
+
+`paper towel` names no pack size, so nothing screens it: Coles parses that line's
+pack count as rolls and Woolworths as sheets, and the basket compares $2.20 for
+two rolls with $2.20 for 2×80 sheets. Every unsized line in the basket has the
+same exposure. It is a comparability problem rather than an identity one, the
+size screen from case 3 cannot reach it because the line states no size, and it
+is recorded here rather than fixed.
+
+---
+
 ## What they have in common
 
-The v1 study ran once, by hand, and someone looked at the output. All three of
+The v1 study ran once, by hand, and someone looked at the output. All four of
 these failures are what that looks like when nobody is looking any more:
 
 - A retailer's search ranking is **not a stable interface**. It is tuned
@@ -278,7 +360,7 @@ these failures are what that looks like when nobody is looking any more:
 - An error that is **asymmetric between the things being compared** does not add
   noise, it adds bias — and it will point wherever the ranking happens to point.
 
-Every test in this project passed on all three.
+Every test in this project passed on all four.
 
 Two of the three were found by looking at a number that was the wrong size. The
 third was found because a routine change forced a check nobody had run. None was

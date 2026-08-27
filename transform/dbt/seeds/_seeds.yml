@@ -22,6 +22,7 @@ seeds:
       column_types:
         search_term: varchar
         must_match: varchar
+        must_not_match: varchar
         require_unit_basis: varchar
         note: varchar
     columns:
@@ -34,6 +35,14 @@ seeds:
         description: >
           Optional lowercase regex the product name must match. Backslash-free,
           per the rule in macros/cross_db.sql.
+      - name: must_not_match
+        description: >
+          Optional lowercase regex the product name must NOT match. Backslash-free,
+          like must_match. Exists because positive matching cannot always do the
+          job: a line asking for butter has to reject 'Buttery Spread', which
+          contains the word it is looking for, and 'Spreadable Butter Blend',
+          which is a dairy blend rather than butter. Applied after must_match, so
+          a rule can admit a family and then carve exceptions out of it.
       - name: require_unit_basis
         description: >
           Optional unit-price basis the product must carry, as computed in
