@@ -47,3 +47,57 @@ seeds:
                 values: ['per_100g', 'per_100ml', 'per_each']
       - name: note
         description: Why the rule exists, and what was observed that prompted it.
+
+  - name: buckets
+    description: >
+      The pre-registered bucket assignment: 80 items, 40 price-visible and 40
+      price-opaque, each with a name-match pattern and the rationale for its
+      tier. Registered by the commit that added this file, before any
+      bucket-level figure was computed — see docs/preregistration.md.
+
+      This seed is evidence, not configuration. It is not edited to improve a
+      result; a pattern may be corrected only for a demonstrable coverage fault,
+      in its own commit, stating what was wrong.
+
+      Known limit, found before registering and recorded in the doc: the
+      price-opaque half matches only three pairs in the backfill, because a
+      cross-retailer pair needs the product at both chains and the long tail is
+      barely stocked in that source. The opaque half is registered for Arm B,
+      which can be pointed at those lines deliberately.
+    config:
+      column_types:
+        item_key: varchar
+        bucket: varchar
+        aisle: varchar
+        match_pattern: varchar
+        rationale: varchar
+    # The 40-and-40 assertion is a singular test, tests/assert_buckets_forty_forty.sql
+    # — a bucket that quietly grows or shrinks after registration is exactly the
+    # failure this seed exists to make impossible.
+    columns:
+      - name: item_key
+        description: Stable identifier for the item. Never reused for a different product.
+        data_tests: [not_null, unique]
+      - name: bucket
+        description: The registered tier. Assigned before any price was looked at.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['price_visible', 'price_opaque']
+      - name: aisle
+        description: Grouping within the tier. Produce and packaged staples are analysed separately.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['produce', 'dairy', 'bakery', 'pantry', 'meat', 'frozen', 'drinks',
+                         'household', 'baby', 'health', 'pet', 'occasion']
+      - name: match_pattern
+        description: >
+          Lowercase substring a product name must contain. Backslash-free, per
+          the rule in macros/cross_db.sql, so one literal works on both engines.
+        data_tests: [not_null, unique]
+      - name: rationale
+        description: Why this item sits in this tier. Written before measurement.
+        data_tests: [not_null]
