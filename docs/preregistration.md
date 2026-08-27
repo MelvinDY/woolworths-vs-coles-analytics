@@ -184,3 +184,27 @@ test from a story.
    buckets were written, so this is a blind analysis — predictions fixed before
    measurement on pre-existing data — and not a true pre-registration. Arm B is
    the true one. The distinction is stated wherever both appear.
+
+---
+
+## Status note — 2026-08-27 (appended after registration)
+
+Appended, not edited. The registered text above stands as written; this records
+what has happened since.
+
+**The basket expansion named above is done.** `transform/dbt/seeds/basket.csv`
+now carries 90 lines: the original 50 `everyday` lines and the 40 `tail` lines
+matching the registered price-opaque items. All 40 were probed against both
+retailers' live search endpoints before being added, and all 40 return results
+at both chains — so the tail that the backfill source cannot supply is reachable
+from the retailers directly, exactly as this document predicted it would have to
+be.
+
+Ten of the tail lines carry `basket_relevance` rules, added because the probe
+showed a chain's top hit was the wrong product: `sink plunger` returned a sink
+strainer at Coles, `reading glasses` returned drinking glasses, `worming tablets
+dog` returned dog food. Every rule tests product identity and none looks at
+price, per the existing rule in that seed.
+
+**No tail line has been collected yet.** The visibility hypothesis (P5, P6, P7)
+remains registered and unrun, and stays that way until enough days accumulate.

@@ -14,6 +14,15 @@ with candidates as (
     from {{ ref('stg_prices') }} p
     join {{ ref('int_day_coverage') }} d
         on p.snapshot_date = d.snapshot_date
+    -- The everyday panel only. v3 added 40 long-tail lines for the Arm B bucket
+    -- test (docs/preregistration.md), and they are not groceries a shopper puts
+    -- in a trolley -- a plunger, denture tablets, worming tablets. Letting them
+    -- into this mart would move the published basket total by design rather than
+    -- by a price change, and make it incomparable with every figure published
+    -- before they were added. The tail is analysed by bucket, not by basket.
+    join {{ ref('basket') }} b
+        on p.search_term = b.search_term
+       and b.panel = 'everyday'
     -- A day where one retailer answered a fraction of the basket is not a
     -- cheaper day, it is an unobserved one. Dropping it here rather than
     -- averaging it in is the same rule the history marts already apply to

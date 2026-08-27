@@ -456,10 +456,15 @@ against 52.5%).
    deviation from FR-5, which said `seeds/buckets.csv`: it is consumed by dbt
    models, so it belongs with the other dbt seeds) plus
    [docs/preregistration.md](docs/preregistration.md).
-3. **Expand `seeds/basket.csv` past its 50 head lines to the 40 registered
-   opaque items.** This is now the blocking step for the whole visibility
-   hypothesis, and it is a change to the daily collector rather than to
-   analysis, so it is called out rather than made quietly.
+3. ~~Expand the basket past its 50 head lines to the 40 registered opaque
+   items.~~ **Done.** The basket moved to `transform/dbt/seeds/basket.csv` (one
+   file for the collector and the warehouse) and carries 90 lines in two panels.
+   All 40 tail terms were probed live first and all 40 answer at both chains.
+   Only the `everyday` panel gates day completeness or enters the basket total,
+   and `int_day_coverage` now takes its denominator from the seed rather than
+   from `max(terms_seen)` — the inferred version would have marked every
+   historical day incomplete on the first tail collection. **The tail has not
+   been collected yet**; that happens on the next collector run.
 4. **Run the Arm A produce-vs-staples test** against the registered predictions,
    citing 51cb891 beside every figure.
 5. Arm B's four measures still wait on collected days, not on code — and now

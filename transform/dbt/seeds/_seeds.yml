@@ -101,3 +101,36 @@ seeds:
       - name: rationale
         description: Why this item sits in this tier. Written before measurement.
         data_tests: [not_null]
+
+  - name: basket
+    description: >
+      The collection basket: what ingest/fetch_prices.py asks both retailers for
+      every morning. Moved here from seeds/basket.csv in v3 so that the
+      collector and the warehouse read one file rather than two copies that can
+      drift -- int_day_coverage and mart_basket both need to know which panel a
+      line belongs to, and inferring it from the data is what let a denominator
+      move under a published figure.
+
+      Two panels. `everyday` is the original 50 lines and the only panel that
+      decides whether a day is complete or enters the published basket total.
+      `tail` is the 40 long-tail lines added for the pre-registered bucket test
+      (docs/preregistration.md) -- thinly stocked, exploratory, and deliberately
+      unable to invalidate a day of milk and bread prices by going out of stock.
+    config:
+      column_types:
+        search_term: varchar
+        category: varchar
+        panel: varchar
+    columns:
+      - name: search_term
+        description: Sent verbatim to both retailers' search endpoints.
+        data_tests: [not_null, unique]
+      - name: category
+        data_tests: [not_null]
+      - name: panel
+        description: Which panel the line belongs to. Only `everyday` gates completeness.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['everyday', 'tail']

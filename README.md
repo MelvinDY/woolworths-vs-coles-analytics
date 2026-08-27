@@ -210,11 +210,27 @@ liquid — mid-tail supermarket lines. **No version of this project has yet
 measured the true long tail**, so the 62.5%-to-7.1% parity spread is a spread
 across the head of the range.
 
+**The basket now reaches it.** `transform/dbt/seeds/basket.csv` carries 90 lines
+in two panels: the original 50 `everyday` lines, and 40 `tail` lines — sink
+plungers, denture tablets, worming tablets, greeting cards. All 40 were probed
+against both retailers' live search endpoints first and **all 40 return results
+at both chains**, which is the point: the tail is absent from the backfill
+source but perfectly reachable from the retailers themselves. Arm B can go where
+Arm A cannot.
+
+The panel split is what keeps the tail from contaminating what is already
+published. Only `everyday` decides whether a day is complete, only `everyday`
+enters the basket total, and the denominator comes from the seed rather than
+from whatever came back that morning — an inferred denominator would have jumped
+from 50 to 90 on the first tail collection and marked **every historical day
+incomplete**, taking all twelve complete days and every figure resting on them
+with it.
+
 ## Architecture
 
 ```
-seeds/basket.csv ──► ingest/fetch_prices.py ──► data/raw/prices_{date}.csv
-     (50 terms)        Woolworths search API        (immutable, one per day,
+transform/dbt/seeds/basket.csv ──► ingest/fetch_prices.py ──► data/raw/prices_{date}.csv
+  (90 terms: 50 everyday + 40 tail)        Woolworths search API        (immutable, one per day,
                        Coles _next/data API          the thing that accumulates)
                                                               │
                                                               ▼
