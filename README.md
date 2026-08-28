@@ -3,39 +3,36 @@
 **Is Woolworths or Coles cheaper — and for what?** This project answers the
 question with live data: it captures prices from both retailers' public web APIs
 every day, matches identical products across the two chains (same brand, same
-pack size), and quantifies the gap at four levels — matched product pairs, a
-typical grocery basket, per-category unit prices, and now **how those prices
-move over time**.
+pack size), and quantifies the gap where it is measurable: **matched product
+pairs**, per-category unit prices, a basket total, and **how those prices move
+over three years of history**. The matched pairs carry the findings; the basket
+is built and tested but is not what this project rests on.
 
 The daily collection is the asset. A price snapshot cannot be backfilled: every
 day the collector does not run is a day of history that can never be recovered.
 That is why the repo tracks `data/raw/` and why the warehouse does not.
 
-**Status: complete.** Collection ran from 2026-07-15 to 2026-08-23 and the study
-now holds **13 complete days**. A further day, 2026-08-22, was collected and is
-deliberately excluded: see `docs/data_quality.md`.
+**Status: collecting.** The daily run has been going since 2026-07-15 and the
+series holds **13 complete days** to 2026-08-27, alongside a backfilled history
+reaching 2023. One day, 2026-08-22, was collected and is deliberately excluded:
+see [docs/data_quality.md](docs/data_quality.md).
 
-**Finding (from 13 complete days):** neither chain wins the basket.
-The 48-line basket comes to **$190.71 at Coles and $191.47 at Woolworths — a gap
-of 76 cents.** Across the thirteen days the winner flips repeatedly: Coles takes
-6, Woolworths 7, and Woolworths averages **$6.07 cheaper**. Of 128 identical
-products, **43% are priced exactly the same**, with Coles and Woolworths
-splitting the rest 37–36.
+**Finding (from 13 complete days):** on identical products priced the same
+morning, the two chains mostly refuse to be beaten. Of **128 matched pairs, 43%
+are priced identically to the cent**, with Coles and Woolworths splitting the
+rest 37–36. At the level of the whole shop there is nothing to choose between
+them, which is the least interesting thing in the data.
 
-> **Correction, 2026-08-27.** This figure previously read "$13.92, Coles cheaper,
-> Coles takes 9 of 10 days" over a 50-line basket. That was wrong. The basket
-> took the cheapest hit per line without checking its pack size, so `skim milk
-> 2l` could be priced on a 1 L bottle and `carrots 1kg` on a 170 g pack — and the
-> error was twelve times more common at Coles (35.9% of sized rows against 3.1%),
-> almost always toward smaller, cheaper packs. It applied a systematic discount
-> to the side the finding named as cheaper. Two lines left the basket because
-> Coles stocks no 250 g bacon and no 750 g oats, hence 48 lines rather than 50.
-> A second fault surfaced while checking that fix: `butter 500g` was priced on
-> margarine at both chains and `paper towel` on facial tissues at Coles, so
-> `basket_relevance` gained a `must_not_match` column — 'Nuttelex Buttery Spread'
-> contains the word butter, and a positive pattern cannot exclude it. Both lines
-> now land level at $7.00 and $2.20. Full write-up of both in
-> [docs/data_quality.md](docs/data_quality.md).
+> **On the basket.** This README used to lead with a basket total, and no longer
+> does. `mart_basket` is still built and tested and the number is still in the
+> warehouse, but it rests on 13 collected days, it is a single figure per day,
+> and it was corrected twice: once for pricing a 2 L milk line on a 1 L bottle in
+> a way that was **twelve times more common at Coles** and biased the answer
+> toward the side the finding named as cheaper, and once for pricing `butter
+> 500g` on margarine. Both are written up in
+> [docs/data_quality.md](docs/data_quality.md). A measure that thin, corrected
+> that often, does not belong above three years of matched-pair history. The
+> pair-level and backfill findings below never depended on it.
 
 **The finding worth the build:** the average hides everything. Split the same
 pairs by aisle and parity runs from **62.5% in pantry to 7.1% in household**,
@@ -444,12 +441,13 @@ numeric column, which DuckDB accepts and Snowflake rejects.
   have no pack size at Coles that matches what the line asks for, so they have no
   comparable candidate and leave the basket rather than being compared across
   different sizes.
-- Scope is a fixed 50-term everyday basket, not a whole-of-store price index.
+- Scope is a fixed 90-term basket, 50 everyday lines plus 40 long-tail lines
+  added for the pre-registered bucket test, not a whole-of-store price index.
 - **13 complete days is a short series**, with a four-week hole between
-  2026-07-15 and 2026-08-12 where the collection was not yet automated. Of 203
-  promotion episodes, only 44 have observed days on *both* sides of the
-  promotion. Those 44 are the whole basis of the restored-versus-genuine-cut
-  finding; the other 159 are unresolved and stay that way.
+  2026-07-15 and 2026-08-12 where the collection was not yet automated. Of 319
+  promotion episodes, only 93 have observed days on *both* sides of the
+  promotion. Those 93 are the whole basis of the restored-versus-genuine-cut
+  finding; the other 226 are unresolved and stay that way.
 - **The parity-by-aisle split was found in the data, not predicted before it.**
   That makes it a hypothesis this study generated rather than one it tested.
   Testing it properly means assigning every line to a bucket up front,
